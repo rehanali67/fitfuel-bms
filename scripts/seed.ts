@@ -1,5 +1,5 @@
 import { getDatabase } from '../lib/mongodb';
-import { createUser, findUserByEmail } from '../lib/models/User';
+import { createUser, findUserByEmail, getUserCollection } from '../lib/models/User';
 import { hashPassword } from '../lib/auth';
 
 async function seed() {
@@ -10,22 +10,33 @@ async function seed() {
         const db = await getDatabase();
         console.log('✅ Connected to database');
 
-        // Check if admin user already exists
-        const existingAdmin = await findUserByEmail('king@desert.com');
+        // Delete old admin user if it exists
+        const oldAdmin = await findUserByEmail('king@desert.com');
+        if (oldAdmin) {
+            console.log('🗑️  Deleting old admin user: king@desert.com');
+            const collection = await getUserCollection();
+            await collection.deleteOne({ email: 'king@desert.com' });
+            console.log('✅ Old admin user deleted');
+        } else {
+            console.log('ℹ️  No old admin user found (king@desert.com)');
+        }
+
+        // Check if new admin user already exists
+        const existingAdmin = await findUserByEmail('admin@fitfuel.com');
 
         if (existingAdmin) {
-            console.log('ℹ️  Admin user already exists with email: king@desert.com');
+            console.log('ℹ️  Admin user already exists with email: admin@fitfuel.com');
             console.log('✅ Seed completed (no changes needed)');
             process.exit(0);
         }
 
-        // Create admin user
+        // Create new admin user
         console.log('📝 Creating admin user...');
 
-        const hashedPassword = await hashPassword('admin123');
+        const hashedPassword = await hashPassword('Admin123!!!');
 
         const adminUser = await createUser({
-            email: 'king@desert.com',
+            email: 'admin@fitfuel.com',
             password: hashedPassword,
             name: 'Admin',
             role: 'admin',
