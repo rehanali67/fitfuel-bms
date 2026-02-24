@@ -372,6 +372,19 @@ export default function InvoiceDetailPage() {
                         margin: 10mm 8mm 10mm 8mm;
                     }
                     
+                    /* Hide browser headers and footers */
+                    @page :first {
+                        margin-top: 0;
+                    }
+                    
+                    @page :left {
+                        margin-left: 0;
+                    }
+                    
+                    @page :right {
+                        margin-right: 0;
+                    }
+                    
                     * {
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;

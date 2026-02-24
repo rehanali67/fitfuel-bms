@@ -3,22 +3,22 @@ import { getDatabase } from '../mongodb';
 
 export interface CompanyDocument {
     _id?: ObjectId;
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    city?: string;
     zipCode?: string;
     updatedAt: Date;
 }
 
 export interface CompanyResponse {
     id: string;
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    city?: string;
     zipCode?: string;
 }
 

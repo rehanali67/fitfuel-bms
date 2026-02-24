@@ -31,6 +31,8 @@ import {
     LuMenu,
     LuUsers,
     LuX,
+    LuUserCog,
+    LuWallet,
 } from "react-icons/lu";
 import Link from "next/link";
 import Image from "next/image";
@@ -105,8 +107,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         { icon: <LuFileText />, label: "Invoices", href: "/dashboard/invoices" },
         { icon: <LuClipboardList />, label: "Quotations", href: "/dashboard/quotations" },
         { icon: <LuPackage />, label: "Inventory", href: "/dashboard/inventory" },
-        // { icon: <LuUsers />, label: "Employees", href: "/dashboard/employees" },
         { icon: <LuUsers />, label: "Customers", href: "/dashboard/customers" },
+        ...(user?.role === "admin"
+            ? [
+                { icon: <LuUserCog />, label: "Users", href: "/dashboard/users" },
+                { icon: <LuWallet />, label: "Accounts", href: "/dashboard/accounts" },
+            ]
+            : []),
         { icon: <LuSettings />, label: "Settings", href: "/dashboard/settings" },
     ];
 

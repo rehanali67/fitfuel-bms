@@ -1,0 +1,199 @@
+"use client";
+
+import {
+    Box,
+    Card,
+    HStack,
+    VStack,
+    Text,
+    SimpleGrid,
+    Icon,
+    Flex,
+    Badge,
+    Button,
+    Stat,
+} from "@chakra-ui/react";
+import {
+    LuTrendingUp,
+    LuTrendingDown,
+    LuDollarSign,
+    LuPercent,
+} from "react-icons/lu";
+
+export type PnLPeriod = "daily" | "weekly" | "monthly" | "yearly";
+
+interface PnLSummary {
+    totalRevenue: number;
+    totalExpenses: number;
+    netProfit: number;
+    invoiceCount: number;
+    profitMargin: number;
+}
+
+interface PnLOverviewProps {
+    summary: PnLSummary | null;
+    period: PnLPeriod;
+    onPeriodChange: (p: PnLPeriod) => void;
+    isLoading: boolean;
+}
+
+const PERIODS: { value: PnLPeriod; label: string }[] = [
+    { value: "daily", label: "Last 30 Days" },
+    { value: "weekly", label: "Last 12 Weeks" },
+    { value: "monthly", label: "Last 12 Months" },
+    { value: "yearly", label: "Last 5 Years" },
+];
+
+function fmt(n: number) {
+    return `QAR ${n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+export default function PnLOverview({ summary, period, onPeriodChange, isLoading }: PnLOverviewProps) {
+    const isProfit = (summary?.netProfit ?? 0) >= 0;
+    const marginColor =
+        !summary ? "gray" :
+            summary.profitMargin >= 20 ? "green" :
+                summary.profitMargin >= 0 ? "yellow" : "red";
+    const marginLabel =
+        !summary ? "—" :
+            summary.profitMargin >= 20 ? "Healthy" :
+                summary.profitMargin >= 0 ? "Moderate" : "Loss";
+
+    return (
+        <VStack gap={5} align="stretch">
+            {/* Period Selector */}
+            <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Body p={4}>
+                    <Flex gap={2} flexWrap="wrap" align="center">
+                        <Text fontSize="sm" color="gray.500" fontWeight="medium" mr={2}>
+                            View period:
+                        </Text>
+                        {PERIODS.map((p) => (
+                            <Button
+                                key={p.value}
+                                size="sm"
+                                variant={period === p.value ? "solid" : "outline"}
+                                colorPalette={period === p.value ? "blue" : "gray"}
+                                onClick={() => onPeriodChange(p.value)}
+                                borderRadius="lg"
+                            >
+                                {p.label}
+                            </Button>
+                        ))}
+                    </Flex>
+                </Card.Body>
+            </Card.Root>
+
+            {/* Stat Cards */}
+            <SimpleGrid columns={{ base: 1, sm: 2, xl: 4 }} gap={4}>
+
+                {/* Revenue */}
+                <Stat.Root
+                    bg="white"
+                    borderWidth="1px"
+                    borderColor="gray.100"
+                    borderRadius="xl"
+                    p={5}
+                    opacity={isLoading ? 0.5 : 1}
+                    transition="opacity 0.2s"
+                >
+                    <HStack justify="space-between" mb={1}>
+                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Total Revenue</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg="green.50" align="center" justify="center">
+                            <Icon color="green.500"><LuTrendingUp /></Icon>
+                        </Flex>
+                    </HStack>
+                    <Stat.ValueText fontSize="xl" fontWeight="bold" color="green.600">
+                        {summary ? fmt(summary.totalRevenue) : "—"}
+                    </Stat.ValueText>
+                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                        {summary?.invoiceCount ?? 0} paid invoices
+                    </Stat.HelpText>
+                </Stat.Root>
+
+                {/* Expenses */}
+                <Stat.Root
+                    bg="white"
+                    borderWidth="1px"
+                    borderColor="gray.100"
+                    borderRadius="xl"
+                    p={5}
+                    opacity={isLoading ? 0.5 : 1}
+                    transition="opacity 0.2s"
+                >
+                    <HStack justify="space-between" mb={1}>
+                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Total Expenses</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg="orange.50" align="center" justify="center">
+                            <Icon color="orange.500"><LuDollarSign /></Icon>
+                        </Flex>
+                    </HStack>
+                    <Stat.ValueText fontSize="xl" fontWeight="bold" color="orange.600">
+                        {summary ? fmt(summary.totalExpenses) : "—"}
+                    </Stat.ValueText>
+                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                        Salary payments
+                    </Stat.HelpText>
+                </Stat.Root>
+
+                {/* Net Profit / Loss */}
+                <Stat.Root
+                    bg="white"
+                    borderWidth="1px"
+                    borderColor="gray.100"
+                    borderRadius="xl"
+                    p={5}
+                    opacity={isLoading ? 0.5 : 1}
+                    transition="opacity 0.2s"
+                >
+                    <HStack justify="space-between" mb={1}>
+                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Net Profit / Loss</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg={isProfit ? "green.50" : "red.50"} align="center" justify="center">
+                            <Icon color={isProfit ? "green.500" : "red.500"}>
+                                {isProfit ? <LuTrendingUp /> : <LuTrendingDown />}
+                            </Icon>
+                        </Flex>
+                    </HStack>
+                    <HStack gap={2} align="center">
+                        <Stat.ValueText fontSize="xl" fontWeight="bold" color={isProfit ? "green.600" : "red.600"}>
+                            {summary ? fmt(summary.netProfit) : "—"}
+                        </Stat.ValueText>
+                        {summary && (
+                            <Badge colorPalette={isProfit ? "green" : "red"} variant="plain" px="0" fontSize="xs">
+                                {isProfit ? <Stat.UpIndicator /> : <Stat.DownIndicator />}
+                                {Math.abs(summary.profitMargin)}%
+                            </Badge>
+                        )}
+                    </HStack>
+                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                        Profit margin
+                    </Stat.HelpText>
+                </Stat.Root>
+
+                {/* Profit Margin */}
+                <Stat.Root
+                    bg="white"
+                    borderWidth="1px"
+                    borderColor="gray.100"
+                    borderRadius="xl"
+                    p={5}
+                    opacity={isLoading ? 0.5 : 1}
+                    transition="opacity 0.2s"
+                >
+                    <HStack justify="space-between" mb={1}>
+                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Profit Margin</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg={`${marginColor}.50`} align="center" justify="center">
+                            <Icon color={`${marginColor}.500`}><LuPercent /></Icon>
+                        </Flex>
+                    </HStack>
+                    <Stat.ValueText fontSize="xl" fontWeight="bold" color={`${marginColor}.600`}>
+                        {summary ? `${summary.profitMargin}%` : "—"}
+                    </Stat.ValueText>
+                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                        {marginLabel}
+                    </Stat.HelpText>
+                </Stat.Root>
+
+            </SimpleGrid>
+        </VStack>
+    );
+}

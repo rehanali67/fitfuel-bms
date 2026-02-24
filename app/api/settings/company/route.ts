@@ -5,18 +5,18 @@ import { handleError } from '@/lib/errors';
 import { z } from 'zod';
 
 const companySchema = z.object({
-    name: z.string().min(1, 'Company name is required'),
-    email: z.string().email('Invalid email address'),
-    phone: z.string().min(1, 'Phone is required'),
-    address: z.string().min(1, 'Address is required'),
-    city: z.string().min(1, 'City is required'),
+    name: z.string().optional(),
+    email: z.string().email('Invalid email address').optional().or(z.literal('')),
+    phone: z.string().optional(),
+    address: z.string().optional(),
+    city: z.string().optional(),
     zipCode: z.string().optional(),
 });
 
 async function getHandler(request: AuthenticatedRequest) {
     try {
         const company = await getCompany();
-        
+
         if (!company) {
             return NextResponse.json({
                 success: true,

@@ -34,11 +34,11 @@ import { toaster } from "@/components/ui/toaster";
 import { apiClient } from "@/lib/api";
 
 interface CompanyInfo {
-    name: string;
-    email: string;
-    phone: string;
-    address: string;
-    city: string;
+    name?: string;
+    email?: string;
+    phone?: string;
+    address?: string;
+    city?: string;
     zipCode?: string;
 }
 
@@ -339,7 +339,7 @@ export default function SettingsPage() {
                                 <Field.Root>
                                     <Field.Label>Company Name</Field.Label>
                                     <Input
-                                        value={companyInfo.name}
+                                        value={companyInfo.name || ''}
                                         onChange={(e) => setCompanyInfo({ ...companyInfo, name: e.target.value })}
                                         placeholder="My Business Inc."
                                         disabled={isLoadingCompany}
@@ -349,7 +349,7 @@ export default function SettingsPage() {
                                 <Field.Root>
                                     <Field.Label>Business Email</Field.Label>
                                     <Input
-                                        value={companyInfo.email}
+                                        value={companyInfo.email || ''}
                                         onChange={(e) => setCompanyInfo({ ...companyInfo, email: e.target.value })}
                                         type="email"
                                         placeholder="contact@mybusiness.com"
@@ -360,7 +360,7 @@ export default function SettingsPage() {
                                 <Field.Root>
                                     <Field.Label>Business Phone</Field.Label>
                                     <Input
-                                        value={companyInfo.phone}
+                                        value={companyInfo.phone || ''}
                                         onChange={(e) => setCompanyInfo({ ...companyInfo, phone: e.target.value })}
                                         placeholder="+1 (555) 123-4567"
                                         disabled={isLoadingCompany}
@@ -370,7 +370,7 @@ export default function SettingsPage() {
                                 <Field.Root>
                                     <Field.Label>Address</Field.Label>
                                     <Input
-                                        value={companyInfo.address}
+                                        value={companyInfo.address || ''}
                                         onChange={(e) => setCompanyInfo({ ...companyInfo, address: e.target.value })}
                                         placeholder="123 Business Street, Suite 100"
                                         disabled={isLoadingCompany}
@@ -381,7 +381,7 @@ export default function SettingsPage() {
                                     <Field.Root flex={1}>
                                         <Field.Label>City</Field.Label>
                                         <Input
-                                            value={companyInfo.city}
+                                            value={companyInfo.city || ''}
                                             onChange={(e) => setCompanyInfo({ ...companyInfo, city: e.target.value })}
                                             placeholder="New York"
                                             disabled={isLoadingCompany}
@@ -390,7 +390,7 @@ export default function SettingsPage() {
                                     <Field.Root flex={1}>
                                         <Field.Label>ZIP Code</Field.Label>
                                         <Input
-                                            value={companyInfo.zipCode}
+                                            value={companyInfo.zipCode || ''}
                                             onChange={(e) => setCompanyInfo({ ...companyInfo, zipCode: e.target.value })}
                                             placeholder="10001"
                                             disabled={isLoadingCompany}

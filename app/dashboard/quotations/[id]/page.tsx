@@ -387,6 +387,19 @@ export default function QuotationDetailPage() {
                         margin-bottom: 50px;
                     }
                     
+                    /* Hide browser headers and footers */
+                    @page :first {
+                        margin-top: 0;
+                    }
+                    
+                    @page :left {
+                        margin-left: 0;
+                    }
+                    
+                    @page :right {
+                        margin-right: 0;
+                    }
+                    
                     * {
                         -webkit-print-color-adjust: exact !important;
                         print-color-adjust: exact !important;
@@ -543,90 +556,90 @@ export default function QuotationDetailPage() {
                             <Box className="quotation-header-section">
                                 {/* Purple Accent Bar at Top */}
                                 <Box className="purple-accent-bar" h="8px" />
-                                
+
                                 {/* Header Section */}
                                 <Box px={6} pt={4} pb={3}>
-                                {/* Logo Section - Smaller */}
-                                <Flex justify="center" align="center" mb={3}>
-                                    <Box>
-                                        <img
-                                            src="/logo.png"
-                                            alt="Company Logo"
-                                            style={{ 
-                                                width: "240px",
-                                                height: "auto",
-                                                maxHeight: "100px",
-                                                objectFit: "contain" 
-                                            }}
-                                        />
-                                    </Box>
-                                </Flex>
+                                    {/* Logo Section - Smaller */}
+                                    <Flex justify="center" align="center" mb={3}>
+                                        <Box>
+                                            <img
+                                                src="/logo.png"
+                                                alt="Company Logo"
+                                                style={{
+                                                    width: "240px",
+                                                    height: "auto",
+                                                    maxHeight: "100px",
+                                                    objectFit: "contain"
+                                                }}
+                                            />
+                                        </Box>
+                                    </Flex>
 
-                                {/* Quotation Title & Number */}
-                                <Flex justify="space-between" align="flex-end" mb={4}>
-                                    <Box>
-                                        <Text 
-                                            fontSize="24px" 
-                                            fontWeight="900" 
-                                            color="#1F2937"
-                                            letterSpacing="-1px"
-                                            lineHeight="1"
+                                    {/* Quotation Title & Number */}
+                                    <Flex justify="space-between" align="flex-end" mb={4}>
+                                        <Box>
+                                            <Text
+                                                fontSize="24px"
+                                                fontWeight="900"
+                                                color="#1F2937"
+                                                letterSpacing="-1px"
+                                                lineHeight="1"
+                                            >
+                                                QUOTATION
+                                            </Text>
+                                            <Text fontSize="xs" color="gray.500" mt={0.5}>
+                                                Price Quote / عرض السعر
+                                            </Text>
+                                        </Box>
+                                        <Box textAlign="right">
+                                            <Text fontSize="xs" color="gray.500" fontWeight="medium">Quote No.</Text>
+                                            <Text fontSize="lg" fontWeight="bold" color="#7C3AED">
+                                                {quotation.quotationNumber}
+                                            </Text>
+                                            <Text fontSize="xs" color="gray.600" mt={0.5}>
+                                                {new Date(quotation.issueDate).toLocaleDateString('en-US', {
+                                                    day: '2-digit',
+                                                    month: 'short',
+                                                    year: 'numeric'
+                                                })}
+                                            </Text>
+                                        </Box>
+                                    </Flex>
+
+                                    {/* Prepared For / From Section */}
+                                    <SimpleGrid columns={2} gap={4} mb={4}>
+                                        <Box
+                                            p={2}
+                                            bg="gray.50"
+                                            borderRadius="md"
+                                            borderLeft="3px solid"
+                                            borderColor="#7C3AED"
                                         >
-                                            QUOTATION
-                                        </Text>
-                                        <Text fontSize="xs" color="gray.500" mt={0.5}>
-                                            Price Quote / عرض السعر
-                                        </Text>
-                                    </Box>
-                                    <Box textAlign="right">
-                                        <Text fontSize="xs" color="gray.500" fontWeight="medium">Quote No.</Text>
-                                        <Text fontSize="lg" fontWeight="bold" color="#7C3AED">
-                                            {quotation.quotationNumber}
-                                        </Text>
-                                        <Text fontSize="xs" color="gray.600" mt={0.5}>
-                                            {new Date(quotation.issueDate).toLocaleDateString('en-US', { 
-                                                day: '2-digit', 
-                                                month: 'short', 
-                                                year: 'numeric' 
-                                            })}
-                                        </Text>
-                                    </Box>
-                                </Flex>
-
-                                {/* Prepared For / From Section */}
-                                <SimpleGrid columns={2} gap={4} mb={4}>
-                                    <Box 
-                                        p={2} 
-                                        bg="gray.50" 
-                                        borderRadius="md"
-                                        borderLeft="3px solid"
-                                        borderColor="#7C3AED"
-                                    >
-                                        <Text fontSize="xs" fontWeight="bold" color="#7C3AED" mb={1} textTransform="uppercase" letterSpacing="1px">
-                                            Prepared For
-                                        </Text>
-                                        <Text fontSize="sm" fontWeight="bold" color="gray.800">
-                                            {quotation.client || "Customer"}
-                                        </Text>
-                                        {quotation.clientPhone && (
-                                            <Text fontSize="xs" color="gray.600" mt={0.5}>{quotation.clientPhone}</Text>
-                                        )}
-                                    </Box>
-                                    <Box 
-                                        p={2} 
-                                        bg="gray.50" 
-                                        borderRadius="md"
-                                        borderLeft="3px solid"
-                                        borderColor="gray.300"
-                                    >
-                                        <Text fontSize="xs" fontWeight="bold" color="gray.500" mb={1} textTransform="uppercase" letterSpacing="1px">
-                                            From
-                                        </Text>
-                                        <Text fontSize="sm" fontWeight="bold" color="gray.800">{companyInfo.name}</Text>
-                                        <Text fontSize="xs" color="gray.600" mt={0.5}>{companyInfo.address}</Text>
-                                        <Text fontSize="xs" color="gray.600">{companyInfo.phone}</Text>
-                                    </Box>
-                                </SimpleGrid>
+                                            <Text fontSize="xs" fontWeight="bold" color="#7C3AED" mb={1} textTransform="uppercase" letterSpacing="1px">
+                                                Prepared For
+                                            </Text>
+                                            <Text fontSize="sm" fontWeight="bold" color="gray.800">
+                                                {quotation.client || "Customer"}
+                                            </Text>
+                                            {quotation.clientPhone && (
+                                                <Text fontSize="xs" color="gray.600" mt={0.5}>{quotation.clientPhone}</Text>
+                                            )}
+                                        </Box>
+                                        <Box
+                                            p={2}
+                                            bg="gray.50"
+                                            borderRadius="md"
+                                            borderLeft="3px solid"
+                                            borderColor="gray.300"
+                                        >
+                                            <Text fontSize="xs" fontWeight="bold" color="gray.500" mb={1} textTransform="uppercase" letterSpacing="1px">
+                                                From
+                                            </Text>
+                                            <Text fontSize="sm" fontWeight="bold" color="gray.800">{companyInfo.name}</Text>
+                                            <Text fontSize="xs" color="gray.600" mt={0.5}>{companyInfo.address}</Text>
+                                            <Text fontSize="xs" color="gray.600">{companyInfo.phone}</Text>
+                                        </Box>
+                                    </SimpleGrid>
                                 </Box>
                             </Box>
 
@@ -634,131 +647,131 @@ export default function QuotationDetailPage() {
                             <Box className="quotation-content-area">
                                 {/* Items Table */}
                                 <Box px={6} mb={3}>
-                                <Box className="quotation-table" borderRadius="md" overflow="hidden" border="1px solid" borderColor="gray.200">
-                                    <Table.Root size="sm">
-                                        <Table.Header>
-                                            <Table.Row>
-                                                <Table.ColumnHeader py={2} px={3} width="45%">
-                                                    <Text fontSize="xs">Description <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الوصف)</Text></Text>
-                                                </Table.ColumnHeader>
-                                                <Table.ColumnHeader py={2} px={2} textAlign="center" width="15%">
-                                                    <Text fontSize="xs">Qty <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الكمية)</Text></Text>
-                                                </Table.ColumnHeader>
-                                                <Table.ColumnHeader py={2} px={2} textAlign="right" width="20%">
-                                                    <Text fontSize="xs">Unit Price <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(سعر الوحدة)</Text></Text>
-                                                </Table.ColumnHeader>
-                                                <Table.ColumnHeader py={2} px={3} textAlign="right" width="20%">
-                                                    <Text fontSize="xs">Amount <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(المبلغ)</Text></Text>
-                                                </Table.ColumnHeader>
-                                            </Table.Row>
-                                        </Table.Header>
-                                        <Table.Body>
-                                            {quotation.items.map((item, index) => {
-                                                const amount = item.amount ?? (Math.abs(item.quantity) * item.rate);
-                                                const product = item.productId ? productsMap.get(item.productId) : null;
-                                                return (
-                                                    <Table.Row key={index}>
-                                                        <Table.Cell py={2} px={3}>
-                                                            <Text fontWeight="medium" color="gray.800" fontSize="xs">{item.description}</Text>
-                                                            {product?.arabicName && (
-                                                                <Text fontSize="10px" color="gray.500" dir="rtl" mt={0.5}>{product.arabicName}</Text>
-                                                            )}
-                                                        </Table.Cell>
-                                                        <Table.Cell textAlign="center" py={2} px={2}>
-                                                            <Text fontWeight="semibold" color="gray.700" fontSize="xs">{item.quantity}</Text>
-                                                            <Text fontSize="10px" color="gray.400" dir="rtl">{toArabic(Math.abs(item.quantity))}</Text>
-                                                        </Table.Cell>
-                                                        <Table.Cell textAlign="right" py={2} px={2}>
-                                                            <Text color="gray.700" fontSize="xs">QAR {item.rate.toLocaleString()}</Text>
-                                                            <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(item.rate)}</Text>
-                                                        </Table.Cell>
-                                                        <Table.Cell textAlign="right" py={2} px={3}>
-                                                            <Text fontWeight="semibold" color="gray.800" fontSize="xs">QAR {amount.toLocaleString()}</Text>
-                                                            <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(amount)}</Text>
-                                                        </Table.Cell>
-                                                    </Table.Row>
-                                                );
-                                            })}
-                                        </Table.Body>
-                                    </Table.Root>
-                                </Box>
-                            </Box>
-
-                            {/* Totals Section */}
-                            <Box px={6} mb={3}>
-                                <Flex justify="flex-end">
-                                    <Box w="240px" bg="gray.50" borderRadius="md" p={2.5}>
-                                        <VStack gap={1.5} align="stretch">
-                                            <HStack justify="space-between">
-                                                <Text fontWeight="bold" color="gray.800" fontSize="sm">TOTAL</Text>
-                                                <Box textAlign="right">
-                                                    <Text fontWeight="black" color="#7C3AED" fontSize="lg">QAR {quotation.total.toLocaleString()}</Text>
-                                                    <Text fontSize="xs" color="gray.500" dir="rtl">{formatCurrency(quotation.total)}</Text>
-                                                </Box>
-                                            </HStack>
-                                        </VStack>
+                                    <Box className="quotation-table" borderRadius="md" overflow="hidden" border="1px solid" borderColor="gray.200">
+                                        <Table.Root size="sm">
+                                            <Table.Header>
+                                                <Table.Row>
+                                                    <Table.ColumnHeader py={2} px={3} width="45%">
+                                                        <Text fontSize="xs">Description <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الوصف)</Text></Text>
+                                                    </Table.ColumnHeader>
+                                                    <Table.ColumnHeader py={2} px={2} textAlign="center" width="15%">
+                                                        <Text fontSize="xs">Qty <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الكمية)</Text></Text>
+                                                    </Table.ColumnHeader>
+                                                    <Table.ColumnHeader py={2} px={2} textAlign="right" width="20%">
+                                                        <Text fontSize="xs">Unit Price <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(سعر الوحدة)</Text></Text>
+                                                    </Table.ColumnHeader>
+                                                    <Table.ColumnHeader py={2} px={3} textAlign="right" width="20%">
+                                                        <Text fontSize="xs">Amount <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(المبلغ)</Text></Text>
+                                                    </Table.ColumnHeader>
+                                                </Table.Row>
+                                            </Table.Header>
+                                            <Table.Body>
+                                                {quotation.items.map((item, index) => {
+                                                    const amount = item.amount ?? (Math.abs(item.quantity) * item.rate);
+                                                    const product = item.productId ? productsMap.get(item.productId) : null;
+                                                    return (
+                                                        <Table.Row key={index}>
+                                                            <Table.Cell py={2} px={3}>
+                                                                <Text fontWeight="medium" color="gray.800" fontSize="xs">{item.description}</Text>
+                                                                {product?.arabicName && (
+                                                                    <Text fontSize="10px" color="gray.500" dir="rtl" mt={0.5}>{product.arabicName}</Text>
+                                                                )}
+                                                            </Table.Cell>
+                                                            <Table.Cell textAlign="center" py={2} px={2}>
+                                                                <Text fontWeight="semibold" color="gray.700" fontSize="xs">{item.quantity}</Text>
+                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{toArabic(Math.abs(item.quantity))}</Text>
+                                                            </Table.Cell>
+                                                            <Table.Cell textAlign="right" py={2} px={2}>
+                                                                <Text color="gray.700" fontSize="xs">QAR {item.rate.toLocaleString()}</Text>
+                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(item.rate)}</Text>
+                                                            </Table.Cell>
+                                                            <Table.Cell textAlign="right" py={2} px={3}>
+                                                                <Text fontWeight="semibold" color="gray.800" fontSize="xs">QAR {amount.toLocaleString()}</Text>
+                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(amount)}</Text>
+                                                            </Table.Cell>
+                                                        </Table.Row>
+                                                    );
+                                                })}
+                                            </Table.Body>
+                                        </Table.Root>
                                     </Box>
-                                </Flex>
-                            </Box>
+                                </Box>
 
-                            {/* Valid Until Box */}
-                            <Box px={6} mb={2}>
-                                <Box className="valid-until-box" p={2.5} borderRadius="md">
-                                    <VStack gap={1} align="start">
-                                        <HStack gap={2}>
-                                            <Box 
-                                                bg="purple.600" 
-                                                color="white" 
-                                                px={2} 
-                                                py={0.5} 
-                                                borderRadius="full"
-                                                fontSize="10px"
-                                                fontWeight="bold"
-                                            >
-                                                VALID UNTIL
-                                            </Box>
-                                            <Text fontSize="xs" color="black">
-                                                This quotation is valid until{" "}
-                                                <Text as="span" fontWeight="bold" color="black">
-                                                    {new Date(quotation.validUntil).toLocaleDateString('en-US', { 
-                                                        day: '2-digit', 
-                                                        month: 'long', 
-                                                        year: 'numeric' 
+                                {/* Totals Section */}
+                                <Box px={6} mb={3}>
+                                    <Flex justify="flex-end">
+                                        <Box w="240px" bg="gray.50" borderRadius="md" p={2.5}>
+                                            <VStack gap={1.5} align="stretch">
+                                                <HStack justify="space-between">
+                                                    <Text fontWeight="bold" color="gray.800" fontSize="sm">TOTAL</Text>
+                                                    <Box textAlign="right">
+                                                        <Text fontWeight="black" color="#7C3AED" fontSize="lg">QAR {quotation.total.toLocaleString()}</Text>
+                                                        <Text fontSize="xs" color="gray.500" dir="rtl">{formatCurrency(quotation.total)}</Text>
+                                                    </Box>
+                                                </HStack>
+                                            </VStack>
+                                        </Box>
+                                    </Flex>
+                                </Box>
+
+                                {/* Valid Until Box */}
+                                <Box px={6} mb={2}>
+                                    <Box className="valid-until-box" p={2.5} borderRadius="md">
+                                        <VStack gap={1} align="start">
+                                            <HStack gap={2}>
+                                                <Box
+                                                    bg="purple.600"
+                                                    color="white"
+                                                    px={2}
+                                                    py={0.5}
+                                                    borderRadius="full"
+                                                    fontSize="10px"
+                                                    fontWeight="bold"
+                                                >
+                                                    VALID UNTIL
+                                                </Box>
+                                                <Text fontSize="xs" color="black">
+                                                    This quotation is valid until{" "}
+                                                    <Text as="span" fontWeight="bold" color="black">
+                                                        {new Date(quotation.validUntil).toLocaleDateString('en-US', {
+                                                            day: '2-digit',
+                                                            month: 'long',
+                                                            year: 'numeric'
+                                                        })}
+                                                    </Text>
+                                                </Text>
+                                            </HStack>
+                                            <Text fontSize="xs" color="black" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }} ml={8}>
+                                                هذا العرض ساري حتى{" "}
+                                                <Text as="span" fontWeight="bold">
+                                                    {new Date(quotation.validUntil).toLocaleDateString('ar-SA', {
+                                                        day: 'numeric',
+                                                        month: 'long',
+                                                        year: 'numeric'
                                                     })}
                                                 </Text>
                                             </Text>
-                                        </HStack>
-                                        <Text fontSize="xs" color="black" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }} ml={8}>
-                                            هذا العرض ساري حتى{" "}
-                                            <Text as="span" fontWeight="bold">
-                                                {new Date(quotation.validUntil).toLocaleDateString('ar-SA', { 
-                                                    day: 'numeric', 
-                                                    month: 'long', 
-                                                    year: 'numeric' 
-                                                })}
-                                            </Text>
-                                        </Text>
-                                    </VStack>
-                                </Box>
-                            </Box>
-
-                            {/* Notes */}
-                            {quotation.notes && (
-                                <Box px={6} mb={2}>
-                                    <Box p={2.5} bg="blue.50" borderRadius="md" borderLeft="3px solid" borderColor="blue.400">
-                                        <Text fontSize="10px" fontWeight="bold" color="blue.600" mb={0.5}>NOTE</Text>
-                                        <Text fontSize="xs" color="gray.700">{quotation.notes}</Text>
+                                        </VStack>
                                     </Box>
                                 </Box>
-                            )}
 
-                            {/* Footer Wave - Dark Gray/Black - Fixed to Bottom */}
-                            <Box className="footer-wave" h="40px">
-                                <svg viewBox="0 0 1200 40" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-                                    <path d="M0,40 L0,20 Q300,0 600,20 T1200,15 L1200,40 Z" fill="#1F2937" opacity="0.9" />
-                                    <path d="M0,40 L0,30 Q400,15 800,25 L1200,23 L1200,40 Z" fill="#111827" />
-                                </svg>
-                            </Box>
+                                {/* Notes */}
+                                {quotation.notes && (
+                                    <Box px={6} mb={2}>
+                                        <Box p={2.5} bg="blue.50" borderRadius="md" borderLeft="3px solid" borderColor="blue.400">
+                                            <Text fontSize="10px" fontWeight="bold" color="blue.600" mb={0.5}>NOTE</Text>
+                                            <Text fontSize="xs" color="gray.700">{quotation.notes}</Text>
+                                        </Box>
+                                    </Box>
+                                )}
+
+                                {/* Footer Wave - Dark Gray/Black - Fixed to Bottom */}
+                                <Box className="footer-wave" h="40px">
+                                    <svg viewBox="0 0 1200 40" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
+                                        <path d="M0,40 L0,20 Q300,0 600,20 T1200,15 L1200,40 Z" fill="#1F2937" opacity="0.9" />
+                                        <path d="M0,40 L0,30 Q400,15 800,25 L1200,23 L1200,40 Z" fill="#111827" />
+                                    </svg>
+                                </Box>
                             </Box>
                         </Card.Body>
                     </Card.Root>

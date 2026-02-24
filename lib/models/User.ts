@@ -59,3 +59,27 @@ export async function createUser(userData: Omit<UserDocument, '_id' | 'createdAt
     return { ...user, _id: result.insertedId };
 }
 
+export async function getAllUsers(): Promise<UserDocument[]> {
+    const collection = await getUserCollection();
+    return collection.find({}).sort({ createdAt: -1 }).toArray();
+}
+
+export async function updateUser(id: string, updates: Partial<Omit<UserDocument, '_id' | 'createdAt'>>): Promise<UserDocument | null> {
+    const collection = await getUserCollection();
+    if (updates.email) {
+        updates.email = updates.email.toLowerCase();
+    }
+    const result = await collection.findOneAndUpdate(
+        { _id: new ObjectId(id) },
+        { $set: { ...updates, updatedAt: new Date() } },
+        { returnDocument: 'after' }
+    );
+    return result || null;
+}
+
+export async function deleteUser(id: string): Promise<boolean> {
+    const collection = await getUserCollection();
+    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+    return result.deletedCount === 1;
+}
+
