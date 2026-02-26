@@ -63,8 +63,8 @@ export default function CreateQuotationPage() {
     const [issueDate, setIssueDate] = useState(new Date().toISOString().split('T')[0]);
     const [validUntil, setValidUntil] = useState(new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]);
     const [notes, setNotes] = useState("");
-    const [taxAmount, setTaxAmount] = useState<number | null>(null);
-    const [isTaxEditing, setIsTaxEditing] = useState(false);
+    const [discountAmount, setDiscountAmount] = useState<number | null>(null);
+    const [isDiscountEditing, setIsDiscountEditing] = useState(false);
     const [isSaving, setIsSaving] = useState(false);
     const [isSending, setIsSending] = useState(false);
     const [discardDialogOpen, setDiscardDialogOpen] = useState(false);
@@ -233,13 +233,13 @@ export default function CreateQuotationPage() {
         .filter(item => item.isReturn)
         .reduce((sum, item) => sum + (item.quantity * item.rate), 0);
     const netSubtotal = subtotal - returns;
-    const tax = taxAmount !== null ? taxAmount : 0;
-    const total = netSubtotal + tax;
+    const discount = discountAmount !== null ? discountAmount : 0;
+    const total = netSubtotal - discount;
 
     // Check if there are unsaved changes
     const hasUnsavedChanges = items.some(item =>
         item.description || item.quantity > 0 || item.rate > 0
-    ) || clientName || clientPhone || notes || taxAmount !== null;
+    ) || clientName || clientPhone || notes || discountAmount !== null;
 
     // No stock validation for quotations - quotations don't affect inventory
     const validateStockQuantities = (): { valid: boolean; error?: string } => {
@@ -327,7 +327,7 @@ export default function CreateQuotationPage() {
                 clientPhone: clientPhone || undefined,
                 clientId: finalClientId,
                 items: quotationItems,
-                tax: tax,
+                discount: discount,
                 issueDate: issueDate,
                 validUntil: validUntil,
                 notes: notes || undefined,
@@ -433,7 +433,7 @@ export default function CreateQuotationPage() {
                 clientPhone: clientPhone || undefined,
                 clientId: finalClientId,
                 items: quotationItems,
-                tax: tax,
+                discount: discount,
                 issueDate: issueDate,
                 validUntil: validUntil,
                 notes: notes || undefined,
@@ -1084,42 +1084,42 @@ export default function CreateQuotationPage() {
                                     )}
                                     <HStack justify="space-between" align="center">
                                         <HStack gap={2} align="center">
-                                            <Text color="gray.600" fontSize="sm">Tax</Text>
-                                            {taxAmount !== null && taxAmount > 0 && (
+                                            <Text color="gray.600" fontSize="sm">Discount</Text>
+                                            {discountAmount !== null && discountAmount > 0 && (
                                                 <IconButton
                                                     variant="ghost"
                                                     size="xs"
-                                                    aria-label="Reset tax"
+                                                    aria-label="Reset discount"
                                                     onClick={() => {
-                                                        setTaxAmount(null);
-                                                        setIsTaxEditing(false);
+                                                        setDiscountAmount(null);
+                                                        setIsDiscountEditing(false);
                                                     }}
-                                                    title="Remove tax"
+                                                    title="Remove discount"
                                                 >
                                                     <LuRotateCcw />
                                                 </IconButton>
                                             )}
                                         </HStack>
-                                        {isTaxEditing ? (
+                                        {isDiscountEditing ? (
                                             <HStack gap={1} align="center">
-                                                <Text fontSize="xs" color="gray.500">$</Text>
+                                                <Text fontSize="xs" color="gray.500">QAR</Text>
                                                 <Input
                                                     type="number"
                                                     size="xs"
                                                     w="80px"
-                                                    value={taxAmount !== null ? taxAmount : 0}
+                                                    value={discountAmount !== null ? discountAmount : 0}
                                                     onChange={(e) => {
                                                         const value = parseFloat(e.target.value) || 0;
-                                                        setTaxAmount(value);
+                                                        setDiscountAmount(value);
                                                     }}
-                                                    onBlur={() => setIsTaxEditing(false)}
+                                                    onBlur={() => setIsDiscountEditing(false)}
                                                     onKeyDown={(e) => {
                                                         if (e.key === 'Enter') {
-                                                            setIsTaxEditing(false);
+                                                            setIsDiscountEditing(false);
                                                         }
                                                         if (e.key === 'Escape') {
-                                                            setTaxAmount(null);
-                                                            setIsTaxEditing(false);
+                                                            setDiscountAmount(null);
+                                                            setIsDiscountEditing(false);
                                                         }
                                                     }}
                                                     autoFocus
@@ -1130,12 +1130,13 @@ export default function CreateQuotationPage() {
                                         ) : (
                                             <Text
                                                 fontWeight="medium"
+                                                color={discount > 0 ? "green.600" : undefined}
                                                 cursor="pointer"
                                                 _hover={{ color: "purple.600", textDecoration: "underline" }}
-                                                onClick={() => setIsTaxEditing(true)}
-                                                title="Click to edit tax amount"
+                                                onClick={() => setIsDiscountEditing(true)}
+                                                title="Click to edit discount amount"
                                             >
-                                                QAR {tax.toLocaleString()}
+                                                {discount > 0 ? "-" : ""}QAR {discount.toLocaleString()}
                                             </Text>
                                         )}
                                     </HStack>

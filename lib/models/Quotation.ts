@@ -10,9 +10,8 @@ export interface QuotationDocument {
     clientPhone?: string;
     items: QuotationItem[];
     subtotal: number;
-    tax: number;
+    discount: number;
     total: number;
-    status: QuotationStatus;
     issueDate: Date;
     validUntil: Date;
     notes?: string;
@@ -32,7 +31,7 @@ export interface QuotationResponse {
     clientPhone?: string;
     items: QuotationItem[];
     subtotal: number;
-    tax: number;
+    discount: number;
     total: number;
     issueDate: Date;
     notes?: string;
@@ -51,7 +50,7 @@ export function quotationToResponse(quotation: QuotationDocument): QuotationResp
         clientPhone: quotation.clientPhone,
         items: quotation.items,
         subtotal: quotation.subtotal,
-        tax: quotation.tax,
+        discount: quotation.discount,
         total: quotation.total,
         issueDate: quotation.issueDate,
         notes: quotation.notes,
@@ -78,7 +77,7 @@ export async function createQuotation(quotationData: Omit<QuotationDocument, '_i
     const collection = await getQuotationCollection();
     const now = new Date();
     const quotationNumber = await generateQuotationNumber();
-    
+
     const quotation: QuotationDocument = {
         ...quotationData,
         quotationNumber,

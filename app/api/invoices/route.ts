@@ -153,6 +153,7 @@ async function postHandler(request: AuthenticatedRequest) {
             total,
             issueDate: typeof validatedData.issueDate === 'string' ? new Date(validatedData.issueDate) : validatedData.issueDate,
             status: invoiceStatus,
+            createdByName: request.user?.username || request.user?.email,
         });
 
         // Update inventory stock only if invoice is not a Draft

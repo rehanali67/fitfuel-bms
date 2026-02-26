@@ -18,9 +18,9 @@ async function postHandler(request: AuthenticatedRequest, context?: { params: Pr
         // Convert quotation to invoice
         // Note: Invoice uses discount instead of tax, and doesn't have clientEmail/clientAddress
         // Convert tax to discount (negative discount = tax equivalent)
-        const discount = -quotation.tax; // Negative discount represents tax
+        const discount = quotation.discount;
         const total = quotation.subtotal - discount;
-        
+
         const invoice = await createInvoice({
             clientId: quotation.clientId,
             clientName: quotation.clientName,

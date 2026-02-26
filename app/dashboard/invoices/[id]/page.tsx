@@ -11,8 +11,6 @@ import {
     Button,
     Badge,
     SimpleGrid,
-    Separator,
-    Table,
     IconButton,
     Flex,
     Dialog,
@@ -22,21 +20,18 @@ import {
 import {
     LuArrowLeft,
     LuPencil,
-    LuDownload,
     LuSend,
     LuPrinter,
     LuCopy,
     LuTrash2,
-    LuCheck,
-    LuX,
 } from "react-icons/lu";
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import { useAuth } from "@/context/AuthContext";
 import { toaster } from "@/components/ui/toaster";
 import { apiClient } from "@/lib/api";
 import { InvoiceResponse } from "@/lib/models/Invoice";
-import { useArabicNumbers } from "@/hooks/useArabicNumbers";
 
 const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
@@ -48,24 +43,11 @@ const getStatusColor = (status: string) => {
     }
 };
 
-const formatDateInArabic = (date: Date, toArabic: (num: number | string) => string): string => {
-    const arabicMonths = [
-        'يناير', 'فبراير', 'مارس', 'أبريل', 'مايو', 'يونيو',
-        'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر'
-    ];
-
-    const day = date.getDate();
-    const month = date.getMonth();
-    const year = date.getFullYear();
-
-    return `${toArabic(day)} ${arabicMonths[month]} ${toArabic(year)}`;
-};
-
 export default function InvoiceDetailPage() {
     const params = useParams();
     const router = useRouter();
     const invoiceId = params.id as string;
-    const { formatCurrency, toArabic } = useArabicNumbers();
+    const { user: currentUser } = useAuth();
 
     // Data state
     const [invoice, setInvoice] = useState<InvoiceResponse | null>(null);
@@ -77,6 +59,10 @@ export default function InvoiceDetailPage() {
         email: "invoices@yourcompany.com",
         address: "456 Enterprise Ave, Floor 5, San Francisco, CA 94102",
         phone: "+1 (555) 987-6543",
+        bankName: "",
+        bankAccount: "",
+        bankIBAN: "",
+        bankBranch: "",
     });
 
     // UI state
@@ -103,18 +89,26 @@ export default function InvoiceDetailPage() {
                 address: string;
                 city: string;
                 zipCode?: string;
+                bankName?: string;
+                bankAccount?: string;
+                bankIBAN?: string;
+                bankBranch?: string;
             }>("/api/settings/company");
             if (response.success && response.data) {
                 const addressParts = [response.data.address, response.data.city];
                 if (response.data.zipCode) {
                     addressParts.push(response.data.zipCode);
                 }
-                const fullAddress = addressParts.join(", ");
+                const fullAddress = addressParts.filter(Boolean).join(", ");
                 setCompanyInfo({
                     name: response.data.name,
                     email: response.data.email,
                     phone: response.data.phone,
                     address: fullAddress,
+                    bankName: response.data.bankName || "",
+                    bankAccount: response.data.bankAccount || "",
+                    bankIBAN: response.data.bankIBAN || "",
+                    bankBranch: response.data.bankBranch || "",
                 });
             }
         } catch (error) {
@@ -319,71 +313,15 @@ export default function InvoiceDetailPage() {
                     overflow: hidden;
                 }
                 
-                /* Red accent bar */
-                .red-accent-bar {
-                    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%);
-                }
-                
-                /* Table styling */
-                .invoice-table thead tr {
-                    background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%) !important;
-                }
-                .invoice-table thead th {
-                    color: white !important;
-                    font-weight: 600 !important;
-                    text-transform: uppercase !important;
-                    letter-spacing: 0.5px !important;
-                    font-size: 11px !important;
-                }
-                .invoice-table tbody tr {
-                    border-bottom: 1px solid #E5E7EB !important;
-                }
-                .invoice-table tbody tr:hover {
-                    background: #F9FAFB !important;
-                }
-                
-                /* Header section - fixed to top */
-                .invoice-header-section {
-                    position: relative;
-                    z-index: 1;
-                    background: white;
-                }
-                
-                /* Footer wave */
-                .footer-wave {
-                    position: absolute;
-                    bottom: 0;
-                    left: 0;
-                    right: 0;
-                    background: linear-gradient(135deg, #FB923C 0%, #F97316 50%, #EA580C 100%);
-                }
-                
-                /* Content area with padding for fixed header/footer */
-                .invoice-content-area {
-                    padding-top: 0;
-                    padding-bottom: 80px;
-                    position: relative;
-                    z-index: 2;
-                }
-                
                 @media print {
                     @page {
                         size: A4 portrait;
                         margin: 10mm 8mm 10mm 8mm;
                     }
                     
-                    /* Hide browser headers and footers */
-                    @page :first {
-                        margin-top: 0;
-                    }
-                    
-                    @page :left {
-                        margin-left: 0;
-                    }
-                    
-                    @page :right {
-                        margin-right: 0;
-                    }
+                    @page :first { margin-top: 0; }
+                    @page :left { margin-left: 0; }
+                    @page :right { margin-right: 0; }
                     
                     * {
                         -webkit-print-color-adjust: exact !important;
@@ -417,55 +355,15 @@ export default function InvoiceDetailPage() {
                         margin: 0 auto !important;
                     }
                     
-                    .invoice-print-content:last-child {
-                        page-break-after: auto;
-                    }
-                    
                     .invoice-print-content button,
                     .invoice-print-content .chakra-button,
                     .no-print {
                         display: none !important;
                     }
                     
-                    .invoice-table thead tr {
-                        background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%) !important;
-                    }
-                    
-                    .invoice-table thead th {
-                        color: white !important;
-                    }
-                    
-                    .red-accent-bar {
-                        background: linear-gradient(135deg, #DC2626 0%, #B91C1C 100%) !important;
-                    }
-                    
-                    /* Header section - not fixed in print, just normal flow */
-                    .invoice-header-section {
-                        position: relative !important;
-                        z-index: 1 !important;
-                        background: white !important;
-                        page-break-inside: avoid !important;
-                    }
-                    
-                    /* Fixed footer to bottom */
-                    .footer-wave {
-                        position: fixed !important;
-                        bottom: 0 !important;
-                        left: 0 !important;
-                        width: 210mm !important;
-                        height: 50px !important;
-                        z-index: 1000 !important;
-                        page-break-inside: avoid !important;
-                        -webkit-print-color-adjust: exact !important;
-                        print-color-adjust: exact !important;
-                    }
-                    
-                    /* Content area padding to prevent overlap with footer only */
-                    .invoice-content-area {
-                        padding-top: 0 !important;
-                        padding-bottom: 60px !important;
-                        position: relative !important;
-                        z-index: 2 !important;
+                    .corner-decoration {
+                        position: absolute !important;
+                        overflow: hidden !important;
                     }
                 }
             `}</style>
@@ -519,228 +417,215 @@ export default function InvoiceDetailPage() {
                     </Flex>
 
                     {/* Invoice Document - A4 */}
-                    <Card.Root border="none" bg="white" className="invoice-print-content" overflow="hidden">
-                        <Card.Body p={0}>
-                            {/* Header Section - Fixed to Top */}
-                            <Box className="invoice-header-section">
-                                {/* Red Accent Bar at Top */}
-                                <Box className="red-accent-bar" h="6px" />
+                    <Card.Root border="none" bg="white" className="invoice-print-content" overflow="hidden" position="relative">
+                        <Card.Body p={0} position="relative">
 
-                                {/* Header Section */}
-                                <Box px={6} pt={0.5} pb={0.5}>
-                                    {/* Logo Section - Smaller */}
-                                    <Flex justify="center" align="center" mb={0.5}>
-                                        <Box>
-                                            <img
-                                                src="/logo.png"
-                                                alt="Company Logo"
-                                                style={{
-                                                    width: "220px",
-                                                    height: "auto",
-                                                    maxHeight: "90px",
-                                                    objectFit: "contain"
-                                                }}
-                                            />
-                                        </Box>
-                                    </Flex>
-
-                                    {/* Invoice Title & Number */}
-                                    <Flex justify="space-between" align="flex-end" mb={0.5}>
-                                        <Box>
-                                            <Text
-                                                fontSize="20px"
-                                                fontWeight="900"
-                                                color="#1F2937"
-                                                letterSpacing="-1px"
-                                                lineHeight="1"
-                                            >
-                                                INVOICE
-                                            </Text>
-                                        </Box>
-                                        <Box textAlign="right" ml={4}>
-                                            <Text fontSize="xs" color="gray.500" fontWeight="medium">Invoice No.</Text>
-                                            <Text fontSize="lg" fontWeight="bold" color="#DC2626">
-                                                {invoice.invoiceNumber || `INV-${invoice.id?.slice(-6)}`}
-                                            </Text>
-                                            <Box mt={0.5}>
-                                                <Text fontSize="xs" color="gray.600" mb={0.5}>
-                                                    {new Date(invoice.issueDate).toLocaleDateString('en-US', {
-                                                        day: '2-digit',
-                                                        month: 'short',
-                                                        year: 'numeric'
-                                                    })}
-                                                </Text>
-                                                <Text fontSize="xs" color="gray.500" dir="rtl" textAlign="right" style={{ fontFamily: 'Arial, sans-serif' }}>
-                                                    {formatDateInArabic(new Date(invoice.issueDate), toArabic)}
-                                                </Text>
-                                            </Box>
-                                        </Box>
-                                    </Flex>
-
-                                    {/* Bill To / From Section */}
-                                    <SimpleGrid columns={2} gap={4} mb={0.5}>
-                                        <Box
-                                            p={2}
-                                            bg="gray.50"
-                                            borderRadius="md"
-                                            borderLeft="3px solid"
-                                            borderColor="#DC2626"
-                                        >
-                                            <Text fontSize="xs" fontWeight="bold" color="#DC2626" mb={1} textTransform="uppercase" letterSpacing="1px">
-                                                Bill To
-                                            </Text>
-                                            {invoice.client || invoice.clientPhone ? (
-                                                <>
-                                                    <Text fontSize="sm" fontWeight="bold" color="gray.800">
-                                                        {invoice.client || "Customer"}
-                                                    </Text>
-                                                    {invoice.clientPhone && (
-                                                        <Text fontSize="xs" color="gray.600" mt={0.5}>{invoice.clientPhone}</Text>
-                                                    )}
-                                                </>
-                                            ) : (
-                                                <Text fontSize="xs" color="gray.400" fontStyle="italic">Walk-in Customer</Text>
-                                            )}
-                                        </Box>
-                                        <Box
-                                            p={2}
-                                            bg="gray.50"
-                                            borderRadius="md"
-                                            borderLeft="3px solid"
-                                            borderColor="gray.300"
-                                        >
-                                            <Text fontSize="xs" fontWeight="bold" color="gray.500" mb={1} textTransform="uppercase" letterSpacing="1px">
-                                                From
-                                            </Text>
-                                            <Text fontSize="sm" fontWeight="bold" color="gray.800">{companyInfo.name}</Text>
-                                            <Text fontSize="xs" color="gray.600" mt={0.5}>{companyInfo.address}</Text>
-                                            <Text fontSize="xs" color="gray.600">{companyInfo.phone}</Text>
-                                        </Box>
-                                    </SimpleGrid>
-                                </Box>
+                            {/* ── Top-right corner decoration ── */}
+                            <Box position="absolute" top={0} right={0} w="180px" h="180px" overflow="hidden" zIndex={0} pointerEvents="none">
+                                <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="180,0 180,110 70,0" fill="#1B2D4E" />
+                                    <polygon points="70,0 180,110 180,135 95,0" fill="#2C4A7C" />
+                                    <polygon points="95,0 180,135 180,155 115,0" fill="#7B96B4" />
+                                    <polygon points="115,0 180,155 180,175 135,0" fill="#1B2D4E" opacity="0.6" />
+                                </svg>
                             </Box>
 
-                            {/* Content Area with padding for fixed header/footer */}
-                            <Box className="invoice-content-area">
-                                {/* Items Table */}
-                                <Box px={6} mb={1}>
-                                    <Box className="invoice-table" borderRadius="md" overflow="hidden" border="1px solid" borderColor="gray.200">
-                                        <Table.Root size="sm">
-                                            <Table.Header>
-                                                <Table.Row>
-                                                    <Table.ColumnHeader py={1.5} px={3} width="45%">
-                                                        <Text fontSize="xs">Description <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الوصف)</Text></Text>
-                                                    </Table.ColumnHeader>
-                                                    <Table.ColumnHeader py={1.5} px={2} textAlign="center" width="15%">
-                                                        <Text fontSize="xs">Qty <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(الكمية)</Text></Text>
-                                                    </Table.ColumnHeader>
-                                                    <Table.ColumnHeader py={1.5} px={2} textAlign="right" width="20%">
-                                                        <Text fontSize="xs">Unit Price <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(سعر الوحدة)</Text></Text>
-                                                    </Table.ColumnHeader>
-                                                    <Table.ColumnHeader py={1.5} px={3} textAlign="right" width="20%">
-                                                        <Text fontSize="xs">Amount <Text as="span" dir="rtl" style={{ fontFamily: 'Arial, sans-serif' }}>(المبلغ)</Text></Text>
-                                                    </Table.ColumnHeader>
-                                                </Table.Row>
-                                            </Table.Header>
-                                            <Table.Body>
-                                                {invoice.items.map((item, index) => {
-                                                    const amount = item.amount ?? (item.quantity * item.rate);
-                                                    const product = item.productId ? productsMap.get(item.productId) : null;
-                                                    return (
-                                                        <Table.Row key={index}>
-                                                            <Table.Cell py={1.5} px={3}>
-                                                                <Text fontWeight="medium" color="gray.800" fontSize="xs">{item.description}</Text>
-                                                                {product?.arabicName && (
-                                                                    <Text fontSize="10px" color="gray.500" dir="rtl" mt={0.5}>{product.arabicName}</Text>
-                                                                )}
-                                                            </Table.Cell>
-                                                            <Table.Cell textAlign="center" py={1.5} px={2}>
-                                                                <Text fontWeight="semibold" color="gray.700" fontSize="xs">{item.quantity}</Text>
-                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{toArabic(item.quantity)}</Text>
-                                                            </Table.Cell>
-                                                            <Table.Cell textAlign="right" py={1.5} px={2}>
-                                                                <Text color="gray.700" fontSize="xs">QAR {item.rate.toLocaleString()}</Text>
-                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(item.rate)}</Text>
-                                                            </Table.Cell>
-                                                            <Table.Cell textAlign="right" py={1.5} px={3}>
-                                                                <Text fontWeight="semibold" color="gray.800" fontSize="xs">QAR {amount.toLocaleString()}</Text>
-                                                                <Text fontSize="10px" color="gray.400" dir="rtl">{formatCurrency(amount)}</Text>
-                                                            </Table.Cell>
-                                                        </Table.Row>
-                                                    );
-                                                })}
-                                            </Table.Body>
-                                        </Table.Root>
-                                    </Box>
-                                </Box>
+                            {/* ── Bottom-left corner decoration ── */}
+                            <Box position="absolute" bottom={0} left={0} w="180px" h="180px" overflow="hidden" zIndex={0} pointerEvents="none">
+                                <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
+                                    <polygon points="0,180 110,180 0,70" fill="#1B2D4E" />
+                                    <polygon points="0,70 110,180 135,180 0,95" fill="#2C4A7C" />
+                                    <polygon points="0,95 135,180 155,180 0,115" fill="#7B96B4" />
+                                    <polygon points="0,115 155,180 175,180 0,135" fill="#1B2D4E" opacity="0.6" />
+                                </svg>
+                            </Box>
 
-                                {/* Totals Section */}
-                                <Box px={6} mb={1}>
-                                    <Flex justify="flex-end" gap={4} align="flex-start">
-                                        {/* Totals Section */}
-                                        <Box w="240px" bg="gray.50" borderRadius="md" p={2.5}>
-                                            <VStack gap={1.5} align="stretch">
-                                                <HStack justify="space-between">
-                                                    <Text color="gray.600" fontSize="xs">Subtotal</Text>
-                                                    <Box textAlign="right">
-                                                        <Text fontWeight="medium" color="gray.800" fontSize="xs">QAR {invoice.subtotal.toLocaleString()}</Text>
-                                                    </Box>
-                                                </HStack>
-                                                {invoice.discount > 0 && (
-                                                    <HStack justify="space-between">
-                                                        <Text color="green.600" fontSize="xs">Discount</Text>
-                                                        <Text fontWeight="medium" color="green.600" fontSize="xs">-QAR {invoice.discount.toLocaleString()}</Text>
-                                                    </HStack>
-                                                )}
-                                                <Separator />
-                                                <HStack justify="space-between">
-                                                    <Text fontWeight="bold" color="gray.800" fontSize="sm">TOTAL</Text>
-                                                    <Box textAlign="right">
-                                                        <Text fontWeight="black" color="#DC2626" fontSize="lg">QAR {invoice.total.toLocaleString()}</Text>
-                                                        <Text fontSize="xs" color="gray.500" dir="rtl">{formatCurrency(invoice.total)}</Text>
-                                                    </Box>
-                                                </HStack>
-                                            </VStack>
-                                        </Box>
-                                    </Flex>
-                                </Box>
+                            {/* ── Invoice content ── */}
+                            <Box position="relative" zIndex={1} px={10} pt={7} pb={10}>
 
-                                {/* Payment Method */}
-                                {paymentMethod && (
-                                    <Box px={6} mb={0.5}>
-                                        <Text fontSize="xs" fontWeight="bold" color="gray.600" mb={0.5}>PAYMENT METHOD</Text>
-                                        <Text fontSize="sm" color="gray.800" fontWeight="medium">
-                                            {paymentMethod === 'bank-transfer' ? 'Bank Transfer' : paymentMethod.charAt(0).toUpperCase() + paymentMethod.slice(1)}
+                                {/* Logo – top right */}
+                                <Flex justify="flex-end" mb={6}>
+                                    <img
+                                        src="/logo.png"
+                                        alt="Company Logo"
+                                        style={{ height: "52px", objectFit: "contain" }}
+                                    />
+                                </Flex>
+
+                                {/* INVOICE heading */}
+                                <Text
+                                    fontSize="28px"
+                                    fontWeight="800"
+                                    color="#1B2D4E"
+                                    letterSpacing="3px"
+                                    mb={5}
+                                    lineHeight="1"
+                                >
+                                    INVOICE
+                                </Text>
+
+                                {/* Invoice By / Invoice to – two columns */}
+                                <SimpleGrid columns={2} gap={10} mb={7}>
+                                    {/* Left – Invoice By */}
+                                    <Box>
+                                        <Text fontSize="11px" color="gray.500" mb={1} letterSpacing="0.5px">
+                                            Invoice By:
                                         </Text>
+                                        <Text fontWeight="700" color="#1B2D4E" fontSize="sm" textTransform="uppercase">
+                                            {companyInfo.name}
+                                        </Text>
+                                        {currentUser?.name && (
+                                            <Text color="gray.700" fontSize="sm" mt={0.5}>{invoice.createdByName || currentUser.name}</Text>
+                                        )}
+                                        {companyInfo.phone && (
+                                            <Text color="gray.500" fontSize="sm">Contact Number:&nbsp; {companyInfo.phone}</Text>
+                                        )}
                                     </Box>
+                                    {/* Right – Invoice to */}
+                                    <Box>
+                                        <Text fontSize="11px" color="gray.500" mb={1} letterSpacing="0.5px">
+                                            Invoice to:
+                                        </Text>
+                                        <Text fontWeight="700" color="#1B2D4E" fontSize="sm" textTransform="uppercase">
+                                            {invoice.client || "Walk-in Customer"}
+                                        </Text>
+                                        {invoice.clientPhone && (
+                                            <Text color="gray.500" fontSize="sm">{invoice.clientPhone}</Text>
+                                        )}
+                                        <HStack gap={6} mt={1.5}>
+                                            <Box>
+                                                <Text fontSize="11px" color="gray.500" letterSpacing="0.5px">Invoice Number:</Text>
+                                                <Text color="gray.700" fontSize="sm" fontWeight="600">
+                                                    {invoice.invoiceNumber || `INV-${invoice.id?.slice(-6)}`}
+                                                </Text>
+                                            </Box>
+                                            <Box>
+                                                <Text fontSize="11px" color="gray.500" letterSpacing="0.5px">Invoice Date:</Text>
+                                                <Text color="gray.700" fontSize="sm" fontWeight="600">
+                                                    {new Date(invoice.issueDate).toLocaleDateString('en-GB', {
+                                                        day: '2-digit', month: '2-digit', year: 'numeric'
+                                                    })}
+                                                </Text>
+                                            </Box>
+                                        </HStack>
+                                    </Box>
+                                </SimpleGrid>
+
+                                {/* ── Items table ── */}
+                                <Box mb={0} border="1px solid" borderColor="gray.200" borderRadius="md" overflow="hidden">
+                                    {/* Table header */}
+                                    <Flex bg="#1B2D4E" px={5} py={3} align="center">
+                                        <Text
+                                            color="white"
+                                            fontWeight="700"
+                                            fontSize="11px"
+                                            letterSpacing="1.5px"
+                                            textTransform="uppercase"
+                                            flex={1}
+                                        >
+                                            Product Name
+                                        </Text>
+                                        <Text
+                                            color="white"
+                                            fontWeight="700"
+                                            fontSize="11px"
+                                            letterSpacing="1.5px"
+                                            textTransform="uppercase"
+                                            textAlign="right"
+                                            minW="100px"
+                                        >
+                                            Total Price
+                                        </Text>
+                                    </Flex>
+
+                                    {/* Rows */}
+                                    {invoice.items.map((item, index) => {
+                                        const amount = item.amount ?? (item.quantity * item.rate);
+                                        return (
+                                            <Flex
+                                                key={index}
+                                                px={5}
+                                                py={3}
+                                                align="flex-start"
+                                                borderBottom={index < invoice.items.length - 1 ? "1px solid" : "none"}
+                                                borderColor="gray.100"
+                                                bg={index % 2 === 1 ? "gray.50" : "white"}
+                                            >
+                                                <Box flex={1}>
+                                                    <Text color="gray.800" fontSize="sm">{item.description}</Text>
+                                                    {item.quantity > 1 && (
+                                                        <Text fontSize="xs" color="gray.400" mt={0.5}>
+                                                            {item.quantity} × QAR {item.rate.toLocaleString()}
+                                                        </Text>
+                                                    )}
+                                                </Box>
+                                                <Text
+                                                    color="gray.700"
+                                                    fontSize="sm"
+                                                    fontWeight="600"
+                                                    minW="100px"
+                                                    textAlign="right"
+                                                    whiteSpace="nowrap"
+                                                >
+                                                    QR {amount.toLocaleString()}
+                                                </Text>
+                                            </Flex>
+                                        );
+                                    })}
+                                </Box>
+
+                                {/* ── Total amount bar ── */}
+                                <Flex
+                                    bg="#1B2D4E"
+                                    justify="center"
+                                    align="center"
+                                    py={3}
+                                    mt={3}
+                                    mb="3px"
+                                >
+                                    <Text color="white" fontWeight="700" fontSize="sm" letterSpacing="1.5px" textTransform="uppercase">
+                                        Total Amount: QR {invoice.total.toLocaleString()}
+                                    </Text>
+                                </Flex>
+
+                                {/* ── Discount bar (only if discount exists) ── */}
+                                {invoice.discount > 0 && (
+                                    <Flex
+                                        bg="#2C4A7C"
+                                        justify="center"
+                                        align="center"
+                                        py={2.5}
+                                        mb="3px"
+                                    >
+                                        <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="1.5px" textTransform="uppercase">
+                                            Discount: QR {invoice.discount.toLocaleString()}
+                                        </Text>
+                                    </Flex>
                                 )}
 
                                 {/* Notes */}
                                 {invoice.notes && (
-                                    <Box px={6} mb={0.5}>
-                                        <Box p={2.5} bg="blue.50" borderRadius="md" borderLeft="3px solid" borderColor="blue.400">
-                                            <Text fontSize="10px" fontWeight="bold" color="blue.600" mb={0.5}>NOTE</Text>
-                                            <Text fontSize="xs" color="gray.700">{invoice.notes}</Text>
-                                        </Box>
+                                    <Box mt={5}>
+                                        <Text fontSize="xs" fontWeight="700" color="gray.500" mb={1} letterSpacing="0.5px">
+                                            Note:
+                                        </Text>
+                                        <Text fontSize="sm" color="gray.600">{invoice.notes}</Text>
                                     </Box>
                                 )}
 
-                            </Box>
+                                {/* ── Footer ── */}
+                                <Box mt={10}>
+                                    <Text fontSize="sm" color="gray.500" fontStyle="italic">Yours sincerely,</Text>
+                                    <Text fontWeight="700" color="#1B2D4E" fontSize="sm" mt={1} letterSpacing="0.5px" textTransform="uppercase">
+                                        {invoice.createdByName || currentUser?.name || companyInfo.name || ""}
+                                    </Text>
+                                    {/* Signature line */}
+                                    <Box mt={4} mb={1} w="130px" h="36px" borderBottom="1.5px solid" borderColor="gray.300" />
+                                    <Text fontSize="xs" color="gray.400" letterSpacing="0.3px">
+                                        Thanks for your purchase
+                                    </Text>
+                                </Box>
 
-                            {/* Footer Wave - Orange Beautiful - Fixed to Bottom */}
-                            <Box className="footer-wave" h="50px">
-                                <svg viewBox="0 0 1200 50" preserveAspectRatio="none" style={{ width: "100%", height: "100%" }}>
-                                    <defs>
-                                        <linearGradient id="orangeGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                            <stop offset="0%" style={{ stopColor: "#FB923C", stopOpacity: 1 }} />
-                                            <stop offset="50%" style={{ stopColor: "#F97316", stopOpacity: 1 }} />
-                                            <stop offset="100%" style={{ stopColor: "#EA580C", stopOpacity: 1 }} />
-                                        </linearGradient>
-                                    </defs>
-                                    <path d="M0,50 L0,25 Q200,5 400,20 T800,18 T1200,20 L1200,50 Z" fill="url(#orangeGradient)" opacity="0.9" />
-                                    <path d="M0,50 L0,35 Q300,20 600,30 T1200,28 L1200,50 Z" fill="#F97316" opacity="0.7" />
-                                    <path d="M0,50 L0,40 Q400,30 800,35 L1200,33 L1200,50 Z" fill="#EA580C" />
-                                </svg>
                             </Box>
                         </Card.Body>
                     </Card.Root>

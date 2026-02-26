@@ -73,7 +73,7 @@ export const quotationSchema = z.object({
     clientPhone: z.string().optional(),
     clientId: z.string().optional(),
     items: z.array(invoiceItemSchema).min(1, 'At least one item is required'),
-    tax: z.number().min(0).default(0),
+    discount: z.number().min(0).default(0),
     issueDate: z.string().or(z.date()),
     validUntil: z.string().or(z.date()),
     notes: z.string().optional(),

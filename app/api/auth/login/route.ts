@@ -55,6 +55,7 @@ export async function POST(request: NextRequest) {
             userId: user._id!.toString(),
             email: user.email,
             role: user.role,
+            username: user.name,
         });
 
         const response: LoginResponse = {

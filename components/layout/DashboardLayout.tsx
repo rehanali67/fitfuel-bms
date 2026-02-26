@@ -112,9 +112,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
             ? [
                 { icon: <LuUserCog />, label: "Users", href: "/dashboard/users" },
                 { icon: <LuWallet />, label: "Accounts", href: "/dashboard/accounts" },
+                { icon: <LuSettings />, label: "Settings", href: "/dashboard/settings" },
             ]
             : []),
-        { icon: <LuSettings />, label: "Settings", href: "/dashboard/settings" },
     ];
 
     const handleLogout = () => {

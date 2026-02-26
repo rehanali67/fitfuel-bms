@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
     Box,
     Card,
@@ -40,6 +41,10 @@ interface CompanyInfo {
     address?: string;
     city?: string;
     zipCode?: string;
+    bankName?: string;
+    bankAccount?: string;
+    bankIBAN?: string;
+    bankBranch?: string;
 }
 
 interface CategoryResponse {
@@ -49,6 +54,16 @@ interface CategoryResponse {
 
 export default function SettingsPage() {
     const { user } = useAuth();
+    const router = useRouter();
+
+    // Redirect non-admins
+    useEffect(() => {
+        if (user && user.role !== "admin") {
+            router.replace("/dashboard");
+        }
+    }, [user, router]);
+
+    if (user && user.role !== "admin") return null;
 
     // Company info state
     const [companyInfo, setCompanyInfo] = useState<CompanyInfo>({
@@ -58,6 +73,10 @@ export default function SettingsPage() {
         address: "",
         city: "",
         zipCode: "",
+        bankName: "",
+        bankAccount: "",
+        bankIBAN: "",
+        bankBranch: "",
     });
 
     // Loading states
@@ -397,6 +416,53 @@ export default function SettingsPage() {
                                         />
                                     </Field.Root>
                                 </HStack>
+
+                                {/* Bank Account Details */}
+                                <Box pt={2}>
+                                    <Text fontWeight="semibold" fontSize="sm" color="gray.700" mb={3}>Bank Account Details</Text>
+                                    <VStack gap={4} align="stretch">
+                                        <SimpleGrid columns={2} gap={4}>
+                                            <Field.Root>
+                                                <Field.Label>Bank Name</Field.Label>
+                                                <Input
+                                                    value={companyInfo.bankName || ''}
+                                                    onChange={(e) => setCompanyInfo({ ...companyInfo, bankName: e.target.value })}
+                                                    placeholder="Qatar National Bank"
+                                                    disabled={isLoadingCompany}
+                                                />
+                                            </Field.Root>
+                                            <Field.Root>
+                                                <Field.Label>Account Number</Field.Label>
+                                                <Input
+                                                    value={companyInfo.bankAccount || ''}
+                                                    onChange={(e) => setCompanyInfo({ ...companyInfo, bankAccount: e.target.value })}
+                                                    placeholder="0012345678"
+                                                    disabled={isLoadingCompany}
+                                                />
+                                            </Field.Root>
+                                        </SimpleGrid>
+                                        <SimpleGrid columns={2} gap={4}>
+                                            <Field.Root>
+                                                <Field.Label>IBAN</Field.Label>
+                                                <Input
+                                                    value={companyInfo.bankIBAN || ''}
+                                                    onChange={(e) => setCompanyInfo({ ...companyInfo, bankIBAN: e.target.value })}
+                                                    placeholder="QA57QNBA000000000012345678"
+                                                    disabled={isLoadingCompany}
+                                                />
+                                            </Field.Root>
+                                            <Field.Root>
+                                                <Field.Label>Branch</Field.Label>
+                                                <Input
+                                                    value={companyInfo.bankBranch || ''}
+                                                    onChange={(e) => setCompanyInfo({ ...companyInfo, bankBranch: e.target.value })}
+                                                    placeholder="Doha Main Branch"
+                                                    disabled={isLoadingCompany}
+                                                />
+                                            </Field.Root>
+                                        </SimpleGrid>
+                                    </VStack>
+                                </Box>
 
                                 <Button
                                     colorPalette="purple"

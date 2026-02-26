@@ -43,7 +43,6 @@ import { UserResponse } from "@/lib/models/User";
 function getRoleColor(role: string) {
     switch (role) {
         case "admin": return "red";
-        case "manager": return "purple";
         case "user": return "blue";
         default: return "gray";
     }
@@ -52,7 +51,6 @@ function getRoleColor(role: string) {
 function getRoleLabel(role: string) {
     switch (role) {
         case "admin": return "Admin";
-        case "manager": return "Manager";
         case "user": return "Sales";
         default: return role;
     }
@@ -79,7 +77,7 @@ export default function UsersPage() {
     const [createName, setCreateName] = useState("");
     const [createEmail, setCreateEmail] = useState("");
     const [createPassword, setCreatePassword] = useState("");
-    const [createRole, setCreateRole] = useState<"admin" | "manager" | "user">("user");
+    const [createRole, setCreateRole] = useState<"admin" | "user">("user");
     const [showCreatePassword, setShowCreatePassword] = useState(false);
 
     // Edit dialog
@@ -88,7 +86,7 @@ export default function UsersPage() {
     const [isEditing, setIsEditing] = useState(false);
     const [editName, setEditName] = useState("");
     const [editEmail, setEditEmail] = useState("");
-    const [editRole, setEditRole] = useState<"admin" | "manager" | "user">("user");
+    const [editRole, setEditRole] = useState<"admin" | "user">("user");
     const [editPassword, setEditPassword] = useState("");
     const [showEditPassword, setShowEditPassword] = useState(false);
 
@@ -179,7 +177,7 @@ export default function UsersPage() {
         setUserToEdit(u);
         setEditName(u.name);
         setEditEmail(u.email);
-        setEditRole(u.role as "admin" | "manager" | "user");
+        setEditRole(u.role as "admin" | "user");
         setEditPassword("");
         setShowEditPassword(false);
         setEditDialogOpen(true);
@@ -265,8 +263,7 @@ export default function UsersPage() {
     const stats = [
         { label: "Total Users", value: users.length, color: "blue" },
         { label: "Admins", value: users.filter((u) => u.role === "admin").length, color: "red" },
-        { label: "Managers", value: users.filter((u) => u.role === "manager").length, color: "purple" },
-        { label: "Sales", value: users.filter((u) => u.role === "user").length, color: "green" },
+        { label: "Salespersons", value: users.filter((u) => u.role === "user").length, color: "green" },
     ];
 
     if (currentUser && currentUser.role !== "admin") return null;
@@ -515,11 +512,10 @@ export default function UsersPage() {
                                             <NativeSelect.Field
                                                 value={createRole}
                                                 onChange={(e) =>
-                                                    setCreateRole(e.target.value as "admin" | "manager" | "user")
+                                                    setCreateRole(e.target.value as "admin" | "user")
                                                 }
                                             >
-                                                <option value="user">Sales (User)</option>
-                                                <option value="manager">Manager</option>
+                                                <option value="user">Salesperson</option>
                                                 <option value="admin">Admin</option>
                                             </NativeSelect.Field>
                                             <NativeSelect.Indicator />
@@ -611,11 +607,10 @@ export default function UsersPage() {
                                             <NativeSelect.Field
                                                 value={editRole}
                                                 onChange={(e) =>
-                                                    setEditRole(e.target.value as "admin" | "manager" | "user")
+                                                    setEditRole(e.target.value as "admin" | "user")
                                                 }
                                             >
-                                                <option value="user">Sales (User)</option>
-                                                <option value="manager">Manager</option>
+                                                <option value="user">Salesperson</option>
                                                 <option value="admin">Admin</option>
                                             </NativeSelect.Field>
                                             <NativeSelect.Indicator />

@@ -53,9 +53,8 @@ async function putHandler(request: AuthenticatedRequest, context?: { params: Pro
                 amount: item.quantity * item.rate,
             }));
             const subtotal = items.reduce((sum: number, item: any) => sum + item.amount, 0);
-            // Use existing quotation's tax since tax is not in the validation schema
-            const tax = quotation.tax;
-            const total = subtotal + tax;
+            const discount = validatedData.discount !== undefined ? validatedData.discount : quotation.discount;
+            const total = subtotal - discount;
             updates.items = items;
             updates.subtotal = subtotal;
             updates.total = total;

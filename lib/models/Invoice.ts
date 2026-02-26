@@ -16,6 +16,7 @@ export interface InvoiceDocument {
     issueDate: Date;
     notes?: string;
     paymentMethod?: 'cash' | 'card' | 'bank-transfer' | 'Fawran' | 'Pending';
+    createdByName?: string;
     createdAt: Date;
     updatedAt: Date;
 }
@@ -36,6 +37,7 @@ export interface InvoiceResponse {
     issueDate: Date;
     notes?: string;
     paymentMethod?: 'cash' | 'card' | 'bank-transfer' | 'Fawran' | 'Pending';
+    createdByName?: string;
 }
 
 export function invoiceToResponse(invoice: InvoiceDocument): InvoiceResponse {
@@ -55,6 +57,7 @@ export function invoiceToResponse(invoice: InvoiceDocument): InvoiceResponse {
         issueDate: invoice.issueDate,
         notes: invoice.notes,
         paymentMethod: invoice.paymentMethod,
+        createdByName: invoice.createdByName,
     };
 }
 
@@ -78,7 +81,7 @@ export async function createInvoice(invoiceData: Omit<InvoiceDocument, '_id' | '
     const collection = await getInvoiceCollection();
     const now = new Date();
     const invoiceNumber = await generateInvoiceNumber();
-    
+
     const invoice: InvoiceDocument = {
         ...invoiceData,
         invoiceNumber,

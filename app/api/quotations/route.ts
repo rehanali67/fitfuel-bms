@@ -91,18 +91,17 @@ async function postHandler(request: AuthenticatedRequest) {
             .filter(item => item.quantity < 0)
             .reduce((sum, item) => sum + item.amount, 0);
         const netSubtotal = subtotal - returns;
-        const tax = validatedData.tax || 0;
-        const total = netSubtotal + tax;
+        const discount = validatedData.discount || 0;
+        const total = netSubtotal - discount;
 
         const quotation = await createQuotation({
             ...validatedData,
             items: items, // Use items with calculated amounts but preserve quantity signs
             subtotal: netSubtotal,
-            tax,
+            discount,
             total,
             issueDate: typeof validatedData.issueDate === 'string' ? new Date(validatedData.issueDate) : validatedData.issueDate,
             validUntil: typeof validatedData.validUntil === 'string' ? new Date(validatedData.validUntil) : validatedData.validUntil,
-            status: validatedData.status || 'Draft',
         });
 
         return NextResponse.json(

@@ -9,6 +9,10 @@ export interface CompanyDocument {
     address?: string;
     city?: string;
     zipCode?: string;
+    bankName?: string;
+    bankAccount?: string;
+    bankIBAN?: string;
+    bankBranch?: string;
     updatedAt: Date;
 }
 
@@ -20,6 +24,10 @@ export interface CompanyResponse {
     address?: string;
     city?: string;
     zipCode?: string;
+    bankName?: string;
+    bankAccount?: string;
+    bankIBAN?: string;
+    bankBranch?: string;
 }
 
 export function companyToResponse(company: CompanyDocument): CompanyResponse {
@@ -31,6 +39,10 @@ export function companyToResponse(company: CompanyDocument): CompanyResponse {
         address: company.address,
         city: company.city,
         zipCode: company.zipCode,
+        bankName: company.bankName,
+        bankAccount: company.bankAccount,
+        bankIBAN: company.bankIBAN,
+        bankBranch: company.bankBranch,
     };
 }
 

@@ -11,6 +11,10 @@ const companySchema = z.object({
     address: z.string().optional(),
     city: z.string().optional(),
     zipCode: z.string().optional(),
+    bankName: z.string().optional(),
+    bankAccount: z.string().optional(),
+    bankIBAN: z.string().optional(),
+    bankBranch: z.string().optional(),
 });
 
 async function getHandler(request: AuthenticatedRequest) {
@@ -41,6 +45,9 @@ async function getHandler(request: AuthenticatedRequest) {
 }
 
 async function putHandler(request: AuthenticatedRequest) {
+    if (request.user?.role !== 'admin') {
+        return NextResponse.json({ success: false, error: 'Forbidden' }, { status: 403 });
+    }
     try {
         const body = await request.json();
         const validatedData = companySchema.parse(body);

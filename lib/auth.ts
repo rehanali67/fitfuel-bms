@@ -13,6 +13,7 @@ export interface JWTPayload {
     userId: string;
     email: string;
     role: string;
+    username?: string;
 }
 
 const JWT_SECRET: string = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
