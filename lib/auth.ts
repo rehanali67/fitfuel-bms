@@ -55,9 +55,6 @@ export function verifyToken(token: string): JWTPayload {
     }
 }
 
-/**
- * Extract token from Authorization header
- */
 export function extractTokenFromHeader(authHeader: string | null): string | null {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return null;
