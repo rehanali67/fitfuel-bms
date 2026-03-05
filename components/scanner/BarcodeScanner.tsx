@@ -76,7 +76,7 @@ export function BarcodeScanner({ isOpen, onClose, onScan, onError }: BarcodeScan
                         <Dialog.Header
                             bg="blackAlpha.900"
                             borderBottomWidth="1px"
-                            bordercolor="fg.default"
+                            borderColor="fg.default"
                             p={4}
                         >
                             <HStack justify="space-between" align="center">
@@ -156,14 +156,14 @@ export function BarcodeScanner({ isOpen, onClose, onScan, onError }: BarcodeScan
                         <Dialog.Footer
                             bg="blackAlpha.900"
                             borderTopWidth="1px"
-                            bordercolor="fg.default"
+                            borderColor="fg.default"
                             p={4}
                         >
                             <HStack justify="space-between" w="100%">
                                 <Text color="fg.subtle" fontSize="xs">
                                     Position the barcode within the frame
                                 </Text>
-                                <Button onClick={handleClose} variant="outline" color="white" bordercolor="fg.muted">
+                                <Button onClick={handleClose} variant="outline" color="white" borderColor="fg.muted">
                                     Cancel
                                 </Button>
                             </HStack>
