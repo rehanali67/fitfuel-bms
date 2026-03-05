@@ -66,7 +66,7 @@ export default function LineItemsSection({
     onScanBarcode,
 }: LineItemsSectionProps) {
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
             <Card.Header p={5} pb={0}>
                 <Flex justify="space-between" align="center">
                     <Heading size="sm" fontWeight="semibold">Line Items</Heading>
@@ -82,7 +82,7 @@ export default function LineItemsSection({
                         {items.map((item, index) => (
                             <HStack key={item.id} gap={{ base: 2, md: 3 }} align="flex-end" flexWrap={{ base: "wrap", md: "nowrap" }}>
                                 <Box flex={{ base: 1, md: 3, lg: 4 }} minW={{ base: "100%", md: "200px", lg: "250px" }} position="relative">
-                                    {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Description</Text>}
+                                    {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Description</Text>}
                                     <Box position="relative">
                                         <HStack gap={1}>
                                             <Input
@@ -111,9 +111,9 @@ export default function LineItemsSection({
                                                 left={0}
                                                 right={0}
                                                 zIndex={1000}
-                                                bg="white"
+                                                bg="bg.surface"
                                                 borderWidth="1px"
-                                                borderColor="gray.200"
+                                                borderColor="border.default"
                                                 borderRadius="md"
                                                 shadow="lg"
                                                 mt={1}
@@ -122,7 +122,7 @@ export default function LineItemsSection({
                                             >
                                                 {isSearchingProducts[item.id] ? (
                                                     <Box p={3} textAlign="center">
-                                                        <Text fontSize="sm" color="gray.500">Searching...</Text>
+                                                        <Text fontSize="sm" color="fg.muted">Searching...</Text>
                                                     </Box>
                                                 ) : filteredProducts(item.id).length > 0 ? (
                                                     <List.Root>
@@ -130,24 +130,24 @@ export default function LineItemsSection({
                                                             <List.Item
                                                                 key={product.id}
                                                                 cursor="pointer"
-                                                                _hover={{ bg: "blue.50" }}
+                                                                _hover={{ bg: "blue.500/10" }}
                                                                 onClick={() => onProductSelect(item.id, product)}
                                                                 p={2}
                                                                 borderBottomWidth="1px"
-                                                                borderColor="gray.100"
+                                                                borderColor="border.default"
                                                             >
                                                                 <HStack gap={2}>
                                                                     <Icon color="blue.500"><LuPackage /></Icon>
                                                                     <VStack align="start" gap={0} flex={1}>
                                                                         <Text fontSize="sm" fontWeight="medium">{product.name}</Text>
                                                                         {product.arabicName && (
-                                                                            <Text fontSize="xs" color="gray.500" dir="rtl">{product.arabicName}</Text>
+                                                                            <Text fontSize="xs" color="fg.muted" dir="rtl">{product.arabicName}</Text>
                                                                         )}
                                                                         <HStack gap={2} flexWrap="wrap">
-                                                                            <Text fontSize="xs" color="gray.500">SKU: {product.sku}</Text>
-                                                                            <Text fontSize="xs" color="gray.500">•</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">SKU: {product.sku}</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">•</Text>
                                                                             <Text fontSize="xs" color="blue.600" fontWeight="medium">QAR {product.sellingPrice.toLocaleString()}</Text>
-                                                                            <Text fontSize="xs" color="gray.500">•</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">•</Text>
                                                                             <Text fontSize="xs" color={product.stock === 0 ? "red.600" : product.stock < (product.minStock || 15) ? "orange.600" : "green.600"}>
                                                                                 Stock: {product.stock}
                                                                             </Text>
@@ -159,7 +159,7 @@ export default function LineItemsSection({
                                                     </List.Root>
                                                 ) : productSearchQueries[item.id] ? (
                                                     <Box p={3} textAlign="center">
-                                                        <Text fontSize="sm" color="gray.500">No products found</Text>
+                                                        <Text fontSize="sm" color="fg.muted">No products found</Text>
                                                     </Box>
                                                 ) : null}
                                             </Box>
@@ -172,7 +172,7 @@ export default function LineItemsSection({
                                     )}
                                 </Box>
                                 <Box w={{ base: "80px", md: "80px" }} flexShrink={0}>
-                                    {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Qty</Text>}
+                                    {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Qty</Text>}
                                     <VStack align="stretch" gap={0}>
                                         <Input
                                             type="number"
@@ -216,7 +216,7 @@ export default function LineItemsSection({
                                     </VStack>
                                 </Box>
                                 <Box w={{ base: "100px", md: "100px" }} flexShrink={0}>
-                                    {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Rate</Text>}
+                                    {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Rate</Text>}
                                     <Input
                                         type="number"
                                         size={{ base: "md", md: "sm" }}
@@ -237,7 +237,7 @@ export default function LineItemsSection({
                                     />
                                 </Box>
                                 <Box w={{ base: "100px", md: "100px" }} flexShrink={0}>
-                                    {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Amount</Text>}
+                                    {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Amount</Text>}
                                     <Text
                                         fontWeight="medium"
                                         py={2}
@@ -247,7 +247,7 @@ export default function LineItemsSection({
                                     </Text>
                                 </Box>
                                 <Box w={{ base: "80px", md: "80px" }} flexShrink={0}>
-                                    {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Type</Text>}
+                                    {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Type</Text>}
                                     <Button
                                         size="xs"
                                         variant={item.isReturn ? "solid" : "outline"}
@@ -312,9 +312,9 @@ export default function LineItemsSection({
                                                     left={0}
                                                     right={0}
                                                     zIndex={1000}
-                                                    bg="white"
+                                                    bg="bg.surface"
                                                     borderWidth="1px"
-                                                    borderColor="gray.200"
+                                                    borderColor="border.default"
                                                     borderRadius="md"
                                                     shadow="lg"
                                                     mt={1}
@@ -326,24 +326,24 @@ export default function LineItemsSection({
                                                             <List.Item
                                                                 key={product.id}
                                                                 cursor="pointer"
-                                                                _hover={{ bg: "blue.50" }}
+                                                                _hover={{ bg: "blue.500/10" }}
                                                                 onClick={() => onProductSelect(item.id, product)}
                                                                 p={2}
                                                                 borderBottomWidth="1px"
-                                                                borderColor="gray.100"
+                                                                borderColor="border.default"
                                                             >
                                                                 <HStack gap={2}>
                                                                     <Icon color="blue.500"><LuPackage /></Icon>
                                                                     <VStack align="start" gap={0} flex={1}>
                                                                         <Text fontSize="sm" fontWeight="medium">{product.name}</Text>
                                                                         {product.arabicName && (
-                                                                            <Text fontSize="xs" color="gray.500" dir="rtl">{product.arabicName}</Text>
+                                                                            <Text fontSize="xs" color="fg.muted" dir="rtl">{product.arabicName}</Text>
                                                                         )}
                                                                         <HStack gap={2} flexWrap="wrap">
-                                                                            <Text fontSize="xs" color="gray.500">SKU: {product.sku}</Text>
-                                                                            <Text fontSize="xs" color="gray.500">•</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">SKU: {product.sku}</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">•</Text>
                                                                             <Text fontSize="xs" color="blue.600" fontWeight="medium">QAR {product.sellingPrice.toLocaleString()}</Text>
-                                                                            <Text fontSize="xs" color="gray.500">•</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">•</Text>
                                                                             <Text fontSize="xs" color={product.stock === 0 ? "red.600" : product.stock < (product.minStock || 15) ? "orange.600" : "green.600"}>
                                                                                 Stock: {product.stock}
                                                                             </Text>
@@ -442,7 +442,7 @@ export default function LineItemsSection({
                                             {item.isReturn ? "Return" : "Sale"}
                                         </Button>
                                         <HStack gap={2} flex={1} justify="flex-end">
-                                            <Text fontSize="sm" color="gray.600">
+                                            <Text fontSize="sm" color="fg.muted">
                                                 Amount: <Text as="span" fontWeight="semibold" color={item.isReturn ? "red.600" : "gray.800"}>
                                                     {item.isReturn ? "-" : ""}QAR {(item.quantity * item.rate).toLocaleString()}
                                                 </Text>

@@ -182,7 +182,7 @@ export default function InventoryPage() {
                 <Flex justify="space-between" align="center" flexWrap="wrap" gap={4}>
                     <Box>
                         <Heading size={{ base: "lg", md: "xl" }} fontWeight="semibold">Inventory</Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Manage your products and stock levels
                         </Text>
                     </Box>
@@ -198,7 +198,7 @@ export default function InventoryPage() {
                 
                 {lowStockCount > 0 && (
                     <Card.Root
-                        bg="orange.50"
+                        bg="orange.500/10"
                         borderWidth="1px"
                         borderColor="orange.200"
                         transition="all 0.2s"
@@ -233,16 +233,16 @@ export default function InventoryPage() {
                     {stats.map((stat) => (
                         <Card.Root
                             key={stat.label}
-                            bg="white"
+                            bg="bg.surface"
                             borderWidth="1px"
-                            borderColor="gray.100"
+                            borderColor="border.default"
                             transition="all 0.2s"
                             _hover={{ shadow: "md", transform: "translateY(-2px)" }}
                             cursor="pointer"
                         >
                             <Card.Body p={4}>
                                 <VStack align="start" gap={1}>
-                                    <Text color="gray.500" fontSize="xs" fontWeight="medium">
+                                    <Text color="fg.muted" fontSize="xs" fontWeight="medium">
                                         {stat.label}
                                     </Text>
                                     <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold" color={`${stat.color}.600`}>
@@ -255,11 +255,11 @@ export default function InventoryPage() {
                 </SimpleGrid>
 
                 {/* Filters & Search */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         <Flex gap={4} flexWrap="wrap" align="center">
                             <HStack flex={1} minW="200px">
-                                <Icon color="gray.400"><LuSearch /></Icon>
+                                <Icon color="fg.subtle"><LuSearch /></Icon>
                                 <Input
                                     placeholder="Search products..."
                                     variant="flushed"
@@ -303,7 +303,7 @@ export default function InventoryPage() {
                                 />
                             </HStack>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="xs" color="gray.500" fontWeight="medium">Category</Text>
+                                <Text fontSize="xs" color="fg.muted" fontWeight="medium">Category</Text>
                                 <Box w="100%" maxW="300px">
                                     <NativeSelect.Root size="sm">
                                         <NativeSelect.Field
@@ -325,7 +325,7 @@ export default function InventoryPage() {
                                 </Box>
                             </VStack>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="xs" color="gray.500" fontWeight="medium">Status</Text>
+                                <Text fontSize="xs" color="fg.muted" fontWeight="medium">Status</Text>
                                 <HStack gap={2} flexWrap="wrap">
                                     {["All", "In Stock", "Low Stock", "Out of Stock"].map((status) => (
                                         <Button
@@ -346,39 +346,39 @@ export default function InventoryPage() {
                 </Card.Root>
 
                 {/* Products Table */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100" overflow="hidden">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default" overflow="hidden">
                     <Box overflowX="auto">
                         <Table.Root size="sm" minW="800px">
                             <Table.Header>
-                                <Table.Row bg="gray.50">
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Product</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">SKU</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Category</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Stock</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Price</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Expiry Date</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Status</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600" textAlign="right">Actions</Table.ColumnHeader>
+                                <Table.Row bg="bg.subtle">
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Product</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">SKU</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Category</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Stock</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Price</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Expiry Date</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Status</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted" textAlign="right">Actions</Table.ColumnHeader>
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
                                 {isLoading ? (
                                     <Table.Row>
                                         <Table.Cell colSpan={8} textAlign="center" py={8}>
-                                            <Text color="gray.500">Loading products...</Text>
+                                            <Text color="fg.muted">Loading products...</Text>
                                         </Table.Cell>
                                     </Table.Row>
                                 ) : filteredProducts.length === 0 ? (
                                     <Table.Row>
                                         <Table.Cell colSpan={8} textAlign="center" py={8}>
-                                            <Text color="gray.500">No products found</Text>
+                                            <Text color="fg.muted">No products found</Text>
                                         </Table.Cell>
                                     </Table.Row>
                                 ) : (
                                     filteredProducts.map((product) => (
                                         <Table.Row
                                             key={product.id}
-                                            _hover={{ bg: "gray.50" }}
+                                            _hover={{ bg: "bg.subtle" }}
                                             transition="background 0.15s"
                                         >
                                             <Table.Cell>
@@ -387,7 +387,7 @@ export default function InventoryPage() {
                                                         w={8}
                                                         h={8}
                                                         borderRadius="lg"
-                                                        bg="orange.50"
+                                                        bg="orange.500/10"
                                                         align="center"
                                                         justify="center"
                                                     >
@@ -395,7 +395,7 @@ export default function InventoryPage() {
                                                     </Flex>
                                                     <VStack align="start" gap={0}>
                                                         <Text fontWeight="medium" fontSize="sm">{product.name}</Text>
-                                                        <Text fontSize="xs" color="gray.500">{product.id}</Text>
+                                                        <Text fontSize="xs" color="fg.muted">{product.id}</Text>
                                                     </VStack>
                                                 </HStack>
                                             </Table.Cell>
@@ -433,7 +433,7 @@ export default function InventoryPage() {
                                                         {new Date(product.expiryDate).toLocaleDateString()}
                                                     </Text>
                                                 ) : (
-                                                    <Text fontSize="sm" color="gray.400">N/A</Text>
+                                                    <Text fontSize="sm" color="fg.subtle">N/A</Text>
                                                 )}
                                             </Table.Cell>
                                             <Table.Cell>
@@ -448,12 +448,12 @@ export default function InventoryPage() {
                                             <Table.Cell textAlign="right">
                                                 <HStack gap={1} justify="flex-end">
                                                     <Link href={`/dashboard/inventory/${product.id}`}>
-                                                        <Button variant="ghost" size="xs" _hover={{ bg: "blue.50", color: "blue.600" }}>
+                                                        <Button variant="ghost" size="xs" _hover={{ bg: "blue.500/10", color: "blue.600" }}>
                                                             <LuEye />
                                                         </Button>
                                                     </Link>
                                                     <Link href={`/dashboard/inventory/${product.id}/edit`}>
-                                                        <Button variant="ghost" size="xs" _hover={{ bg: "gray.100" }}>
+                                                        <Button variant="ghost" size="xs" _hover={{ bg: "bg.muted" }}>
                                                             <LuPencil />
                                                         </Button>
                                                     </Link>
@@ -462,7 +462,7 @@ export default function InventoryPage() {
                                                         size="xs"
                                                         colorPalette="red"
                                                         onClick={() => openDeleteDialog(product)}
-                                                        _hover={{ bg: "red.50" }}
+                                                        _hover={{ bg: "red.500/10" }}
                                                     >
                                                         <LuTrash2 />
                                                     </Button>
@@ -478,22 +478,22 @@ export default function InventoryPage() {
 
                 {/* Empty State */}
                 {filteredProducts.length === 0 && (
-                    <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                    <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                         <Card.Body p={10}>
                             <VStack gap={4}>
                                 <Flex
                                     w={16}
                                     h={16}
                                     borderRadius="full"
-                                    bg="gray.100"
+                                    bg="bg.muted"
                                     align="center"
                                     justify="center"
                                 >
-                                    <Icon fontSize="2xl" color="gray.400"><LuPackage /></Icon>
+                                    <Icon fontSize="2xl" color="fg.subtle"><LuPackage /></Icon>
                                 </Flex>
                                 <VStack gap={1}>
                                     <Text fontWeight="medium">No products found</Text>
-                                    <Text fontSize="sm" color="gray.500">Try adjusting your search or filters</Text>
+                                    <Text fontSize="sm" color="fg.muted">Try adjusting your search or filters</Text>
                                 </VStack>
                                 <Link href="/dashboard/inventory/create">
                                     <Button colorPalette="orange" size="sm">
@@ -515,12 +515,12 @@ export default function InventoryPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Delete Product</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete <Text as="span" fontWeight="semibold">{productToDelete?.name}</Text>?
                                     This action cannot be undone.
                                 </Text>

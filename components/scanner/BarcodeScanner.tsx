@@ -76,7 +76,7 @@ export function BarcodeScanner({ isOpen, onClose, onScan, onError }: BarcodeScan
                         <Dialog.Header
                             bg="blackAlpha.900"
                             borderBottomWidth="1px"
-                            borderColor="gray.700"
+                            bordercolor="fg.default"
                             p={4}
                         >
                             <HStack justify="space-between" align="center">
@@ -108,7 +108,7 @@ export function BarcodeScanner({ isOpen, onClose, onScan, onError }: BarcodeScan
                                         <Text color="white" fontWeight="medium" fontSize="lg">
                                             Camera Error
                                         </Text>
-                                        <Text color="gray.300" fontSize="sm" textAlign="center" maxW="400px">
+                                        <Text color="fg.subtle" fontSize="sm" textAlign="center" maxW="400px">
                                             {error}
                                         </Text>
                                     </VStack>
@@ -156,14 +156,14 @@ export function BarcodeScanner({ isOpen, onClose, onScan, onError }: BarcodeScan
                         <Dialog.Footer
                             bg="blackAlpha.900"
                             borderTopWidth="1px"
-                            borderColor="gray.700"
+                            bordercolor="fg.default"
                             p={4}
                         >
                             <HStack justify="space-between" w="100%">
-                                <Text color="gray.400" fontSize="xs">
+                                <Text color="fg.subtle" fontSize="xs">
                                     Position the barcode within the frame
                                 </Text>
-                                <Button onClick={handleClose} variant="outline" color="white" borderColor="gray.600">
+                                <Button onClick={handleClose} variant="outline" color="white" bordercolor="fg.muted">
                                     Cancel
                                 </Button>
                             </HStack>

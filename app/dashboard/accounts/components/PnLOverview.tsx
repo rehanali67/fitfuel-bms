@@ -62,10 +62,10 @@ export default function PnLOverview({ summary, period, onPeriodChange, isLoading
     return (
         <VStack gap={5} align="stretch">
             {/* Period Selector */}
-            <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+            <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                 <Card.Body p={4}>
                     <Flex gap={2} flexWrap="wrap" align="center">
-                        <Text fontSize="sm" color="gray.500" fontWeight="medium" mr={2}>
+                        <Text fontSize="sm" color="fg.muted" fontWeight="medium" mr={2}>
                             View period:
                         </Text>
                         {PERIODS.map((p) => (
@@ -89,64 +89,64 @@ export default function PnLOverview({ summary, period, onPeriodChange, isLoading
 
                 {/* Revenue */}
                 <Stat.Root
-                    bg="white"
+                    bg="bg.surface"
                     borderWidth="1px"
-                    borderColor="gray.100"
+                    borderColor="border.default"
                     borderRadius="xl"
                     p={5}
                     opacity={isLoading ? 0.5 : 1}
                     transition="opacity 0.2s"
                 >
                     <HStack justify="space-between" mb={1}>
-                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Total Revenue</Stat.Label>
-                        <Flex w={9} h={9} borderRadius="lg" bg="green.50" align="center" justify="center">
+                        <Stat.Label fontSize="xs" color="fg.muted" fontWeight="medium">Total Revenue</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg="green.500/10" align="center" justify="center">
                             <Icon color="green.500"><LuTrendingUp /></Icon>
                         </Flex>
                     </HStack>
                     <Stat.ValueText fontSize="xl" fontWeight="bold" color="green.600">
                         {summary ? fmt(summary.totalRevenue) : "—"}
                     </Stat.ValueText>
-                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                    <Stat.HelpText color="fg.subtle" fontSize="xs" mt={1}>
                         {summary?.invoiceCount ?? 0} paid invoices
                     </Stat.HelpText>
                 </Stat.Root>
 
                 {/* Expenses */}
                 <Stat.Root
-                    bg="white"
+                    bg="bg.surface"
                     borderWidth="1px"
-                    borderColor="gray.100"
+                    borderColor="border.default"
                     borderRadius="xl"
                     p={5}
                     opacity={isLoading ? 0.5 : 1}
                     transition="opacity 0.2s"
                 >
                     <HStack justify="space-between" mb={1}>
-                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Total Expenses</Stat.Label>
-                        <Flex w={9} h={9} borderRadius="lg" bg="orange.50" align="center" justify="center">
+                        <Stat.Label fontSize="xs" color="fg.muted" fontWeight="medium">Total Expenses</Stat.Label>
+                        <Flex w={9} h={9} borderRadius="lg" bg="orange.500/10" align="center" justify="center">
                             <Icon color="orange.500"><LuDollarSign /></Icon>
                         </Flex>
                     </HStack>
                     <Stat.ValueText fontSize="xl" fontWeight="bold" color="orange.600">
                         {summary ? fmt(summary.totalExpenses) : "—"}
                     </Stat.ValueText>
-                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                    <Stat.HelpText color="fg.subtle" fontSize="xs" mt={1}>
                         Salary payments
                     </Stat.HelpText>
                 </Stat.Root>
 
                 {/* Net Profit / Loss */}
                 <Stat.Root
-                    bg="white"
+                    bg="bg.surface"
                     borderWidth="1px"
-                    borderColor="gray.100"
+                    borderColor="border.default"
                     borderRadius="xl"
                     p={5}
                     opacity={isLoading ? 0.5 : 1}
                     transition="opacity 0.2s"
                 >
                     <HStack justify="space-between" mb={1}>
-                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Net Profit / Loss</Stat.Label>
+                        <Stat.Label fontSize="xs" color="fg.muted" fontWeight="medium">Net Profit / Loss</Stat.Label>
                         <Flex w={9} h={9} borderRadius="lg" bg={isProfit ? "green.50" : "red.50"} align="center" justify="center">
                             <Icon color={isProfit ? "green.500" : "red.500"}>
                                 {isProfit ? <LuTrendingUp /> : <LuTrendingDown />}
@@ -164,23 +164,23 @@ export default function PnLOverview({ summary, period, onPeriodChange, isLoading
                             </Badge>
                         )}
                     </HStack>
-                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                    <Stat.HelpText color="fg.subtle" fontSize="xs" mt={1}>
                         Profit margin
                     </Stat.HelpText>
                 </Stat.Root>
 
                 {/* Profit Margin */}
                 <Stat.Root
-                    bg="white"
+                    bg="bg.surface"
                     borderWidth="1px"
-                    borderColor="gray.100"
+                    borderColor="border.default"
                     borderRadius="xl"
                     p={5}
                     opacity={isLoading ? 0.5 : 1}
                     transition="opacity 0.2s"
                 >
                     <HStack justify="space-between" mb={1}>
-                        <Stat.Label fontSize="xs" color="gray.500" fontWeight="medium">Profit Margin</Stat.Label>
+                        <Stat.Label fontSize="xs" color="fg.muted" fontWeight="medium">Profit Margin</Stat.Label>
                         <Flex w={9} h={9} borderRadius="lg" bg={`${marginColor}.50`} align="center" justify="center">
                             <Icon color={`${marginColor}.500`}><LuPercent /></Icon>
                         </Flex>
@@ -188,7 +188,7 @@ export default function PnLOverview({ summary, period, onPeriodChange, isLoading
                     <Stat.ValueText fontSize="xl" fontWeight="bold" color={`${marginColor}.600`}>
                         {summary ? `${summary.profitMargin}%` : "—"}
                     </Stat.ValueText>
-                    <Stat.HelpText color="gray.400" fontSize="xs" mt={1}>
+                    <Stat.HelpText color="fg.subtle" fontSize="xs" mt={1}>
                         {marginLabel}
                     </Stat.HelpText>
                 </Stat.Root>

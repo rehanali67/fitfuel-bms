@@ -33,12 +33,12 @@ export default function DiscardDialog({
             <Portal>
                 <Dialog.Backdrop bg="blackAlpha.600" />
                 <Dialog.Positioner>
-                    <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                    <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                         <Dialog.Header p={6} pb={4}>
                             <Dialog.Title fontWeight="semibold">Discard Changes</Dialog.Title>
                         </Dialog.Header>
                         <Dialog.Body px={6} pb={6}>
-                            <Text color="gray.600">
+                            <Text color="fg.muted">
                                 Are you sure you want to discard this invoice? All unsaved changes will be lost.
                             </Text>
                         </Dialog.Body>

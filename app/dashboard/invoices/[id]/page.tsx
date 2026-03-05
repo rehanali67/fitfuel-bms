@@ -10,7 +10,6 @@ import {
     Heading,
     Button,
     Badge,
-    SimpleGrid,
     IconButton,
     Flex,
     Dialog,
@@ -28,6 +27,7 @@ import {
 import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
 import DashboardLayout from "@/components/layout/DashboardLayout";
+import { LightMode } from "@/components/ui/color-mode";
 import { useAuth } from "@/context/AuthContext";
 import { toaster } from "@/components/ui/toaster";
 import { apiClient } from "@/lib/api";
@@ -304,13 +304,12 @@ export default function InvoiceDetailPage() {
                 /* A4 Page Container */
                 .invoice-print-content {
                     width: 210mm;
-                    min-height: auto;
-                    max-height: 297mm;
+                    min-height: 297mm;
                     margin: 0 auto;
                     background: white;
-                    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+                    box-shadow: 0 4px 32px rgba(0,0,0,0.13);
                     position: relative;
-                    overflow: hidden;
+                    font-family: 'Segoe UI', Arial, sans-serif;
                 }
                 
                 @media print {
@@ -363,11 +362,6 @@ export default function InvoiceDetailPage() {
                     .no-print {
                         display: none !important;
                     }
-                    
-                    .corner-decoration {
-                        position: absolute !important;
-                        overflow: hidden !important;
-                    }
                 }
             `}</style>
             <DashboardLayout>
@@ -395,7 +389,7 @@ export default function InvoiceDetailPage() {
                                         {invoice.status}
                                     </Badge>
                                 </HStack>
-                                <Text color="gray.500" fontSize="sm">
+                                <Text color="fg.muted" fontSize="sm">
                                     Created on {new Date(invoice.issueDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                                 </Text>
                             </Box>
@@ -420,218 +414,186 @@ export default function InvoiceDetailPage() {
                     </Flex>
 
                     {/* Invoice Document - A4 */}
-                    <Card.Root border="none" bg="white" className="invoice-print-content" overflow="hidden" position="relative">
-                        <Card.Body p={0} position="relative">
-
-                            {/* ── Top-right corner decoration ── */}
-                            <Box position="absolute" top={0} right={0} w="180px" h="180px" overflow="hidden" zIndex={0} pointerEvents="none">
-                                <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-                                    <polygon points="180,0 180,110 70,0" fill="#1B2D4E" />
-                                    <polygon points="70,0 180,110 180,135 95,0" fill="#2C4A7C" />
-                                    <polygon points="95,0 180,135 180,155 115,0" fill="#7B96B4" />
-                                    <polygon points="115,0 180,155 180,175 135,0" fill="#1B2D4E" opacity="0.6" />
-                                </svg>
-                            </Box>
-
-                            {/* ── Bottom-left corner decoration ── */}
-                            <Box position="absolute" bottom={0} left={0} w="180px" h="180px" overflow="hidden" zIndex={0} pointerEvents="none">
-                                <svg width="180" height="180" viewBox="0 0 180 180" xmlns="http://www.w3.org/2000/svg">
-                                    <polygon points="0,180 110,180 0,70" fill="#1B2D4E" />
-                                    <polygon points="0,70 110,180 135,180 0,95" fill="#2C4A7C" />
-                                    <polygon points="0,95 135,180 155,180 0,115" fill="#7B96B4" />
-                                    <polygon points="0,115 155,180 175,180 0,135" fill="#1B2D4E" opacity="0.6" />
-                                </svg>
-                            </Box>
-
-                            {/* ── Invoice content ── */}
-                            <Box position="relative" zIndex={1} px={10} pt={7} pb={10}>
-
-                                {/* Logo – top right */}
-                                <Flex justify="flex-end" mb={6}>
-                                    <img
-                                        src="/logo.png"
-                                        alt="Company Logo"
-                                        style={{ height: "52px", objectFit: "contain" }}
-                                    />
-                                </Flex>
-
-                                {/* INVOICE heading */}
-                                <Text
-                                    fontSize="28px"
-                                    fontWeight="800"
-                                    color="#1B2D4E"
-                                    letterSpacing="3px"
-                                    mb={5}
-                                    lineHeight="1"
+                    <LightMode>
+                        <Card.Root border="none" bg="white" className="invoice-print-content" position="relative">
+                            <Card.Body p={0}>
+                                {/* All hardcoded colors so LightMode is irrelevant — safe for print */}
+                                <Box
+                                    style={{
+                                        padding: "40px 52px 48px 52px",
+                                        color: "#111",
+                                        background: "white",
+                                    }}
                                 >
-                                    INVOICE
-                                </Text>
-
-                                {/* Invoice By / Invoice to – two columns */}
-                                <SimpleGrid columns={2} gap={10} mb={7}>
-                                    {/* Left – Invoice By */}
-                                    <Box>
-                                        <Text fontSize="11px" color="gray.500" mb={1} letterSpacing="0.5px">
-                                            Invoice By:
-                                        </Text>
-                                        <Text fontWeight="700" color="#1B2D4E" fontSize="sm" textTransform="uppercase">
+                                    {/* ── HEADER ── */}
+                                    <div style={{ textAlign: "center", marginBottom: "28px" }}>
+                                        <img
+                                            src="/logo.png"
+                                            alt="logo"
+                                            style={{
+                                                height: "60px",
+                                                width: "60px",
+                                                objectFit: "cover",
+                                                borderRadius: "50%",
+                                                marginBottom: "10px",
+                                                display: "inline-block",
+                                            }}
+                                        />
+                                        <div style={{ fontWeight: 900, fontSize: "22px", letterSpacing: "0.5px", color: "#111" }}>
                                             {companyInfo.name}
-                                        </Text>
-                                        {currentUser?.name && (
-                                            <Text color="gray.700" fontSize="sm" mt={0.5}>{invoice.createdByName || currentUser.name}</Text>
+                                        </div>
+                                        {companyInfo.address && (
+                                            <div style={{ fontSize: "13px", color: "#666", marginTop: "3px" }}>
+                                                {companyInfo.address}
+                                            </div>
                                         )}
-                                        {companyInfo.phone && (
-                                            <Text color="gray.500" fontSize="sm">Contact Number:&nbsp; {companyInfo.phone}</Text>
-                                        )}
-                                    </Box>
-                                    {/* Right – Invoice to */}
-                                    <Box>
-                                        <Text fontSize="11px" color="gray.500" mb={1} letterSpacing="0.5px">
-                                            Invoice to:
-                                        </Text>
-                                        <Text fontWeight="700" color="#1B2D4E" fontSize="sm" textTransform="uppercase">
-                                            {invoice.client || "Walk-in Customer"}
-                                        </Text>
+                                        <div style={{ fontSize: "13px", color: "#666", marginTop: "3px" }}>
+                                            {new Date(invoice.issueDate).toLocaleString("en-GB", {
+                                                day: "2-digit", month: "2-digit", year: "numeric",
+                                                hour: "2-digit", minute: "2-digit",
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* ── DIVIDER ── */}
+                                    <div style={{ borderTop: "2px dashed #bbb", margin: "0 0 24px 0" }} />
+
+                                    {/* ── INVOICE NUMBER ── */}
+                                    <div style={{ textAlign: "center", marginBottom: "24px" }}>
+                                        <div style={{ fontWeight: 700, fontSize: "14px", color: "#111" }}>Invoice Number</div>
+                                        <div style={{ fontSize: "12px", color: "#888", direction: "rtl" }}>رقم الفاتورة</div>
+                                        <div style={{
+                                            fontWeight: 900, fontSize: "32px", letterSpacing: "4px",
+                                            fontFamily: "monospace", color: "#111", marginTop: "6px",
+                                        }}>
+                                            {invoice.invoiceNumber || `INV-${invoice.id?.slice(-6)}`}
+                                        </div>
+                                    </div>
+
+                                    {/* ── DIVIDER ── */}
+                                    <div style={{ borderTop: "2px dashed #bbb", margin: "0 0 22px 0" }} />
+
+                                    {/* ── CUSTOMER ── */}
+                                    <div style={{ marginBottom: "22px" }}>
+                                        <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
+                                            <span style={{ fontWeight: 700, fontSize: "14px", color: "#111" }}>Customer:</span>
+                                            <span style={{ fontSize: "14px", color: "#111" }}>{invoice.client || "Walk-in Customer"}</span>
+                                        </div>
+                                        <div style={{ fontSize: "12px", color: "#888", direction: "rtl", textAlign: "right" }}>العميل</div>
+
                                         {invoice.clientPhone && (
-                                            <Text color="gray.500" fontSize="sm">{invoice.clientPhone}</Text>
+                                            <>
+                                                <div style={{ display: "flex", justifyContent: "space-between", marginTop: "10px", marginBottom: "2px" }}>
+                                                    <span style={{ fontWeight: 700, fontSize: "14px", color: "#111" }}>Customer Phone:</span>
+                                                    <span style={{ fontSize: "14px", color: "#111" }}>{invoice.clientPhone}</span>
+                                                </div>
+                                                <div style={{ fontSize: "12px", color: "#888", direction: "rtl", textAlign: "right" }}>هاتف العميل</div>
+                                            </>
                                         )}
-                                        <HStack gap={6} mt={1.5}>
-                                            <Box>
-                                                <Text fontSize="11px" color="gray.500" letterSpacing="0.5px">Invoice Number:</Text>
-                                                <Text color="gray.700" fontSize="sm" fontWeight="600">
-                                                    {invoice.invoiceNumber || `INV-${invoice.id?.slice(-6)}`}
-                                                </Text>
-                                            </Box>
-                                            <Box>
-                                                <Text fontSize="11px" color="gray.500" letterSpacing="0.5px">Invoice Date:</Text>
-                                                <Text color="gray.700" fontSize="sm" fontWeight="600">
-                                                    {new Date(invoice.issueDate).toLocaleDateString('en-GB', {
-                                                        day: '2-digit', month: '2-digit', year: 'numeric'
-                                                    })}
-                                                </Text>
-                                            </Box>
-                                        </HStack>
-                                    </Box>
-                                </SimpleGrid>
+                                    </div>
 
-                                {/* ── Items table ── */}
-                                <Box mb={0} border="1px solid" borderColor="gray.200" borderRadius="md" overflow="hidden">
-                                    {/* Table header */}
-                                    <Flex bg="#1B2D4E" px={5} py={3} align="center">
-                                        <Text
-                                            color="white"
-                                            fontWeight="700"
-                                            fontSize="11px"
-                                            letterSpacing="1.5px"
-                                            textTransform="uppercase"
-                                            flex={1}
-                                        >
-                                            Product Name
-                                        </Text>
-                                        <Text
-                                            color="white"
-                                            fontWeight="700"
-                                            fontSize="11px"
-                                            letterSpacing="1.5px"
-                                            textTransform="uppercase"
-                                            textAlign="right"
-                                            minW="100px"
-                                        >
-                                            Total Price
-                                        </Text>
-                                    </Flex>
+                                    {/* ── DIVIDER ── */}
+                                    <div style={{ borderTop: "2px dashed #bbb", margin: "0 0 0 0" }} />
 
-                                    {/* Rows */}
-                                    {invoice.items.map((item, index) => {
-                                        const amount = item.amount ?? (item.quantity * item.rate);
-                                        return (
-                                            <Flex
-                                                key={index}
-                                                px={5}
-                                                py={3}
-                                                align="flex-start"
-                                                borderBottom={index < invoice.items.length - 1 ? "1px solid" : "none"}
-                                                borderColor="gray.100"
-                                                bg={index % 2 === 1 ? "gray.50" : "white"}
-                                            >
-                                                <Box flex={1}>
-                                                    <Text color="gray.800" fontSize="sm">{item.description}</Text>
-                                                    {item.quantity > 1 && (
-                                                        <Text fontSize="xs" color="gray.400" mt={0.5}>
-                                                            {item.quantity} × QAR {item.rate.toLocaleString()}
-                                                        </Text>
-                                                    )}
-                                                </Box>
-                                                <Text
-                                                    color="gray.700"
-                                                    fontSize="sm"
-                                                    fontWeight="600"
-                                                    minW="100px"
-                                                    textAlign="right"
-                                                    whiteSpace="nowrap"
-                                                >
-                                                    QR {amount.toLocaleString()}
-                                                </Text>
-                                            </Flex>
-                                        );
-                                    })}
+                                    {/* ── ITEMS ── */}
+                                    <div>
+                                        {invoice.items.map((item, index) => {
+                                            const amount = item.amount ?? (item.quantity * item.rate);
+                                            const arabicName = item.productId ? productsMap.get(item.productId)?.arabicName : undefined;
+                                            return (
+                                                <div key={index}>
+                                                    <div style={{
+                                                        display: "flex", alignItems: "flex-start",
+                                                        justifyContent: "space-between", gap: "16px",
+                                                        padding: "18px 0",
+                                                    }}>
+                                                        {/* Qty */}
+                                                        <span style={{
+                                                            fontWeight: 700, fontSize: "14px", color: "#111",
+                                                            minWidth: "28px", flexShrink: 0, paddingTop: "1px",
+                                                        }}>
+                                                            {item.quantity}
+                                                        </span>
+                                                        {/* Name + Arabic */}
+                                                        <div style={{ flex: 1 }}>
+                                                            <div style={{ fontSize: "14px", color: "#111", lineHeight: "1.45" }}>
+                                                                {item.description}
+                                                            </div>
+                                                            {arabicName && (
+                                                                <div style={{
+                                                                    fontSize: "12px", color: "#888",
+                                                                    direction: "rtl", marginTop: "4px", lineHeight: "1.4",
+                                                                }}>
+                                                                    {arabicName}
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                        {/* Price */}
+                                                        <span style={{
+                                                            fontWeight: 700, fontSize: "14px", color: "#111",
+                                                            whiteSpace: "nowrap", flexShrink: 0,
+                                                        }}>
+                                                            QAR {amount.toLocaleString()}
+                                                        </span>
+                                                    </div>
+                                                    <div style={{ borderTop: "2px dashed #bbb" }} />
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+
+                                    {/* ── TOTALS ── */}
+                                    <div style={{ padding: "18px 0 4px 0" }}>
+                                        {invoice.discount > 0 && (
+                                            <>
+                                                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "2px" }}>
+                                                    <span style={{ fontSize: "14px", color: "#555" }}>Discount</span>
+                                                    <span style={{ fontWeight: 700, fontSize: "14px", color: "#c0392b" }}>
+                                                        - QAR {invoice.discount.toLocaleString()}
+                                                    </span>
+                                                </div>
+                                                <div style={{ fontSize: "12px", color: "#888", direction: "rtl", textAlign: "right", marginBottom: "12px" }}>خصم</div>
+                                            </>
+                                        )}
+                                        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                                            <div>
+                                                <span style={{ fontWeight: 700, fontSize: "15px", color: "#111" }}>
+                                                    Total ({invoice.items.reduce((s, i) => s + i.quantity, 0)} items)
+                                                </span>
+                                                <div style={{ fontSize: "12px", color: "#888", direction: "rtl" }}>
+                                                    المجموع ({invoice.items.reduce((s, i) => s + i.quantity, 0)} عناصر)
+                                                </div>
+                                            </div>
+                                            <span style={{ fontWeight: 900, fontSize: "22px", color: "#111" }}>
+                                                QAR {invoice.total.toLocaleString()}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {invoice.notes && (
+                                        <>
+                                            <div style={{ borderTop: "2px dashed #bbb", margin: "16px 0" }} />
+                                            <div style={{ fontSize: "13px", color: "#666", fontStyle: "italic" }}>{invoice.notes}</div>
+                                        </>
+                                    )}
+
+                                    {/* ── DIVIDER ── */}
+                                    <div style={{ borderTop: "2px dashed #bbb", margin: "20px 0 24px 0" }} />
+
+                                    {/* ── FOOTER ── */}
+                                    <div style={{ textAlign: "center" }}>
+                                        <div style={{ fontWeight: 800, fontSize: "17px", color: "#111", marginBottom: "4px" }}>Thank you !</div>
+                                        <div style={{ fontWeight: 800, fontSize: "17px", color: "#111", marginBottom: "8px" }}>! شكراً</div>
+                                        {invoice.paymentMethod && (
+                                            <div style={{ fontWeight: 600, fontSize: "14px", color: "#444" }}>{invoice.paymentMethod}</div>
+                                        )}
+                                    </div>
+
                                 </Box>
+                            </Card.Body>
+                        </Card.Root>
+                    </LightMode>
 
-                                {/* ── Total amount bar ── */}
-                                <Flex
-                                    bg="#1B2D4E"
-                                    justify="center"
-                                    align="center"
-                                    py={3}
-                                    mt={3}
-                                    mb="3px"
-                                >
-                                    <Text color="white" fontWeight="700" fontSize="sm" letterSpacing="1.5px" textTransform="uppercase">
-                                        Total Amount: QR {invoice.total.toLocaleString()}
-                                    </Text>
-                                </Flex>
-
-                                {/* ── Discount bar (only if discount exists) ── */}
-                                {invoice.discount > 0 && (
-                                    <Flex
-                                        bg="#2C4A7C"
-                                        justify="center"
-                                        align="center"
-                                        py={2.5}
-                                        mb="3px"
-                                    >
-                                        <Text color="white" fontWeight="600" fontSize="sm" letterSpacing="1.5px" textTransform="uppercase">
-                                            Discount: QR {invoice.discount.toLocaleString()}
-                                        </Text>
-                                    </Flex>
-                                )}
-
-                                {/* Notes */}
-                                {invoice.notes && (
-                                    <Box mt={5}>
-                                        <Text fontSize="xs" fontWeight="700" color="gray.500" mb={1} letterSpacing="0.5px">
-                                            Note:
-                                        </Text>
-                                        <Text fontSize="sm" color="gray.600">{invoice.notes}</Text>
-                                    </Box>
-                                )}
-
-                                {/* ── Footer ── */}
-                                <Box mt={10}>
-                                    <Text fontSize="sm" color="gray.500" fontStyle="italic">Yours sincerely,</Text>
-                                    <Text fontWeight="700" color="#1B2D4E" fontSize="sm" mt={1} letterSpacing="0.5px" textTransform="uppercase">
-                                        {invoice.createdByName || currentUser?.name || companyInfo.name || ""}
-                                    </Text>
-                                    {/* Signature line */}
-                                    <Box mt={4} mb={1} w="130px" h="36px" borderBottom="1.5px solid" borderColor="gray.300" />
-                                    <Text fontSize="xs" color="gray.400" letterSpacing="0.3px">
-                                        Thanks for your purchase
-                                    </Text>
-                                </Box>
-
-                            </Box>
-                        </Card.Body>
-                    </Card.Root>
                 </VStack>
 
                 {/* Send Invoice Dialog */}
@@ -639,12 +601,12 @@ export default function InvoiceDetailPage() {
                     <Portal>
                         <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                         <Dialog.Positioner>
-                            <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                            <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                                 <Dialog.Header p={5} pb={0}>
                                     <Dialog.Title fontWeight="semibold">Send Invoice</Dialog.Title>
                                 </Dialog.Header>
                                 <Dialog.Body p={5}>
-                                    <Text color="gray.600">Send invoice {invoice?.invoiceNumber}?</Text>
+                                    <Text color="fg.muted">Send invoice {invoice?.invoiceNumber}?</Text>
                                 </Dialog.Body>
                                 <Dialog.Footer p={5} pt={0} gap={3}>
                                     <Dialog.ActionTrigger asChild>
@@ -667,12 +629,12 @@ export default function InvoiceDetailPage() {
                     <Portal>
                         <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                         <Dialog.Positioner>
-                            <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                            <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                                 <Dialog.Header p={5} pb={0}>
                                     <Dialog.Title fontWeight="semibold">Delete Invoice</Dialog.Title>
                                 </Dialog.Header>
                                 <Dialog.Body p={5}>
-                                    <Text color="gray.600">
+                                    <Text color="fg.muted">
                                         Are you sure you want to delete this invoice? This action cannot be undone.
                                     </Text>
                                 </Dialog.Body>

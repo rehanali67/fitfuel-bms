@@ -27,10 +27,10 @@ export default function Home() {
     >
       <VStack gap={4}>
         <Spinner size="xl" color="blue.500" borderWidth="4px" />
-        <Heading size="md" color="gray.600">
+        <Heading size="md" color="fg.muted">
           Loading BMS...
         </Heading>
-        <Text color="gray.400" fontSize="sm">
+        <Text color="fg.subtle" fontSize="sm">
           Business Management System
         </Text>
       </VStack>

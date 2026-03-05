@@ -139,33 +139,33 @@ export default function SalaryManagement({
 
     return (
         <>
-            <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+            <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                 <Card.Header p={5} pb={3}>
                     <Heading size="sm" fontWeight="semibold">Salary Management</Heading>
-                    <Text fontSize="xs" color="gray.400" mt={1}>
+                    <Text fontSize="xs" color="fg.subtle" mt={1}>
                         Record salary payments per employee
                     </Text>
                 </Card.Header>
                 <Card.Body p={0}>
                     {isLoading ? (
                         <Box p={8} textAlign="center">
-                            <Text color="gray.400" fontSize="sm">Loading users...</Text>
+                            <Text color="fg.subtle" fontSize="sm">Loading users...</Text>
                         </Box>
                     ) : employees.length === 0 ? (
                         <Box p={8} textAlign="center">
-                            <Text color="gray.400" fontSize="sm">No users found.</Text>
+                            <Text color="fg.subtle" fontSize="sm">No users found.</Text>
                         </Box>
                     ) : (
                         <Box overflowX="auto">
                             <Table.Root size="sm">
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" w="40px" />
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold">User</Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold">Role</Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">Total Paid</Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">Payments</Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" />
+                                    <Table.Row bg="bg.subtle">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" w="40px" />
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold">User</Table.ColumnHeader>
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold">Role</Table.ColumnHeader>
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">Total Paid</Table.ColumnHeader>
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">Payments</Table.ColumnHeader>
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" />
                                     </Table.Row>
                                 </Table.Header>
                                 <Table.Body>
@@ -179,7 +179,7 @@ export default function SalaryManagement({
                                                 <>
                                                     <Table.Row
                                                         key={emp.id}
-                                                        _hover={{ bg: "gray.50" }}
+                                                        _hover={{ bg: "bg.subtle" }}
                                                         cursor={empPayments.length > 0 ? "pointer" : "default"}
                                                         onClick={() => {
                                                             if (empPayments.length > 0) {
@@ -189,7 +189,7 @@ export default function SalaryManagement({
                                                     >
                                                         <Table.Cell px={5} py={3} w="40px">
                                                             {empPayments.length > 0 ? (
-                                                                <Box color="gray.400" fontSize="sm">
+                                                                <Box color="fg.subtle" fontSize="sm">
                                                                     {isExpanded ? <LuChevronDown /> : <LuChevronRight />}
                                                                 </Box>
                                                             ) : null}
@@ -200,7 +200,7 @@ export default function SalaryManagement({
                                                                     w={8}
                                                                     h={8}
                                                                     borderRadius="full"
-                                                                    bg="blue.50"
+                                                                    bg="blue.500/10"
                                                                     align="center"
                                                                     justify="center"
                                                                     flexShrink={0}
@@ -209,7 +209,7 @@ export default function SalaryManagement({
                                                                 </Flex>
                                                                 <VStack gap={0} align="flex-start">
                                                                     <Text fontSize="sm" fontWeight="medium">{emp.name}</Text>
-                                                                    <Text fontSize="xs" color="gray.400">{emp.email}</Text>
+                                                                    <Text fontSize="xs" color="fg.subtle">{emp.email}</Text>
                                                                 </VStack>
                                                             </HStack>
                                                         </Table.Cell>
@@ -247,14 +247,14 @@ export default function SalaryManagement({
 
                                                     {/* Expanded payment history */}
                                                     {isExpanded && empPayments.map((pmt) => (
-                                                        <Table.Row key={pmt.id} bg="gray.50">
+                                                        <Table.Row key={pmt.id} bg="bg.subtle">
                                                             <Table.Cell px={5} py={2} />
                                                             <Table.Cell px={5} py={2} colSpan={2}>
-                                                                <Text fontSize="xs" color="gray.500">
+                                                                <Text fontSize="xs" color="fg.muted">
                                                                     {pmt.monthLabel}
                                                                     {pmt.notes && ` — ${pmt.notes}`}
                                                                 </Text>
-                                                                <Text fontSize="xs" color="gray.400">
+                                                                <Text fontSize="xs" color="fg.subtle">
                                                                     Recorded: {new Date(pmt.createdAt).toLocaleDateString()}
                                                                 </Text>
                                                             </Table.Cell>
@@ -369,7 +369,7 @@ export default function SalaryManagement({
                                 <Dialog.Title>Delete Payment Record</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body>
-                                <Text fontSize="sm" color="gray.600">
+                                <Text fontSize="sm" color="fg.muted">
                                     Are you sure you want to delete the payment of{" "}
                                     <Text as="span" fontWeight="bold">{selectedPayment ? fmt(selectedPayment.amount) : ""}</Text>{" "}
                                     for <Text as="span" fontWeight="bold">{selectedPayment?.monthLabel}</Text>?

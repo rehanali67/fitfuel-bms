@@ -191,7 +191,7 @@ export default function EditEmployeePage() {
                             <Heading size="lg" fontWeight="semibold">
                                 Edit Employee
                             </Heading>
-                            <Text color="gray.500" fontSize="sm">
+                            <Text color="fg.muted" fontSize="sm">
                                 Update employee information
                             </Text>
                         </Box>
@@ -229,8 +229,8 @@ export default function EditEmployeePage() {
                             {/* Personal Info */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -332,8 +332,8 @@ export default function EditEmployeePage() {
                             {/* Professional Info */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -462,8 +462,8 @@ export default function EditEmployeePage() {
                             {/* Additional Info */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -498,8 +498,8 @@ export default function EditEmployeePage() {
                             {/* Preview Card */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                                 position="sticky"
                                 top="80px"
                             >
@@ -513,14 +513,14 @@ export default function EditEmployeePage() {
                                         <Box
                                             textAlign="center"
                                             py={6}
-                                            bg="blue.50"
+                                            bg="blue.500/10"
                                             borderRadius="xl"
                                         >
                                             <Box
                                                 w={16}
                                                 h={16}
                                                 mx="auto"
-                                                bg="blue.100"
+                                                bg="blue.500/20"
                                                 borderRadius="xl"
                                                 display="flex"
                                                 alignItems="center"
@@ -537,7 +537,7 @@ export default function EditEmployeePage() {
                                             </Text>
                                             <Text
                                                 fontSize="sm"
-                                                color="gray.500"
+                                                color="fg.muted"
                                             >
                                                 {position || "Position"}
                                             </Text>
@@ -546,7 +546,7 @@ export default function EditEmployeePage() {
                                             <HStack justify="space-between">
                                                 <Text
                                                     fontSize="sm"
-                                                    color="gray.600"
+                                                    color="fg.muted"
                                                 >
                                                     Department
                                                 </Text>
@@ -560,7 +560,7 @@ export default function EditEmployeePage() {
                                             <HStack justify="space-between">
                                                 <Text
                                                     fontSize="sm"
-                                                    color="gray.600"
+                                                    color="fg.muted"
                                                 >
                                                     Email
                                                 </Text>
@@ -575,7 +575,7 @@ export default function EditEmployeePage() {
                                             <HStack justify="space-between">
                                                 <Text
                                                     fontSize="sm"
-                                                    color="gray.600"
+                                                    color="fg.muted"
                                                 >
                                                     Status
                                                 </Text>
@@ -597,7 +597,7 @@ export default function EditEmployeePage() {
                             <Card.Root
                                 border="1px solid"
                                 borderColor="red.100"
-                                bg="red.50"
+                                bg="red.500/10"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading
@@ -644,7 +644,7 @@ export default function EditEmployeePage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -655,7 +655,7 @@ export default function EditEmployeePage() {
                                 </Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to save the changes
                                     for{" "}
                                     <strong>
@@ -698,7 +698,7 @@ export default function EditEmployeePage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -709,7 +709,7 @@ export default function EditEmployeePage() {
                                 </Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     You have unsaved changes. Are you sure you
                                     want to discard them?
                                 </Text>
@@ -748,7 +748,7 @@ export default function EditEmployeePage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -759,7 +759,7 @@ export default function EditEmployeePage() {
                                 </Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600" mb={3}>
+                                <Text color="fg.muted" mb={3}>
                                     Are you sure you want to permanently delete{" "}
                                     <strong>
                                         {firstName} {lastName}

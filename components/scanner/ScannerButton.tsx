@@ -66,7 +66,7 @@ export function ScannerButton({
                 </Menu.Trigger>
                 <Portal>
                     <Menu.Positioner>
-                        <Menu.Content minW="200px" bg="white" borderRadius="xl" border="1px solid" borderColor="gray.100">
+                        <Menu.Content minW="200px" bg="bg.surface" borderRadius="xl" border="1px solid" borderColor="border.default">
                             <Menu.Item
                                 value="camera"
                                 onClick={() => handleModeSelect('camera')}

@@ -301,7 +301,7 @@ export default function EditProductPage() {
                         </IconButton>
                         <Box>
                             <Heading size="lg" fontWeight="semibold">Edit Product</Heading>
-                            <Text color="gray.500" fontSize="sm">Update product information</Text>
+                            <Text color="fg.muted" fontSize="sm">Update product information</Text>
                         </Box>
                     </HStack>
                     <HStack gap={2}>
@@ -337,7 +337,7 @@ export default function EditProductPage() {
                     <Box gridColumn={{ base: "1", lg: "span 2" }}>
                         <VStack gap={6} align="stretch">
                             {/* Basic Info */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Basic Information</Heading>
                                 </Card.Header>
@@ -408,9 +408,9 @@ export default function EditProductPage() {
                                                             left={0}
                                                             right={0}
                                                             zIndex={1000}
-                                                            bg="white"
+                                                            bg="bg.surface"
                                                             borderWidth="1px"
-                                                            borderColor="gray.200"
+                                                            borderColor="border.default"
                                                             borderRadius="md"
                                                             shadow="lg"
                                                             mt={1}
@@ -424,7 +424,7 @@ export default function EditProductPage() {
                                                                         px={3}
                                                                         py={2}
                                                                         cursor="pointer"
-                                                                        _hover={{ bg: "gray.50" }}
+                                                                        _hover={{ bg: "bg.subtle" }}
                                                                         onClick={() => selectCategory(cat.name)}
                                                                     >
                                                                         <Text fontSize="sm">{cat.name}</Text>
@@ -436,7 +436,7 @@ export default function EditProductPage() {
                                                                         px={3}
                                                                         py={2}
                                                                         cursor="pointer"
-                                                                        _hover={{ bg: "gray.50" }}
+                                                                        _hover={{ bg: "bg.subtle" }}
                                                                         onClick={() => selectCategory(category.trim())}
                                                                     >
                                                                         <Text fontSize="sm" color="blue.600">
@@ -455,7 +455,7 @@ export default function EditProductPage() {
                             </Card.Root>
 
 
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Pricing</Heading>
                                 </Card.Header>
@@ -476,7 +476,7 @@ export default function EditProductPage() {
                             </Card.Root>
 
                             {/* Stock */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Stock Information</Heading>
                                 </Card.Header>
@@ -525,7 +525,7 @@ export default function EditProductPage() {
                             </Card.Root>
 
                             {/* Supplier */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Supplier Information</Heading>
                                 </Card.Header>
@@ -557,18 +557,18 @@ export default function EditProductPage() {
 
                     {/* Sidebar */}
                     <Box>
-                        <Card.Root border="1px solid" borderColor="gray.100" bg="white" position="sticky" top="80px">
+                        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface" position="sticky" top="80px">
                             <Card.Header p={5} pb={0}>
                                 <Heading size="sm" fontWeight="semibold">Preview</Heading>
                             </Card.Header>
                             <Card.Body p={5}>
                                 <VStack gap={4} align="stretch">
-                                    <Box textAlign="center" py={6} bg="orange.50" borderRadius="xl">
+                                    <Box textAlign="center" py={6} bg="orange.500/10" borderRadius="xl">
                                         <Box
                                             w={16}
                                             h={16}
                                             mx="auto"
-                                            bg="orange.100"
+                                            bg="orange.500/20"
                                             borderRadius="xl"
                                             display="flex"
                                             alignItems="center"
@@ -579,19 +579,19 @@ export default function EditProductPage() {
                                             <LuPackage size={32} />
                                         </Box>
                                         <Text fontWeight="semibold">{productName || "Product Name"}</Text>
-                                        <Text fontSize="sm" color="gray.500">{sku || "SKU-XXX"}</Text>
+                                        <Text fontSize="sm" color="fg.muted">{sku || "SKU-XXX"}</Text>
                                     </Box>
                                     <VStack gap={2} align="stretch">
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Category</Text>
+                                            <Text fontSize="sm" color="fg.muted">Category</Text>
                                             <Text fontSize="sm" fontWeight="medium">{category || "-"}</Text>
                                         </HStack>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Price</Text>
+                                            <Text fontSize="sm" color="fg.muted">Price</Text>
                                             <Text fontSize="sm" fontWeight="medium">QAR {sellingPrice || "0.00"}</Text>
                                         </HStack>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Stock</Text>
+                                            <Text fontSize="sm" color="fg.muted">Stock</Text>
                                             <Text fontSize="sm" fontWeight="medium">{initialStock || "0"} units</Text>
                                         </HStack>
                                     </VStack>
@@ -607,12 +607,12 @@ export default function EditProductPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Save Changes</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to save changes to "{productName}"?
                                 </Text>
                             </Dialog.Body>
@@ -641,12 +641,12 @@ export default function EditProductPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Discard Changes</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     You have unsaved changes. Are you sure you want to discard them?
                                 </Text>
                             </Dialog.Body>
@@ -675,12 +675,12 @@ export default function EditProductPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Delete Product</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete "{productName}"? This action cannot be undone.
                                 </Text>
                             </Dialog.Body>

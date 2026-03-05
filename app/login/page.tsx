@@ -161,7 +161,7 @@ export default function LoginPage() {
                                 <Stack gap={5}>
                                     {error && (
                                         <Box
-                                            bg="red.50"
+                                            bg="red.500/10"
                                             color="red.600"
                                             p={3}
                                             borderRadius="md"
@@ -181,7 +181,7 @@ export default function LoginPage() {
                                                 left={3}
                                                 top="50%"
                                                 transform="translateY(-50%)"
-                                                color="gray.400"
+                                                color="fg.subtle"
                                                 zIndex={2}
                                             >
                                                 <LuMail />
@@ -206,7 +206,7 @@ export default function LoginPage() {
                                                 left={3}
                                                 top="50%"
                                                 transform="translateY(-50%)"
-                                                color="gray.400"
+                                                color="fg.subtle"
                                                 zIndex={2}
                                             >
                                                 <LuLock />

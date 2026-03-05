@@ -39,14 +39,14 @@ export default function InvoiceSummary({
     onDiscountReset,
 }: InvoiceSummaryProps) {
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white" position="sticky" top="80px">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface" position="sticky" top="80px">
             <Card.Header p={5} pb={0}>
                 <Heading size="sm" fontWeight="semibold">Summary</Heading>
             </Card.Header>
             <Card.Body p={5}>
                 <VStack gap={3} align="stretch">
                     <HStack justify="space-between">
-                        <Text color="gray.600" fontSize="sm">Subtotal</Text>
+                        <Text color="fg.muted" fontSize="sm">Subtotal</Text>
                         <Text fontWeight="medium">QAR {subtotal.toLocaleString()}</Text>
                     </HStack>
                     {returns > 0 && (
@@ -57,7 +57,7 @@ export default function InvoiceSummary({
                     )}
                     {returns > 0 && (
                         <HStack justify="space-between">
-                            <Text color="gray.600" fontSize="sm">Net Subtotal</Text>
+                            <Text color="fg.muted" fontSize="sm">Net Subtotal</Text>
                             <Text fontWeight="medium">QAR {netSubtotal.toLocaleString()}</Text>
                         </HStack>
                     )}
@@ -70,7 +70,7 @@ export default function InvoiceSummary({
                     >
                         <HStack justify="space-between" align="center">
                             <HStack gap={2} align="center">
-                                <Text color="gray.600" fontSize="sm" fontWeight="semibold">
+                                <Text color="fg.muted" fontSize="sm" fontWeight="semibold">
                                     Discount
                                 </Text>
                                 {discountAmount !== null && discountAmount > 0 && (
@@ -87,7 +87,7 @@ export default function InvoiceSummary({
                             </HStack>
                             {isDiscountEditing ? (
                                 <HStack gap={1} align="center">
-                                    <Text fontSize="sm" color="gray.500" fontWeight="medium">QAR </Text>
+                                    <Text fontSize="sm" color="fg.muted" fontWeight="medium">QAR </Text>
                                     <Input
                                         type="number"
                                         size="sm"

@@ -126,25 +126,25 @@ export default function CustomerHistoryPage() {
                             <Heading size="lg" fontWeight="semibold">
                                 {customer?.name || 'Customer'} History
                             </Heading>
-                            <Text color="gray.500" fontSize="sm">Transaction history and records</Text>
+                            <Text color="fg.muted" fontSize="sm">Transaction history and records</Text>
                         </Box>
                     </HStack>
                 </Flex>
 
                 {/* History Table */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={0}>
                         {history.length === 0 ? (
                             <Box p={8} textAlign="center">
-                                <Icon fontSize="4xl" color="gray.300" mb={4}>
+                                <Icon fontSize="4xl" color="fg.subtle" mb={4}>
                                     <LuFileText />
                                 </Icon>
-                                <Text color="gray.500">No history found for this customer</Text>
+                                <Text color="fg.muted">No history found for this customer</Text>
                             </Box>
                         ) : (
                             <Table.Root size="sm">
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
+                                    <Table.Row bg="bg.subtle">
                                         <Table.ColumnHeader fontWeight="medium">Type</Table.ColumnHeader>
                                         <Table.ColumnHeader fontWeight="medium">Number</Table.ColumnHeader>
                                         <Table.ColumnHeader fontWeight="medium">Date</Table.ColumnHeader>
@@ -155,7 +155,7 @@ export default function CustomerHistoryPage() {
                                 </Table.Header>
                                 <Table.Body>
                                     {history.map((item) => (
-                                        <Table.Row key={`${item.type}-${item.id}`} _hover={{ bg: "gray.50" }}>
+                                        <Table.Row key={`${item.type}-${item.id}`} _hover={{ bg: "bg.subtle" }}>
                                             <Table.Cell>
                                                 <HStack gap={2}>
                                                     <Icon color={item.type === 'invoice' ? 'blue.500' : 'purple.500'}>
@@ -168,7 +168,7 @@ export default function CustomerHistoryPage() {
                                                 <Text fontWeight="medium">{item.number}</Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text color="gray.600" fontSize="sm">{formatDate(item.date)}</Text>
+                                                <Text color="fg.muted" fontSize="sm">{formatDate(item.date)}</Text>
                                             </Table.Cell>
                                             <Table.Cell textAlign="right">
                                                 <Text fontWeight="medium">QAR {item.amount.toLocaleString()}</Text>

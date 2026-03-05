@@ -28,7 +28,7 @@ export default function InvoiceHeader({
                 </Link>
                 <Box>
                     <Heading size="lg" fontWeight="semibold">Create Invoice</Heading>
-                    <Text color="gray.500" fontSize="sm">Fill in the details to create a new invoice</Text>
+                    <Text color="fg.muted" fontSize="sm">Fill in the details to create a new invoice</Text>
                 </Box>
             </HStack>
             <HStack gap={2} flexWrap="wrap">

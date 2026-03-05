@@ -12,7 +12,7 @@ export default function InvoiceDetailsForm({
     onIssueDateChange,
 }: InvoiceDetailsFormProps) {
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
             <Card.Header p={5} pb={0}>
                 <Heading size="sm" fontWeight="semibold">Invoice Details</Heading>
             </Card.Header>
@@ -20,7 +20,7 @@ export default function InvoiceDetailsForm({
                 <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                     <Field.Root>
                         <Field.Label fontSize="sm">Invoice Number</Field.Label>
-                        <Input value="Auto-generated" readOnly size="sm" bg="gray.50" />
+                        <Input value="Auto-generated" readOnly size="sm" bg="bg.subtle" />
                     </Field.Root>
                     <Field.Root>
                         <Field.Label fontSize="sm">Issue Date</Field.Label>

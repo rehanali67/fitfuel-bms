@@ -153,7 +153,7 @@ export default function AccountsPage() {
                 <HStack justify="space-between" align="flex-start">
                     <VStack align="flex-start" gap={1}>
                         <Heading size="lg" fontWeight="bold">Accounts</Heading>
-                        <Text fontSize="sm" color="gray.500">
+                        <Text fontSize="sm" color="fg.muted">
                             Profit &amp; Loss overview and salary management
                         </Text>
                     </VStack>

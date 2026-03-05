@@ -34,7 +34,7 @@ function fmt(n: number) {
 function Bar({ value, max, color }: { value: number; max: number; color: string }) {
     const pct = max > 0 ? Math.min(100, (value / max) * 100) : 0;
     return (
-        <Box w="full" bg="gray.100" borderRadius="full" h="6px" overflow="hidden">
+        <Box w="full" bg="bg.muted" borderRadius="full" h="6px" overflow="hidden">
             <Box
                 w={`${pct}%`}
                 h="full"
@@ -57,19 +57,19 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                 period === "monthly" ? "Month" : "Year";
 
     return (
-        <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+        <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
             <Card.Header p={5} pb={3}>
                 <Heading size="sm" fontWeight="semibold">
                     P&L Breakdown
                 </Heading>
-                <Text fontSize="xs" color="gray.400" mt={1}>
+                <Text fontSize="xs" color="fg.subtle" mt={1}>
                     Revenue vs expenses per {periodLabel.toLowerCase()}
                 </Text>
             </Card.Header>
             <Card.Body p={0}>
                 {isLoading ? (
                     <Box p={8} textAlign="center">
-                        <Text color="gray.400" fontSize="sm">Loading breakdown...</Text>
+                        <Text color="fg.subtle" fontSize="sm">Loading breakdown...</Text>
                     </Box>
                 ) : (
                     <>
@@ -119,7 +119,7 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                                             key={b.label}
                                             flex={1}
                                             fontSize="9px"
-                                            color="gray.400"
+                                            color="fg.subtle"
                                             textAlign="center"
                                             lineHeight="1.2"
                                             overflow="hidden"
@@ -134,11 +134,11 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                             <HStack gap={4} mt={3}>
                                 <HStack gap={1}>
                                     <Box w={3} h={3} bg="green.400" borderRadius="sm" />
-                                    <Text fontSize="xs" color="gray.500">Revenue</Text>
+                                    <Text fontSize="xs" color="fg.muted">Revenue</Text>
                                 </HStack>
                                 <HStack gap={1}>
                                     <Box w={3} h={3} bg="orange.400" borderRadius="sm" />
-                                    <Text fontSize="xs" color="gray.500">Expenses</Text>
+                                    <Text fontSize="xs" color="fg.muted">Expenses</Text>
                                 </HStack>
                             </HStack>
                         </Box>
@@ -147,20 +147,20 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                         <Box overflowX="auto">
                             <Table.Root size="sm">
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold">
+                                    <Table.Row bg="bg.subtle">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold">
                                             {periodLabel}
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">
                                             Revenue
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">
                                             Expenses
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">
                                             Net
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="gray.500" textTransform="uppercase" fontWeight="semibold" textAlign="right">
+                                        <Table.ColumnHeader px={5} py={3} fontSize="xs" color="fg.muted" textTransform="uppercase" fontWeight="semibold" textAlign="right">
                                             Invoices
                                         </Table.ColumnHeader>
                                     </Table.Row>
@@ -169,7 +169,7 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                                     {[...breakdown].reverse().map((b, i) => {
                                         const isProfit = b.net >= 0;
                                         return (
-                                            <Table.Row key={b.label + i} _hover={{ bg: "gray.50" }}>
+                                            <Table.Row key={b.label + i} _hover={{ bg: "bg.subtle" }}>
                                                 <Table.Cell px={5} py={3}>
                                                     <Text fontSize="sm" fontWeight="medium">{b.label}</Text>
                                                 </Table.Cell>
@@ -193,7 +193,7 @@ export default function PnLBreakdown({ breakdown, period, isLoading }: PnLBreakd
                                                     </Badge>
                                                 </Table.Cell>
                                                 <Table.Cell px={5} py={3} textAlign="right">
-                                                    <Text fontSize="sm" color="gray.500">{b.invoiceCount}</Text>
+                                                    <Text fontSize="sm" color="fg.muted">{b.invoiceCount}</Text>
                                                 </Table.Cell>
                                             </Table.Row>
                                         );

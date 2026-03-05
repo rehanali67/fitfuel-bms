@@ -158,7 +158,7 @@ export default function EmployeeDetailPage() {
                             <Heading size="lg" fontWeight="semibold">
                                 {employeeData.name}
                             </Heading>
-                            <Text color="gray.500" fontSize="sm">
+                            <Text color="fg.muted" fontSize="sm">
                                 {employeeData.position} • {employeeData.department}
                             </Text>
                         </Box>
@@ -194,8 +194,8 @@ export default function EmployeeDetailPage() {
                             {/* Personal Info */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -214,7 +214,7 @@ export default function EmployeeDetailPage() {
                                                 />
                                             </Avatar.Root>
                                             <VStack align="start" gap={1}>
-                                                <Text fontSize="sm" color="gray.600">
+                                                <Text fontSize="sm" color="fg.muted">
                                                     Employee ID
                                                 </Text>
                                                 <Text fontWeight="semibold">
@@ -227,7 +227,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuMail size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Email
                                                     </Text>
                                                 </HStack>
@@ -238,7 +238,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuPhone size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Phone
                                                     </Text>
                                                 </HStack>
@@ -249,7 +249,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuMapPin size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Location
                                                     </Text>
                                                 </HStack>
@@ -260,7 +260,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuCalendar size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Join Date
                                                     </Text>
                                                 </HStack>
@@ -276,8 +276,8 @@ export default function EmployeeDetailPage() {
                             {/* Professional Info */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -290,7 +290,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuBriefcase size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Position
                                                     </Text>
                                                 </HStack>
@@ -301,7 +301,7 @@ export default function EmployeeDetailPage() {
                                             <VStack align="start" gap={1}>
                                                 <HStack gap={2}>
                                                     <LuBuilding2 size={16} />
-                                                    <Text fontSize="xs" color="gray.600">
+                                                    <Text fontSize="xs" color="fg.muted">
                                                         Department
                                                     </Text>
                                                 </HStack>
@@ -316,7 +316,7 @@ export default function EmployeeDetailPage() {
                                                 </Badge>
                                             </VStack>
                                             <VStack align="start" gap={1}>
-                                                <Text fontSize="xs" color="gray.600">
+                                                <Text fontSize="xs" color="fg.muted">
                                                     Manager
                                                 </Text>
                                                 <Text fontSize="sm">
@@ -324,7 +324,7 @@ export default function EmployeeDetailPage() {
                                                 </Text>
                                             </VStack>
                                             <VStack align="start" gap={1}>
-                                                <Text fontSize="xs" color="gray.600">
+                                                <Text fontSize="xs" color="fg.muted">
                                                     Working Hours
                                                 </Text>
                                                 <Text fontSize="sm">
@@ -339,8 +339,8 @@ export default function EmployeeDetailPage() {
                             {/* Skills */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -369,8 +369,8 @@ export default function EmployeeDetailPage() {
                             {/* Bio */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -378,7 +378,7 @@ export default function EmployeeDetailPage() {
                                     </Heading>
                                 </Card.Header>
                                 <Card.Body p={5}>
-                                    <Text fontSize="sm" color="gray.700">
+                                    <Text fontSize="sm" color="fg.default">
                                         {employeeData.bio}
                                     </Text>
                                 </Card.Body>
@@ -392,8 +392,8 @@ export default function EmployeeDetailPage() {
                             {/* Status Card */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -403,7 +403,7 @@ export default function EmployeeDetailPage() {
                                 <Card.Body p={5}>
                                     <VStack align="stretch" gap={4}>
                                         <HStack justify="space-between" align="start">
-                                            <Text fontSize="sm" color="gray.600">
+                                            <Text fontSize="sm" color="fg.muted">
                                                 Current Status
                                             </Text>
                                             <Badge
@@ -436,8 +436,8 @@ export default function EmployeeDetailPage() {
                             {/* Salary Card */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -447,7 +447,7 @@ export default function EmployeeDetailPage() {
                                 <Card.Body p={5}>
                                     <VStack align="stretch" gap={3}>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">
+                                            <Text fontSize="sm" color="fg.muted">
                                                 Annual Salary
                                             </Text>
                                             <Text
@@ -459,7 +459,7 @@ export default function EmployeeDetailPage() {
                                         </HStack>
                                         <Separator />
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">
+                                            <Text fontSize="sm" color="fg.muted">
                                                 Tenure
                                             </Text>
                                             <Text fontWeight="medium">
@@ -473,8 +473,8 @@ export default function EmployeeDetailPage() {
                             {/* Quick Actions */}
                             <Card.Root
                                 border="1px solid"
-                                borderColor="gray.100"
-                                bg="white"
+                                borderColor="border.default"
+                                bg="bg.surface"
                             >
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">
@@ -525,7 +525,7 @@ export default function EmployeeDetailPage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -600,7 +600,7 @@ export default function EmployeeDetailPage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -611,7 +611,7 @@ export default function EmployeeDetailPage() {
                                 </Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to remove{" "}
                                     <strong>{employeeData.name}</strong> from the
                                     system? This action cannot be undone.

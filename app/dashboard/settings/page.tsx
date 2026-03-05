@@ -336,7 +336,7 @@ export default function SettingsPage() {
                 {/* Header */}
                 <Box>
                     <Heading size="xl" mb={1}>Settings</Heading>
-                    <Text color="gray.500">Manage your company information and account security</Text>
+                    <Text color="fg.muted">Manage your company information and account security</Text>
                 </Box>
 
                 <SimpleGrid columns={{ base: 1, lg: 2 }} gap={6}>
@@ -344,12 +344,12 @@ export default function SettingsPage() {
                     <Card.Root>
                         <Card.Header>
                             <HStack gap={3}>
-                                <Box p={2} borderRadius="lg" bg="purple.100" color="purple.600">
+                                <Box p={2} borderRadius="lg" bg="purple.500/20" color="purple.600">
                                     <LuBuilding2 />
                                 </Box>
                                 <Box>
                                     <Heading size="md">Company Information</Heading>
-                                    <Text color="gray.500" fontSize="sm">Update your business information</Text>
+                                    <Text color="fg.muted" fontSize="sm">Update your business information</Text>
                                 </Box>
                             </HStack>
                         </Card.Header>
@@ -419,7 +419,7 @@ export default function SettingsPage() {
 
                                 {/* Bank Account Details */}
                                 <Box pt={2}>
-                                    <Text fontWeight="semibold" fontSize="sm" color="gray.700" mb={3}>Bank Account Details</Text>
+                                    <Text fontWeight="semibold" fontSize="sm" color="fg.default" mb={3}>Bank Account Details</Text>
                                     <VStack gap={4} align="stretch">
                                         <SimpleGrid columns={2} gap={4}>
                                             <Field.Root>
@@ -481,12 +481,12 @@ export default function SettingsPage() {
                     <Card.Root>
                         <Card.Header>
                             <HStack gap={3}>
-                                <Box p={2} borderRadius="lg" bg="red.100" color="red.600">
+                                <Box p={2} borderRadius="lg" bg="red.500/20" color="red.600">
                                     <LuShield />
                                 </Box>
                                 <Box>
                                     <Heading size="md">Password Reset</Heading>
-                                    <Text color="gray.500" fontSize="sm">Change your account password</Text>
+                                    <Text color="fg.muted" fontSize="sm">Change your account password</Text>
                                 </Box>
                             </HStack>
                         </Card.Header>
@@ -540,12 +540,12 @@ export default function SettingsPage() {
                 <Card.Root>
                     <Card.Header>
                         <HStack gap={3}>
-                            <Box p={2} borderRadius="lg" bg="orange.100" color="orange.600">
+                            <Box p={2} borderRadius="lg" bg="orange.500/20" color="orange.600">
                                 <LuTag />
                             </Box>
                             <Box flex={1}>
                                 <Heading size="md">Categories</Heading>
-                                <Text color="gray.500" fontSize="sm">Manage product categories</Text>
+                                <Text color="fg.muted" fontSize="sm">Manage product categories</Text>
                             </Box>
                         </HStack>
                     </Card.Header>
@@ -582,7 +582,7 @@ export default function SettingsPage() {
                                             justify="space-between"
                                             align="center"
                                             p={3}
-                                            bg="gray.50"
+                                            bg="bg.subtle"
                                             borderRadius="md"
                                         >
                                             <Badge fontSize="sm" px={3} py={1}>
@@ -615,7 +615,7 @@ export default function SettingsPage() {
                                     ))}
                                 </VStack>
                             ) : (
-                                <Text color="gray.500" textAlign="center" py={4}>
+                                <Text color="fg.muted" textAlign="center" py={4}>
                                     No categories yet. Create your first category above.
                                 </Text>
                             )}
@@ -629,7 +629,7 @@ export default function SettingsPage() {
                         <Portal>
                             <Dialog.Backdrop bg="blackAlpha.600" />
                             <Dialog.Positioner>
-                                <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                                <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                                     <Dialog.Header p={5} pb={0}>
                                         <Dialog.Title fontWeight="semibold">Edit Category</Dialog.Title>
                                     </Dialog.Header>
@@ -673,12 +673,12 @@ export default function SettingsPage() {
                     <Portal>
                         <Dialog.Backdrop bg="blackAlpha.600" />
                         <Dialog.Positioner>
-                            <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                            <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                                 <Dialog.Header p={5} pb={0}>
                                     <Dialog.Title fontWeight="semibold">Delete Category</Dialog.Title>
                                 </Dialog.Header>
                                 <Dialog.Body p={5}>
-                                    <Text color="gray.600">
+                                    <Text color="fg.muted">
                                         Are you sure you want to delete the category "{categoryToDelete?.name}"? This action cannot be undone.
                                     </Text>
                                 </Dialog.Body>

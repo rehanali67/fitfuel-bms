@@ -296,7 +296,7 @@ export default function InvoicesPage() {
                 <Flex justify="space-between" align="center" flexWrap="wrap" gap={4}>
                     <Box>
                         <Heading size={{ base: "lg", md: "xl" }} fontWeight="semibold">Invoices</Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Manage and track all your invoices
                         </Text>
                     </Box>
@@ -315,16 +315,16 @@ export default function InvoicesPage() {
                     {stats.map((stat) => (
                         <Card.Root
                             key={stat.label}
-                            bg="white"
+                            bg="bg.surface"
                             borderWidth="1px"
-                            borderColor="gray.100"
+                            borderColor="border.default"
                             transition="all 0.2s"
                             _hover={{ shadow: "md", transform: "translateY(-2px)" }}
                             cursor="pointer"
                         >
                             <Card.Body p={4}>
                                 <VStack align="start" gap={1}>
-                                    <Text color="gray.500" fontSize="xs" fontWeight="medium">
+                                    <Text color="fg.muted" fontSize="xs" fontWeight="medium">
                                         {stat.label}
                                     </Text>
                                     <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold" color={`${stat.color}.600`}>
@@ -337,11 +337,11 @@ export default function InvoicesPage() {
                 </SimpleGrid>
 
                 {/* Filters & Search */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         <Flex gap={3} flexWrap="wrap" align="center">
                             <HStack flex={1} minW="200px">
-                                <Icon color="gray.400"><LuSearch /></Icon>
+                                <Icon color="fg.subtle"><LuSearch /></Icon>
                                 <Input
                                     placeholder="Search invoices..."
                                     variant="flushed"
@@ -356,7 +356,7 @@ export default function InvoicesPage() {
                                 />
                             </HStack>
                             <HStack gap={2} flexWrap="wrap">
-                                <Text fontSize="xs" color="gray.600" fontWeight="medium" mr={1}>Payment:</Text>
+                                <Text fontSize="xs" color="fg.muted" fontWeight="medium" mr={1}>Payment:</Text>
                                 {["All", "cash", "card", "bank-transfer", "Fawran", "Pending"].map((method) => (
                                     <Button
                                         key={method}
@@ -375,11 +375,11 @@ export default function InvoicesPage() {
                 </Card.Root>
 
                 {/* Invoices List */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         {isLoading ? (
                             <VStack py={8}>
-                                <Text color="gray.500">Loading invoices...</Text>
+                                <Text color="fg.muted">Loading invoices...</Text>
                             </VStack>
                         ) : filteredInvoices.length === 0 ? (
                             <VStack py={8} gap={4}>
@@ -387,15 +387,15 @@ export default function InvoicesPage() {
                                     w={16}
                                     h={16}
                                     borderRadius="full"
-                                    bg="gray.100"
+                                    bg="bg.muted"
                                     align="center"
                                     justify="center"
                                 >
-                                    <Icon fontSize="2xl" color="gray.400"><LuFileText /></Icon>
+                                    <Icon fontSize="2xl" color="fg.subtle"><LuFileText /></Icon>
                                 </Flex>
                                 <VStack gap={1}>
                                     <Text fontWeight="medium">No invoices found</Text>
-                                    <Text fontSize="sm" color="gray.500">Try adjusting your search or filters</Text>
+                                    <Text fontSize="sm" color="fg.muted">Try adjusting your search or filters</Text>
                                 </VStack>
                                 <Link href="/dashboard/invoices/create">
                                     <Button colorPalette="blue" size="sm">
@@ -409,9 +409,9 @@ export default function InvoicesPage() {
                                     <Card.Root
                                         key={invoice.id}
                                         borderWidth="1px"
-                                        borderColor="gray.200"
-                                        bg="gray.50"
-                                        _hover={{ bg: "gray.100", borderColor: "gray.300", shadow: "sm" }}
+                                        borderColor="border.default"
+                                        bg="bg.subtle"
+                                        _hover={{ bg: "bg.muted", borderColor: "gray.300", shadow: "sm" }}
                                         transition="all 0.15s"
                                         cursor="pointer"
                                         onClick={() => router.push(`/dashboard/invoices/${invoice.id}`)}
@@ -423,7 +423,7 @@ export default function InvoicesPage() {
                                                         w={10}
                                                         h={10}
                                                         borderRadius="lg"
-                                                        bg="blue.50"
+                                                        bg="blue.500/10"
                                                         align="center"
                                                         justify="center"
                                                     >
@@ -447,15 +447,15 @@ export default function InvoicesPage() {
                                                                 </Badge>
                                                             )}
                                                         </HStack>
-                                                        <Text fontSize="sm" color="gray.600" fontWeight="medium">{invoice.client}</Text>
+                                                        <Text fontSize="sm" color="fg.muted" fontWeight="medium">{invoice.client}</Text>
                                                         {invoice.clientPhone && (
-                                                            <Text fontSize="xs" color="gray.500">{invoice.clientPhone}</Text>
+                                                            <Text fontSize="xs" color="fg.muted">{invoice.clientPhone}</Text>
                                                         )}
                                                         <HStack gap={4} mt={1}>
-                                                            <Text fontSize="xs" color="gray.500">
+                                                            <Text fontSize="xs" color="fg.muted">
                                                                 Issue: {new Date(invoice.issueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                             </Text>
-                                                            <Text fontSize="xs" color="gray.500">
+                                                            <Text fontSize="xs" color="fg.muted">
                                                             </Text>
                                                         </HStack>
                                                     </VStack>
@@ -468,7 +468,7 @@ export default function InvoicesPage() {
                                                         <Button
                                                             variant="ghost"
                                                             size="xs"
-                                                            _hover={{ bg: "blue.50", color: "blue.600" }}
+                                                            _hover={{ bg: "blue.500/10", color: "blue.600" }}
                                                             onClick={(e) => {
                                                                 e.stopPropagation();
                                                                 router.push(`/dashboard/invoices/${invoice.id}`);
@@ -484,7 +484,7 @@ export default function InvoicesPage() {
                                                                     e.stopPropagation();
                                                                     handleMarkAsPaid(invoice);
                                                                 }}
-                                                                _hover={{ bg: "green.50", color: "green.600" }}
+                                                                _hover={{ bg: "green.500/10", color: "green.600" }}
                                                             >
                                                                 <LuCheck />
                                                             </Button>
@@ -497,7 +497,7 @@ export default function InvoicesPage() {
                                                                     e.stopPropagation();
                                                                     openSendDialog(invoice);
                                                                 }}
-                                                                _hover={{ bg: "blue.50", color: "blue.600" }}
+                                                                _hover={{ bg: "blue.500/10", color: "blue.600" }}
                                                             >
                                                                 <LuSend />
                                                             </Button>
@@ -509,7 +509,7 @@ export default function InvoicesPage() {
                                                                 e.stopPropagation();
                                                                 handleDuplicate(invoice);
                                                             }}
-                                                            _hover={{ bg: "gray.100" }}
+                                                            _hover={{ bg: "bg.muted" }}
                                                         >
                                                             <LuCopy />
                                                         </Button>
@@ -521,7 +521,7 @@ export default function InvoicesPage() {
                                                                 e.stopPropagation();
                                                                 openDeleteDialog(invoice);
                                                             }}
-                                                            _hover={{ bg: "red.50" }}
+                                                            _hover={{ bg: "red.500/10" }}
                                                         >
                                                             <LuTrash2 />
                                                         </Button>
@@ -540,7 +540,7 @@ export default function InvoicesPage() {
                 {totalPages > 1 && (
                     <Flex justify="flex-end" mt={6}>
                         <HStack gap={2} align="center">
-                            <Text fontSize="sm" color="gray.600">
+                            <Text fontSize="sm" color="fg.muted">
                                 Page {currentPage} of {totalPages}
                             </Text>
                             <HStack gap={1}>
@@ -576,12 +576,12 @@ export default function InvoicesPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Delete Invoice</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete <Text as="span" fontWeight="semibold">{invoiceToDelete?.invoiceNumber}</Text> for {invoiceToDelete?.client}?
                                     This action cannot be undone.
                                 </Text>
@@ -617,19 +617,19 @@ export default function InvoicesPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Send Invoice</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
                                 <VStack align="stretch" gap={4}>
-                                    <Text color="gray.600">
+                                    <Text color="fg.muted">
                                         Send <Text as="span" fontWeight="semibold">{invoiceToSend?.invoiceNumber}</Text> (QAR {invoiceToSend?.total.toLocaleString()}) to:
                                     </Text>
-                                    <Box bg="gray.50" p={4} borderRadius="lg">
+                                    <Box bg="bg.subtle" p={4} borderRadius="lg">
                                         <Text fontWeight="medium">{invoiceToSend?.client}</Text>
                                         {invoiceToSend?.clientPhone && (
-                                            <Text fontSize="sm" color="gray.500">{invoiceToSend?.clientPhone}</Text>
+                                            <Text fontSize="sm" color="fg.muted">{invoiceToSend?.clientPhone}</Text>
                                         )}
                                     </Box>
                                 </VStack>

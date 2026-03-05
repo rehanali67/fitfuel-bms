@@ -179,7 +179,7 @@ export default function CustomerDetailPage() {
                         </Link>
                         <Box>
                             <Heading size="lg" fontWeight="semibold">{customer.name}</Heading>
-                            <Text color="gray.500" fontSize="sm">Customer Details</Text>
+                            <Text color="fg.muted" fontSize="sm">Customer Details</Text>
                         </Box>
                     </HStack>
                     <HStack gap={2}>
@@ -211,7 +211,7 @@ export default function CustomerDetailPage() {
                 </Flex>
 
                 {/* Customer Information */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Header p={5} pb={0}>
                         <Heading size="sm" fontWeight="semibold">Customer Information</Heading>
                     </Card.Header>
@@ -239,7 +239,7 @@ export default function CustomerDetailPage() {
                                         placeholder="Optional"
                                     />
                                 ) : (
-                                    <Text color="gray.600">{customer.phone || '-'}</Text>
+                                    <Text color="fg.muted">{customer.phone || '-'}</Text>
                                 )}
                             </Field.Root>
                             <Field.Root>
@@ -253,7 +253,7 @@ export default function CustomerDetailPage() {
                                         placeholder="Optional"
                                     />
                                 ) : (
-                                    <Text color="gray.600">{customer.email || '-'}</Text>
+                                    <Text color="fg.muted">{customer.email || '-'}</Text>
                                 )}
                             </Field.Root>
                             <Field.Root>
@@ -266,7 +266,7 @@ export default function CustomerDetailPage() {
                                         placeholder="Optional"
                                     />
                                 ) : (
-                                    <Text color="gray.600">{customer.address || '-'}</Text>
+                                    <Text color="fg.muted">{customer.address || '-'}</Text>
                                 )}
                             </Field.Root>
                         </VStack>

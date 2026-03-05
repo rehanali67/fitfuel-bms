@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f1f5f9;
 }
 
 @theme inline {
@@ -12,12 +17,7 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+
 
 body {
   background: var(--background);
@@ -32,16 +32,28 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f5f9;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1e293b;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #c1c1c1;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 
+.dark ::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
 ::-webkit-scrollbar-thumb:hover {
-  background: #a1a1a1;
+  background: #94a3b8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
 }
 
 /* Spin animation for loader */

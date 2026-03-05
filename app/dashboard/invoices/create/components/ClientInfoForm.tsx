@@ -42,7 +42,7 @@ export default function ClientInfoForm({
     onClientNameBlur,
 }: ClientInfoFormProps) {
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
             <Card.Header p={5} pb={0}>
                 <Heading size="sm" fontWeight="semibold">Client Information</Heading>
             </Card.Header>
@@ -67,9 +67,9 @@ export default function ClientInfoForm({
                                     left={0}
                                     right={0}
                                     zIndex={1000}
-                                    bg="white"
+                                    bg="bg.surface"
                                     borderWidth="1px"
-                                    borderColor="gray.200"
+                                    borderColor="border.default"
                                     borderRadius="md"
                                     shadow="lg"
                                     mt={1}
@@ -81,17 +81,17 @@ export default function ClientInfoForm({
                                             <List.Item
                                                 key={client.id}
                                                 cursor="pointer"
-                                                _hover={{ bg: "blue.50" }}
+                                                _hover={{ bg: "blue.500/10" }}
                                                 onClick={() => onClientSelect(client)}
                                                 p={2}
                                                 borderBottomWidth="1px"
-                                                borderColor="gray.100"
+                                                borderColor="border.default"
                                             >
                                                 <HStack gap={2}>
                                                     <Icon color="blue.500"><LuUser /></Icon>
                                                     <VStack align="start" gap={0} flex={1}>
                                                         <Text fontSize="sm" fontWeight="medium">{client.name}</Text>
-                                                        <Text fontSize="xs" color="gray.500">{client.phone}</Text>
+                                                        <Text fontSize="xs" color="fg.muted">{client.phone}</Text>
                                                     </VStack>
                                                 </HStack>
                                             </List.Item>

@@ -198,7 +198,7 @@ export default function EmployeesPage() {
                         <Heading size="lg" fontWeight="semibold">
                             Employees
                         </Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Manage your team members and their information
                         </Text>
                     </Box>
@@ -273,12 +273,12 @@ export default function EmployeesPage() {
                 </SimpleGrid>
 
                 {/* Employees Table */}
-                <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                     <Card.Body p={0}>
                         <Box overflowX="auto">
                             <Table.Root>
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
+                                    <Table.Row bg="bg.subtle">
                                         <Table.ColumnHeader fontWeight="medium">
                                             Employee
                                         </Table.ColumnHeader>
@@ -303,7 +303,7 @@ export default function EmployeesPage() {
                                     {filteredEmployees.map((employee) => (
                                         <Table.Row
                                             key={employee.id}
-                                            _hover={{ bg: "gray.50" }}
+                                            _hover={{ bg: "bg.subtle" }}
                                         >
                                             <Table.Cell>
                                                 <VStack align="start" gap={0}>
@@ -312,7 +312,7 @@ export default function EmployeesPage() {
                                                     </Text>
                                                     <Text
                                                         fontSize="xs"
-                                                        color="gray.500"
+                                                        color="fg.muted"
                                                     >
                                                         {employee.email}
                                                     </Text>
@@ -412,20 +412,20 @@ export default function EmployeesPage() {
                     columns={{ base: 1, sm: 2, md: 4 }}
                     gap={4}
                 >
-                    <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                    <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                         <Card.Body p={5}>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="sm" color="gray.500">
+                                <Text fontSize="sm" color="fg.muted">
                                     Total Employees
                                 </Text>
                                 <Heading size="2xl">{employees.length}</Heading>
                             </VStack>
                         </Card.Body>
                     </Card.Root>
-                    <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                    <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                         <Card.Body p={5}>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="sm" color="gray.500">
+                                <Text fontSize="sm" color="fg.muted">
                                     Active
                                 </Text>
                                 <Heading size="2xl" color="green.600">
@@ -438,10 +438,10 @@ export default function EmployeesPage() {
                             </VStack>
                         </Card.Body>
                     </Card.Root>
-                    <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                    <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                         <Card.Body p={5}>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="sm" color="gray.500">
+                                <Text fontSize="sm" color="fg.muted">
                                     On Leave
                                 </Text>
                                 <Heading size="2xl" color="yellow.600">
@@ -454,10 +454,10 @@ export default function EmployeesPage() {
                             </VStack>
                         </Card.Body>
                     </Card.Root>
-                    <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                    <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                         <Card.Body p={5}>
                             <VStack align="start" gap={2}>
-                                <Text fontSize="sm" color="gray.500">
+                                <Text fontSize="sm" color="fg.muted">
                                     Departments
                                 </Text>
                                 <Heading size="2xl" color="blue.600">
@@ -481,7 +481,7 @@ export default function EmployeesPage() {
                     />
                     <Dialog.Positioner>
                         <Dialog.Content
-                            bg="white"
+                            bg="bg.surface"
                             borderRadius="xl"
                             maxW="400px"
                             mx={4}
@@ -492,7 +492,7 @@ export default function EmployeesPage() {
                                 </Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to remove{" "}
                                     <strong>{selectedEmployee?.name}</strong> from
                                     the system? This action cannot be undone.

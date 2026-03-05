@@ -125,16 +125,16 @@ export default function CustomersPage() {
                 <Flex justify="space-between" align="center" flexWrap="wrap" gap={4}>
                     <Box>
                         <Heading size="lg" fontWeight="semibold">Customers</Heading>
-                        <Text color="gray.500" fontSize="sm">Manage your customer database</Text>
+                        <Text color="fg.muted" fontSize="sm">Manage your customer database</Text>
                     </Box>
                 </Flex>
 
                 {/* Filters & Search */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         <Flex gap={4} flexWrap="wrap" align="center">
                             <HStack flex={1} minW="200px">
-                                <Icon color="gray.400"><LuSearch /></Icon>
+                                <Icon color="fg.subtle"><LuSearch /></Icon>
                                 <Input
                                     placeholder="Search customers..."
                                     variant="flushed"
@@ -148,24 +148,24 @@ export default function CustomersPage() {
                 </Card.Root>
 
                 {/* Customers Table */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={0}>
                         {isLoading ? (
                             <Box p={8} textAlign="center">
-                                <Text color="gray.500">Loading customers...</Text>
+                                <Text color="fg.muted">Loading customers...</Text>
                             </Box>
                         ) : customers.length === 0 ? (
                             <Box p={8} textAlign="center">
-                                <Icon fontSize="4xl" color="gray.300" mb={4}>
+                                <Icon fontSize="4xl" color="fg.subtle" mb={4}>
                                     <LuUser />
                                 </Icon>
-                                <Text color="gray.500" mb={4}>No customers found</Text>
-                                <Text color="gray.400" fontSize="sm">Customers are created automatically when you create invoices or quotations</Text>
+                                <Text color="fg.muted" mb={4}>No customers found</Text>
+                                <Text color="fg.subtle" fontSize="sm">Customers are created automatically when you create invoices or quotations</Text>
                             </Box>
                         ) : (
                             <Table.Root size="sm">
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
+                                    <Table.Row bg="bg.subtle">
                                         <Table.ColumnHeader fontWeight="medium">Name</Table.ColumnHeader>
                                         <Table.ColumnHeader fontWeight="medium">Phone</Table.ColumnHeader>
                                         <Table.ColumnHeader fontWeight="medium">Email</Table.ColumnHeader>
@@ -175,18 +175,18 @@ export default function CustomersPage() {
                                 </Table.Header>
                                 <Table.Body>
                                     {customers.map((customer) => (
-                                        <Table.Row key={customer.id} _hover={{ bg: "gray.50" }}>
+                                        <Table.Row key={customer.id} _hover={{ bg: "bg.subtle" }}>
                                             <Table.Cell>
                                                 <Text fontWeight="medium">{customer.name}</Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text color="gray.600">{customer.phone || '-'}</Text>
+                                                <Text color="fg.muted">{customer.phone || '-'}</Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text color="gray.600">{customer.email || '-'}</Text>
+                                                <Text color="fg.muted">{customer.email || '-'}</Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text color="gray.600" fontSize="sm">{customer.address || '-'}</Text>
+                                                <Text color="fg.muted" fontSize="sm">{customer.address || '-'}</Text>
                                             </Table.Cell>
                                             <Table.Cell textAlign="right">
                                                 <HStack gap={2} justify="flex-end">

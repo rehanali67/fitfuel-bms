@@ -107,7 +107,7 @@ export default function DashboardPage() {
                 <Flex justify="space-between" align="center" flexWrap="wrap" gap={4}>
                     <Box>
                         <Heading size="xl" fontWeight="semibold">Dashboard</Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Welcome back! Here's an overview of your business.
                         </Text>
                     </Box>
@@ -132,12 +132,12 @@ export default function DashboardPage() {
                 {/* Main Content Grid */}
                 <SimpleGrid columns={{ base: 1, lg: 2 }} gap={6}>
                     {/* Recent Invoices */}
-                    <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                    <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                         <Card.Header pb={0}>
                             <Flex justify="space-between" align="center">
                                 <VStack align="start" gap={0}>
                                     <Card.Title fontWeight="semibold">Recent Invoices</Card.Title>
-                                    <Text fontSize="sm" color="gray.500">Your latest invoice activity</Text>
+                                    <Text fontSize="sm" color="fg.muted">Your latest invoice activity</Text>
                                 </VStack>
                                 <Link href="/dashboard/invoices">
                                     <Button variant="ghost" size="sm">
@@ -157,14 +157,14 @@ export default function DashboardPage() {
                                                 justify="space-between"
                                                 p={3}
                                                 borderRadius="lg"
-                                                bg="gray.50"
-                                                _hover={{ bg: "gray.100" }}
+                                                bg="bg.subtle"
+                                                _hover={{ bg: "bg.muted" }}
                                                 transition="background 0.15s"
                                                 cursor="pointer"
                                             >
                                                 <VStack align="start" gap={0}>
                                                     <Text fontWeight="medium" fontSize="sm">{invoice.invoiceNumber}</Text>
-                                                    <Text fontSize="xs" color="gray.500">{invoice.client}</Text>
+                                                    <Text fontSize="xs" color="fg.muted">{invoice.client}</Text>
                                                 </VStack>
                                                 <VStack align="end" gap={1}>
                                                     <Text fontWeight="semibold" fontSize="sm">{invoice.amount}</Text>
@@ -188,7 +188,7 @@ export default function DashboardPage() {
                                     ))}
                                 </VStack>
                             ) : (
-                                <Text color="gray.500" fontSize="sm">No recent invoices</Text>
+                                <Text color="fg.muted" fontSize="sm">No recent invoices</Text>
                             )}
                         </Card.Body>
                     </Card.Root>
@@ -196,11 +196,11 @@ export default function DashboardPage() {
                     {/* Quick Actions & Activity */}
                     <VStack gap={6} align="stretch">
                         {/* Quick Actions Card */}
-                        <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                        <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                             <Card.Header pb={0}>
                                 <VStack align="start" gap={0}>
                                     <Card.Title fontWeight="semibold">Quick Actions</Card.Title>
-                                    <Text fontSize="sm" color="gray.500">Common tasks at your fingertips</Text>
+                                    <Text fontSize="sm" color="fg.muted">Common tasks at your fingertips</Text>
                                 </VStack>
                             </Card.Header>
                             <Card.Body>
@@ -209,10 +209,10 @@ export default function DashboardPage() {
                                         <HStack
                                             p={4}
                                             borderRadius="lg"
-                                            bg="blue.50"
+                                            bg="blue.500/10"
                                             borderWidth="1px"
                                             borderColor="blue.100"
-                                            _hover={{ bg: "blue.100" }}
+                                            _hover={{ bg: "blue.500/20" }}
                                             transition="background 0.15s"
                                             cursor="pointer"
                                         >
@@ -228,7 +228,7 @@ export default function DashboardPage() {
                                             </Flex>
                                             <VStack align="start" gap={0}>
                                                 <Text fontWeight="medium" fontSize="sm">Create Invoice</Text>
-                                                <Text fontSize="xs" color="gray.500">Generate a new invoice for your client</Text>
+                                                <Text fontSize="xs" color="fg.muted">Generate a new invoice for your client</Text>
                                             </VStack>
                                         </HStack>
                                     </Link>
@@ -236,10 +236,10 @@ export default function DashboardPage() {
                                         <HStack
                                             p={4}
                                             borderRadius="lg"
-                                            bg="purple.50"
+                                            bg="purple.500/10"
                                             borderWidth="1px"
                                             borderColor="purple.100"
-                                            _hover={{ bg: "purple.100" }}
+                                            _hover={{ bg: "purple.500/20" }}
                                             transition="background 0.15s"
                                             cursor="pointer"
                                         >
@@ -255,7 +255,7 @@ export default function DashboardPage() {
                                             </Flex>
                                             <VStack align="start" gap={0}>
                                                 <Text fontWeight="medium" fontSize="sm">Create Quotation</Text>
-                                                <Text fontSize="xs" color="gray.500">Prepare a quote for potential clients</Text>
+                                                <Text fontSize="xs" color="fg.muted">Prepare a quote for potential clients</Text>
                                             </VStack>
                                         </HStack>
                                     </Link>
@@ -263,10 +263,10 @@ export default function DashboardPage() {
                                         <HStack
                                             p={4}
                                             borderRadius="lg"
-                                            bg="orange.50"
+                                            bg="orange.500/10"
                                             borderWidth="1px"
                                             borderColor="orange.100"
-                                            _hover={{ bg: "orange.100" }}
+                                            _hover={{ bg: "orange.500/20" }}
                                             transition="background 0.15s"
                                             cursor="pointer"
                                         >
@@ -282,7 +282,7 @@ export default function DashboardPage() {
                                             </Flex>
                                             <VStack align="start" gap={0}>
                                                 <Text fontWeight="medium" fontSize="sm">Add Product</Text>
-                                                <Text fontSize="xs" color="gray.500">Add a new item to your inventory</Text>
+                                                <Text fontSize="xs" color="fg.muted">Add a new item to your inventory</Text>
                                             </VStack>
                                         </HStack>
                                     </Link>
@@ -291,16 +291,16 @@ export default function DashboardPage() {
                         </Card.Root>
 
                         {/* Recent Activity */}
-                        <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                        <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                             <Card.Header pb={0}>
                                 <VStack align="start" gap={0}>
                                     <Card.Title fontWeight="semibold">Recent Activity</Card.Title>
-                                    <Text fontSize="sm" color="gray.500">Latest updates in your business</Text>
+                                    <Text fontSize="sm" color="fg.muted">Latest updates in your business</Text>
                                 </VStack>
                             </Card.Header>
                             <Card.Body>
                                 {isLoading ? (
-                                    <Text color="gray.500" fontSize="sm">Loading activities...</Text>
+                                    <Text color="fg.muted" fontSize="sm">Loading activities...</Text>
                                 ) : activities.length > 0 ? (
                                     <VStack gap={3} align="stretch">
                                         {activities.map((activity) => (
@@ -309,13 +309,13 @@ export default function DashboardPage() {
                                                     gap={3}
                                                     p={activity.link ? 2 : 0}
                                                     borderRadius="lg"
-                                                    _hover={activity.link ? { bg: "gray.50" } : {}}
+                                                    _hover={activity.link ? { bg: "bg.subtle" } : {}}
                                                     transition="background 0.15s"
                                                     cursor={activity.link ? "pointer" : "default"}
                                                 >
                                                     <Flex w={2} h={2} borderRadius="full" bg={`${activity.color}.500`} />
                                                     <Text fontSize="sm" flex={1}>{activity.description}</Text>
-                                                    <Text fontSize="xs" color="gray.400" ml="auto">
+                                                    <Text fontSize="xs" color="fg.subtle" ml="auto">
                                                         {formatTimeAgo(activity.timestamp)}
                                                     </Text>
                                                 </HStack>
@@ -323,7 +323,7 @@ export default function DashboardPage() {
                                         ))}
                                     </VStack>
                                 ) : (
-                                    <Text color="gray.500" fontSize="sm">No recent activities</Text>
+                                    <Text color="fg.muted" fontSize="sm">No recent activities</Text>
                                 )}
                             </Card.Body>
                         </Card.Root>

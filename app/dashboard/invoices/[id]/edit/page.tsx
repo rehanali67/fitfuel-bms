@@ -570,7 +570,7 @@ export default function EditInvoicePage() {
                         </Link>
                         <Box>
                             <Heading size="lg" fontWeight="semibold">Edit Invoice</Heading>
-                            <Text color="gray.500" fontSize="sm">{invoice.invoiceNumber}</Text>
+                            <Text color="fg.muted" fontSize="sm">{invoice.invoiceNumber}</Text>
                         </Box>
                     </HStack>
                     <HStack gap={2} flexWrap="wrap">
@@ -699,12 +699,12 @@ export default function EditInvoicePage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Delete Invoice</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete this invoice? This action cannot be undone.
                                 </Text>
                             </Dialog.Body>

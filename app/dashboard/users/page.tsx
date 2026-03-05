@@ -277,7 +277,7 @@ export default function UsersPage() {
                         <Heading size={{ base: "lg", md: "xl" }} fontWeight="semibold">
                             Users
                         </Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Manage dashboard access and user roles
                         </Text>
                     </Box>
@@ -290,10 +290,10 @@ export default function UsersPage() {
                 {/* Stats */}
                 <SimpleGrid columns={{ base: 2, md: 4 }} gap={4}>
                     {stats.map((stat) => (
-                        <Card.Root key={stat.label} bg="white" borderWidth="1px" borderColor="gray.100">
+                        <Card.Root key={stat.label} bg="bg.surface" borderWidth="1px" borderColor="border.default">
                             <Card.Body p={4}>
                                 <VStack align="flex-start" gap={1}>
-                                    <Text fontSize="xs" color="gray.500" fontWeight="medium">
+                                    <Text fontSize="xs" color="fg.muted" fontWeight="medium">
                                         {stat.label}
                                     </Text>
                                     <Text fontSize="2xl" fontWeight="bold" color={`${stat.color}.600`}>
@@ -306,10 +306,10 @@ export default function UsersPage() {
                 </SimpleGrid>
 
                 {/* Search */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         <HStack flex={1}>
-                            <Icon color="gray.400">
+                            <Icon color="fg.subtle">
                                 <LuSearch />
                             </Icon>
                             <Input
@@ -324,18 +324,18 @@ export default function UsersPage() {
                 </Card.Root>
 
                 {/* Users Table */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={0}>
                         {isLoading ? (
                             <Box p={8} textAlign="center">
-                                <Text color="gray.500">Loading users...</Text>
+                                <Text color="fg.muted">Loading users...</Text>
                             </Box>
                         ) : filteredUsers.length === 0 ? (
                             <VStack p={12} gap={3}>
-                                <Icon fontSize="3xl" color="gray.300">
+                                <Icon fontSize="3xl" color="fg.subtle">
                                     <LuUserCog />
                                 </Icon>
-                                <Text color="gray.400" fontWeight="medium">
+                                <Text color="fg.subtle" fontWeight="medium">
                                     {searchQuery ? "No users found" : "No users yet"}
                                 </Text>
                                 {!searchQuery && (
@@ -347,24 +347,24 @@ export default function UsersPage() {
                         ) : (
                             <Table.Root size="sm">
                                 <Table.Header>
-                                    <Table.Row bg="gray.50">
-                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="gray.500" textTransform="uppercase">
+                                    <Table.Row bg="bg.subtle">
+                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="fg.muted" textTransform="uppercase">
                                             Name
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="gray.500" textTransform="uppercase">
+                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="fg.muted" textTransform="uppercase">
                                             Email
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="gray.500" textTransform="uppercase">
+                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="fg.muted" textTransform="uppercase">
                                             Role
                                         </Table.ColumnHeader>
-                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="gray.500" textTransform="uppercase" textAlign="right">
+                                        <Table.ColumnHeader px={5} py={3} fontWeight="semibold" fontSize="xs" color="fg.muted" textTransform="uppercase" textAlign="right">
                                             Actions
                                         </Table.ColumnHeader>
                                     </Table.Row>
                                 </Table.Header>
                                 <Table.Body>
                                     {filteredUsers.map((u) => (
-                                        <Table.Row key={u.id} _hover={{ bg: "gray.50" }} transition="background 0.15s">
+                                        <Table.Row key={u.id} _hover={{ bg: "bg.subtle" }} transition="background 0.15s">
                                             <Table.Cell px={5} py={3}>
                                                 <HStack gap={3}>
                                                     <Flex
@@ -393,7 +393,7 @@ export default function UsersPage() {
                                                 </HStack>
                                             </Table.Cell>
                                             <Table.Cell px={5} py={3}>
-                                                <Text fontSize="sm" color="gray.600">
+                                                <Text fontSize="sm" color="fg.muted">
                                                     {u.email}
                                                 </Text>
                                             </Table.Cell>
@@ -439,13 +439,13 @@ export default function UsersPage() {
                     <Dialog.Backdrop />
                     <Dialog.Positioner>
                         <Dialog.Content maxW="480px" borderRadius="2xl">
-                            <Dialog.Header borderBottomWidth="1px" borderColor="gray.100" p={5}>
+                            <Dialog.Header borderBottomWidth="1px" borderColor="border.default" p={5}>
                                 <HStack gap={3}>
                                     <Flex
                                         w={9}
                                         h={9}
                                         borderRadius="lg"
-                                        bg="blue.50"
+                                        bg="blue.500/10"
                                         align="center"
                                         justify="center"
                                     >
@@ -520,13 +520,13 @@ export default function UsersPage() {
                                             </NativeSelect.Field>
                                             <NativeSelect.Indicator />
                                         </NativeSelect.Root>
-                                        <Field.HelperText fontSize="xs" color="gray.400">
+                                        <Field.HelperText fontSize="xs" color="fg.subtle">
                                             Sales users can create invoices and manage inventory.
                                         </Field.HelperText>
                                     </Field.Root>
                                 </VStack>
                             </Dialog.Body>
-                            <Dialog.Footer borderTopWidth="1px" borderColor="gray.100" p={5} gap={3}>
+                            <Dialog.Footer borderTopWidth="1px" borderColor="border.default" p={5} gap={3}>
                                 <Button
                                     variant="outline"
                                     size="sm"
@@ -556,13 +556,13 @@ export default function UsersPage() {
                     <Dialog.Backdrop />
                     <Dialog.Positioner>
                         <Dialog.Content maxW="480px" borderRadius="2xl">
-                            <Dialog.Header borderBottomWidth="1px" borderColor="gray.100" p={5}>
+                            <Dialog.Header borderBottomWidth="1px" borderColor="border.default" p={5}>
                                 <HStack gap={3}>
                                     <Flex
                                         w={9}
                                         h={9}
                                         borderRadius="lg"
-                                        bg="orange.50"
+                                        bg="orange.500/10"
                                         align="center"
                                         justify="center"
                                     >
@@ -619,7 +619,7 @@ export default function UsersPage() {
                                     <Field.Root>
                                         <Field.Label fontSize="sm" fontWeight="medium">
                                             New Password{" "}
-                                            <Text as="span" color="gray.400" fontWeight="normal">
+                                            <Text as="span" color="fg.subtle" fontWeight="normal">
                                                 (leave blank to keep current)
                                             </Text>
                                         </Field.Label>
@@ -643,7 +643,7 @@ export default function UsersPage() {
                                     </Field.Root>
                                 </VStack>
                             </Dialog.Body>
-                            <Dialog.Footer borderTopWidth="1px" borderColor="gray.100" p={5} gap={3}>
+                            <Dialog.Footer borderTopWidth="1px" borderColor="border.default" p={5} gap={3}>
                                 <Button
                                     variant="outline"
                                     size="sm"
@@ -673,7 +673,7 @@ export default function UsersPage() {
                     <Dialog.Backdrop />
                     <Dialog.Positioner>
                         <Dialog.Content maxW="400px" borderRadius="2xl">
-                            <Dialog.Header borderBottomWidth="1px" borderColor="gray.100" p={5}>
+                            <Dialog.Header borderBottomWidth="1px" borderColor="border.default" p={5}>
                                 <Dialog.Title fontWeight="semibold" color="red.600">
                                     Delete User
                                 </Dialog.Title>
@@ -682,16 +682,16 @@ export default function UsersPage() {
                                 </Dialog.CloseTrigger>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600" fontSize="sm">
+                                <Text color="fg.muted" fontSize="sm">
                                     Are you sure you want to delete{" "}
-                                    <Text as="span" fontWeight="semibold" color="gray.800">
+                                    <Text as="span" fontWeight="semibold" color="fg.default">
                                         {userToDelete?.name}
                                     </Text>
                                     ? This action cannot be undone and the user will lose all access to
                                     the dashboard.
                                 </Text>
                             </Dialog.Body>
-                            <Dialog.Footer borderTopWidth="1px" borderColor="gray.100" p={5} gap={3}>
+                            <Dialog.Footer borderTopWidth="1px" borderColor="border.default" p={5} gap={3}>
                                 <Button
                                     variant="outline"
                                     size="sm"

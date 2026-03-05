@@ -496,7 +496,7 @@ export default function CreateQuotationPage() {
                         </Link>
                         <Box>
                             <Heading size="lg" fontWeight="semibold">Create Quotation</Heading>
-                            <Text color="gray.500" fontSize="sm">Fill in the details to create a new quotation</Text>
+                            <Text color="fg.muted" fontSize="sm">Fill in the details to create a new quotation</Text>
                         </Box>
                     </HStack>
                     <HStack gap={2} flexWrap="wrap">
@@ -526,7 +526,7 @@ export default function CreateQuotationPage() {
                     <Box gridColumn={{ base: "1", lg: "span 2" }}>
                         <VStack gap={6} align="stretch">
                             {/* Client Info */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Client Information</Heading>
                                 </Card.Header>
@@ -569,9 +569,9 @@ export default function CreateQuotationPage() {
                                                         left={0}
                                                         right={0}
                                                         zIndex={1000}
-                                                        bg="white"
+                                                        bg="bg.surface"
                                                         borderWidth="1px"
-                                                        borderColor="gray.200"
+                                                        borderColor="border.default"
                                                         borderRadius="md"
                                                         shadow="lg"
                                                         mt={1}
@@ -583,17 +583,17 @@ export default function CreateQuotationPage() {
                                                                 <List.Item
                                                                     key={client.id}
                                                                     cursor="pointer"
-                                                                    _hover={{ bg: "purple.50" }}
+                                                                    _hover={{ bg: "purple.500/10" }}
                                                                     onClick={() => selectClient(client)}
                                                                     p={2}
                                                                     borderBottomWidth="1px"
-                                                                    borderColor="gray.100"
+                                                                    borderColor="border.default"
                                                                 >
                                                                     <HStack gap={2}>
                                                                         <Icon color="purple.500"><LuUser /></Icon>
                                                                         <VStack align="start" gap={0} flex={1}>
                                                                             <Text fontSize="sm" fontWeight="medium">{client.name}</Text>
-                                                                            <Text fontSize="xs" color="gray.500">{client.phone}</Text>
+                                                                            <Text fontSize="xs" color="fg.muted">{client.phone}</Text>
                                                                         </VStack>
                                                                     </HStack>
                                                                 </List.Item>
@@ -618,7 +618,7 @@ export default function CreateQuotationPage() {
                             </Card.Root>
 
                             {/* Quotation Details */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Quotation Details</Heading>
                                 </Card.Header>
@@ -626,7 +626,7 @@ export default function CreateQuotationPage() {
                                     <SimpleGrid columns={{ base: 1, md: 3 }} gap={4}>
                                         <Field.Root>
                                             <Field.Label fontSize="sm">Quotation Number</Field.Label>
-                                            <Input value="Auto-generated" readOnly size="sm" bg="gray.50" />
+                                            <Input value="Auto-generated" readOnly size="sm" bg="bg.subtle" />
                                         </Field.Root>
                                         <Field.Root>
                                             <Field.Label fontSize="sm">Issue Date</Field.Label>
@@ -651,7 +651,7 @@ export default function CreateQuotationPage() {
                             </Card.Root>
 
                             {/* Line Items - Same as invoice */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Flex justify="space-between" align="center">
                                         <Heading size="sm" fontWeight="semibold">Line Items</Heading>
@@ -667,7 +667,7 @@ export default function CreateQuotationPage() {
                                             {items.map((item, index) => (
                                                 <HStack key={item.id} gap={{ base: 2, md: 3 }} align="flex-end" flexWrap={{ base: "wrap", md: "nowrap" }}>
                                                     <Box flex={{ base: 1, md: 3, lg: 4 }} minW={{ base: "100%", md: "200px", lg: "250px" }} position="relative">
-                                                        {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Description</Text>}
+                                                        {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Description</Text>}
                                                         <Box position="relative">
                                                             <Input
                                                                 placeholder="Search product or enter description"
@@ -704,9 +704,9 @@ export default function CreateQuotationPage() {
                                                                     left={0}
                                                                     right={0}
                                                                     zIndex={1000}
-                                                                    bg="white"
+                                                                    bg="bg.surface"
                                                                     borderWidth="1px"
-                                                                    borderColor="gray.200"
+                                                                    borderColor="border.default"
                                                                     borderRadius="md"
                                                                     shadow="lg"
                                                                     mt={1}
@@ -715,7 +715,7 @@ export default function CreateQuotationPage() {
                                                                 >
                                                                     {isSearchingProducts[item.id] ? (
                                                                         <Box p={3} textAlign="center">
-                                                                            <Text fontSize="sm" color="gray.500">Searching...</Text>
+                                                                            <Text fontSize="sm" color="fg.muted">Searching...</Text>
                                                                         </Box>
                                                                     ) : filteredProducts(item.id).length > 0 ? (
                                                                         <List.Root>
@@ -723,22 +723,22 @@ export default function CreateQuotationPage() {
                                                                                 <List.Item
                                                                                     key={product.id}
                                                                                     cursor="pointer"
-                                                                                    _hover={{ bg: "purple.50" }}
+                                                                                    _hover={{ bg: "purple.500/10" }}
                                                                                     onClick={() => selectProduct(item.id, product)}
                                                                                     p={2}
                                                                                     borderBottomWidth="1px"
-                                                                                    borderColor="gray.100"
+                                                                                    borderColor="border.default"
                                                                                 >
                                                                                     <HStack gap={2}>
                                                                                         <Icon color="purple.500"><LuPackage /></Icon>
                                                                                         <VStack align="start" gap={0} flex={1}>
                                                                                             <Text fontSize="sm" fontWeight="medium">{product.name}</Text>
                                                                                             {product.arabicName && (
-                                                                                                <Text fontSize="xs" color="gray.500" dir="rtl">{product.arabicName}</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted" dir="rtl">{product.arabicName}</Text>
                                                                                             )}
                                                                                             <HStack gap={2} flexWrap="wrap">
-                                                                                                <Text fontSize="xs" color="gray.500">SKU: {product.sku}</Text>
-                                                                                                <Text fontSize="xs" color="gray.500">•</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted">SKU: {product.sku}</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted">•</Text>
                                                                                                 <Text fontSize="xs" color="purple.600" fontWeight="medium">QAR {product.sellingPrice.toLocaleString()}</Text>
                                                                                             </HStack>
                                                                                         </VStack>
@@ -748,7 +748,7 @@ export default function CreateQuotationPage() {
                                                                         </List.Root>
                                                                     ) : productSearchQueries[item.id] ? (
                                                                         <Box p={3} textAlign="center">
-                                                                            <Text fontSize="sm" color="gray.500">No products found</Text>
+                                                                            <Text fontSize="sm" color="fg.muted">No products found</Text>
                                                                         </Box>
                                                                     ) : null}
                                                                 </Box>
@@ -756,7 +756,7 @@ export default function CreateQuotationPage() {
                                                         </Box>
                                                     </Box>
                                                     <Box w={{ base: "80px", md: "80px" }} flexShrink={0}>
-                                                        {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Qty</Text>}
+                                                        {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Qty</Text>}
                                                         <VStack align="stretch" gap={0}>
                                                             <Input
                                                                 type="number"
@@ -800,7 +800,7 @@ export default function CreateQuotationPage() {
                                                         </VStack>
                                                     </Box>
                                                     <Box w={{ base: "100px", md: "100px" }} flexShrink={0}>
-                                                        {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Rate</Text>}
+                                                        {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Rate</Text>}
                                                         <Input
                                                             type="number"
                                                             size={{ base: "md", md: "sm" }}
@@ -821,7 +821,7 @@ export default function CreateQuotationPage() {
                                                         />
                                                     </Box>
                                                     <Box w={{ base: "100px", md: "100px" }} flexShrink={0}>
-                                                        {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Amount</Text>}
+                                                        {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Amount</Text>}
                                                         <Text
                                                             fontWeight="medium"
                                                             py={2}
@@ -831,7 +831,7 @@ export default function CreateQuotationPage() {
                                                         </Text>
                                                     </Box>
                                                     <Box w={{ base: "80px", md: "80px" }} flexShrink={0}>
-                                                        {index === 0 && <Text fontSize="xs" color="gray.500" mb={1}>Type</Text>}
+                                                        {index === 0 && <Text fontSize="xs" color="fg.muted" mb={1}>Type</Text>}
                                                         <Button
                                                             size="xs"
                                                             variant={item.isReturn ? "solid" : "outline"}
@@ -899,9 +899,9 @@ export default function CreateQuotationPage() {
                                                                         left={0}
                                                                         right={0}
                                                                         zIndex={1000}
-                                                                        bg="white"
+                                                                        bg="bg.surface"
                                                                         borderWidth="1px"
-                                                                        borderColor="gray.200"
+                                                                        borderColor="border.default"
                                                                         borderRadius="md"
                                                                         shadow="lg"
                                                                         mt={1}
@@ -913,22 +913,22 @@ export default function CreateQuotationPage() {
                                                                                 <List.Item
                                                                                     key={product.id}
                                                                                     cursor="pointer"
-                                                                                    _hover={{ bg: "purple.50" }}
+                                                                                    _hover={{ bg: "purple.500/10" }}
                                                                                     onClick={() => selectProduct(item.id, product)}
                                                                                     p={2}
                                                                                     borderBottomWidth="1px"
-                                                                                    borderColor="gray.100"
+                                                                                    borderColor="border.default"
                                                                                 >
                                                                                     <HStack gap={2}>
                                                                                         <Icon color="purple.500"><LuPackage /></Icon>
                                                                                         <VStack align="start" gap={0} flex={1}>
                                                                                             <Text fontSize="sm" fontWeight="medium">{product.name}</Text>
                                                                                             {product.arabicName && (
-                                                                                                <Text fontSize="xs" color="gray.500" dir="rtl">{product.arabicName}</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted" dir="rtl">{product.arabicName}</Text>
                                                                                             )}
                                                                                             <HStack gap={2} flexWrap="wrap">
-                                                                                                <Text fontSize="xs" color="gray.500">SKU: {product.sku}</Text>
-                                                                                                <Text fontSize="xs" color="gray.500">•</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted">SKU: {product.sku}</Text>
+                                                                                                <Text fontSize="xs" color="fg.muted">•</Text>
                                                                                                 <Text fontSize="xs" color="purple.600" fontWeight="medium">QAR {product.sellingPrice.toLocaleString()}</Text>
                                                                                             </HStack>
                                                                                         </VStack>
@@ -1015,7 +1015,7 @@ export default function CreateQuotationPage() {
                                                                 {item.isReturn ? "Return" : "Item"}
                                                             </Button>
                                                             <HStack gap={2} flex={1} justify="flex-end">
-                                                                <Text fontSize="sm" color="gray.600">
+                                                                <Text fontSize="sm" color="fg.muted">
                                                                     Amount: <Text as="span" fontWeight="semibold" color={item.isReturn ? "red.600" : "gray.800"}>
                                                                         {item.isReturn ? "-" : ""}QAR {(item.quantity * item.rate).toLocaleString()}
                                                                     </Text>
@@ -1041,7 +1041,7 @@ export default function CreateQuotationPage() {
                             </Card.Root>
 
                             {/* Notes */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Notes</Heading>
                                 </Card.Header>
@@ -1060,14 +1060,14 @@ export default function CreateQuotationPage() {
 
                     {/* Summary Sidebar */}
                     <Box>
-                        <Card.Root border="1px solid" borderColor="gray.100" bg="white" position="sticky" top="80px">
+                        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface" position="sticky" top="80px">
                             <Card.Header p={5} pb={0}>
                                 <Heading size="sm" fontWeight="semibold">Summary</Heading>
                             </Card.Header>
                             <Card.Body p={5}>
                                 <VStack gap={3} align="stretch">
                                     <HStack justify="space-between">
-                                        <Text color="gray.600" fontSize="sm">Subtotal</Text>
+                                        <Text color="fg.muted" fontSize="sm">Subtotal</Text>
                                         <Text fontWeight="medium">QAR {subtotal.toLocaleString()}</Text>
                                     </HStack>
                                     {returns > 0 && (
@@ -1078,13 +1078,13 @@ export default function CreateQuotationPage() {
                                     )}
                                     {returns > 0 && (
                                         <HStack justify="space-between">
-                                            <Text color="gray.600" fontSize="sm">Net Subtotal</Text>
+                                            <Text color="fg.muted" fontSize="sm">Net Subtotal</Text>
                                             <Text fontWeight="medium">QAR {netSubtotal.toLocaleString()}</Text>
                                         </HStack>
                                     )}
                                     <HStack justify="space-between" align="center">
                                         <HStack gap={2} align="center">
-                                            <Text color="gray.600" fontSize="sm">Discount</Text>
+                                            <Text color="fg.muted" fontSize="sm">Discount</Text>
                                             {discountAmount !== null && discountAmount > 0 && (
                                                 <IconButton
                                                     variant="ghost"
@@ -1102,7 +1102,7 @@ export default function CreateQuotationPage() {
                                         </HStack>
                                         {isDiscountEditing ? (
                                             <HStack gap={1} align="center">
-                                                <Text fontSize="xs" color="gray.500">QAR</Text>
+                                                <Text fontSize="xs" color="fg.muted">QAR</Text>
                                                 <Input
                                                     type="number"
                                                     size="xs"
@@ -1160,28 +1160,28 @@ export default function CreateQuotationPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Send Quotation</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
                                 <VStack align="stretch" gap={4}>
-                                    <Text color="gray.600">
+                                    <Text color="fg.muted">
                                         Ready to send this quotation?
                                     </Text>
-                                    <Box bg="purple.50" p={4} borderRadius="lg">
+                                    <Box bg="purple.500/10" p={4} borderRadius="lg">
                                         <HStack justify="space-between" mb={2}>
-                                            <Text fontSize="sm" color="gray.600">Client</Text>
+                                            <Text fontSize="sm" color="fg.muted">Client</Text>
                                             <Text fontSize="sm" fontWeight="medium">{clientName || "Not specified"}</Text>
                                         </HStack>
                                         {clientPhone && (
                                             <HStack justify="space-between" mb={2}>
-                                                <Text fontSize="sm" color="gray.600">Phone</Text>
+                                                <Text fontSize="sm" color="fg.muted">Phone</Text>
                                                 <Text fontSize="sm" fontWeight="medium">{clientPhone}</Text>
                                             </HStack>
                                         )}
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Total</Text>
+                                            <Text fontSize="sm" color="fg.muted">Total</Text>
                                             <Text fontSize="sm" fontWeight="bold" color="purple.600">QAR {total.toLocaleString()}</Text>
                                         </HStack>
                                     </Box>
@@ -1217,12 +1217,12 @@ export default function CreateQuotationPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Discard Changes</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to discard this quotation? All unsaved changes will be lost.
                                 </Text>
                             </Dialog.Body>

@@ -20,7 +20,7 @@ export default function PaymentMethodSection({
     ];
 
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
             <Card.Header p={5} pb={0}>
                 <Heading size="sm" fontWeight="semibold">Payment Method</Heading>
             </Card.Header>
@@ -33,10 +33,10 @@ export default function PaymentMethodSection({
                             onClick={() => onPaymentMethodChange(method.value)}
                             p={4}
                             border="2px solid"
-                            borderColor={paymentMethod === method.value ? 'blue.500' : 'gray.200'}
+                            borderColor={paymentMethod === method.value ? 'blue.500' : 'border.default'}
                             borderRadius="lg"
-                            bg={paymentMethod === method.value ? 'blue.50' : 'white'}
-                            _hover={{ borderColor: 'blue.300', bg: paymentMethod === method.value ? 'blue.50' : 'gray.50' }}
+                            bg={paymentMethod === method.value ? 'brand.muted' : 'bg.surface'}
+                            _hover={{ borderColor: 'blue.400', bg: paymentMethod === method.value ? 'brand.muted' : 'bg.subtle' }}
                             cursor="pointer"
                             textAlign="left"
                             transition="all 0.2s"
@@ -48,19 +48,19 @@ export default function PaymentMethodSection({
                                         h={4}
                                         borderRadius="full"
                                         border="2px solid"
-                                        borderColor={paymentMethod === method.value ? 'blue.500' : 'gray.300'}
-                                        bg={paymentMethod === method.value ? 'blue.500' : 'white'}
+                                        borderColor={paymentMethod === method.value ? 'blue.500' : 'border.default'}
+                                        bg={paymentMethod === method.value ? 'blue.500' : 'bg.surface'}
                                         display="flex"
                                         alignItems="center"
                                         justifyContent="center"
                                     >
                                         {paymentMethod === method.value && (
-                                            <Box w={2} h={2} borderRadius="full" bg="white" />
+                                            <Box w={2} h={2} borderRadius="full" bg="bg.surface" />
                                         )}
                                     </Box>
                                     <Text fontWeight="semibold">{method.label}</Text>
                                 </HStack>
-                                <Text fontSize="xs" color="gray.500" ml={6}>{method.description}</Text>
+                                <Text fontSize="xs" color="fg.muted" ml={6}>{method.description}</Text>
                             </VStack>
                         </Box>
                     ))}

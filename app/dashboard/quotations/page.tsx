@@ -335,7 +335,7 @@ export default function QuotationsPage() {
                 <Flex justify="space-between" align="center" flexWrap="wrap" gap={4}>
                     <Box>
                         <Heading size={{ base: "lg", md: "xl" }} fontWeight="semibold">Quotations</Heading>
-                        <Text color="gray.500" fontSize="sm">
+                        <Text color="fg.muted" fontSize="sm">
                             Create and manage quotes for your clients
                         </Text>
                     </Box>
@@ -354,16 +354,16 @@ export default function QuotationsPage() {
                     {stats.map((stat) => (
                         <Card.Root
                             key={stat.label}
-                            bg="white"
+                            bg="bg.surface"
                             borderWidth="1px"
-                            borderColor="gray.100"
+                            borderColor="border.default"
                             transition="all 0.2s"
                             _hover={{ shadow: "md", transform: "translateY(-2px)" }}
                             cursor="pointer"
                         >
                             <Card.Body p={4}>
                                 <VStack align="start" gap={1}>
-                                    <Text color="gray.500" fontSize="xs" fontWeight="medium">
+                                    <Text color="fg.muted" fontSize="xs" fontWeight="medium">
                                         {stat.label}
                                     </Text>
                                     <Text fontSize={{ base: "lg", md: "xl" }} fontWeight="semibold" color={`${stat.color}.600`}>
@@ -376,11 +376,11 @@ export default function QuotationsPage() {
                 </SimpleGrid>
 
                 {/* Filters & Search */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                     <Card.Body p={4}>
                         <Flex gap={3} flexWrap="wrap" align="center">
                             <HStack flex={1} minW="200px">
-                                <Icon color="gray.400"><LuSearch /></Icon>
+                                <Icon color="fg.subtle"><LuSearch /></Icon>
                                 <Input
                                     placeholder="Search quotations..."
                                     variant="flushed"
@@ -413,34 +413,34 @@ export default function QuotationsPage() {
                 </Card.Root>
 
                 {/* Quotations Table */}
-                <Card.Root bg="white" borderWidth="1px" borderColor="gray.100" overflow="hidden">
+                <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default" overflow="hidden">
                     <Box overflowX="auto">
                         <Table.Root size="sm" minW="900px">
                             <Table.Header>
-                                <Table.Row bg="gray.50">
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Quote #</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Client</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Amount</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Status</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Date</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600">Valid Until</Table.ColumnHeader>
-                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="gray.600" textAlign="right">Actions</Table.ColumnHeader>
+                                <Table.Row bg="bg.subtle">
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Quote #</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Client</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Amount</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Status</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Date</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted">Valid Until</Table.ColumnHeader>
+                                    <Table.ColumnHeader fontWeight="semibold" fontSize="xs" color="fg.muted" textAlign="right">Actions</Table.ColumnHeader>
                                 </Table.Row>
                             </Table.Header>
                             <Table.Body>
                                 {isLoading ? (
                                     <Table.Row>
                                         <Table.Cell colSpan={8} textAlign="center" py={8}>
-                                            <Text color="gray.500">Loading quotations...</Text>
+                                            <Text color="fg.muted">Loading quotations...</Text>
                                         </Table.Cell>
                                     </Table.Row>
                                 ) : filteredQuotations.length === 0 ? (
                                     <Table.Row>
                                         <Table.Cell colSpan={8} textAlign="center" py={8}>
                                             <VStack gap={2}>
-                                                <Text color="gray.500">No quotations found</Text>
+                                                <Text color="fg.muted">No quotations found</Text>
                                                 {quotations.length > 0 && (
-                                                    <Text fontSize="xs" color="gray.400">
+                                                    <Text fontSize="xs" color="fg.subtle">
                                                         {searchQuery || selectedStatus ? "Try adjusting your search or filters" : ""}
                                                     </Text>
                                                 )}
@@ -451,7 +451,7 @@ export default function QuotationsPage() {
                                     filteredQuotations.map((quote) => (
                                         <Table.Row
                                             key={quote.id}
-                                            _hover={{ bg: "gray.50" }}
+                                            _hover={{ bg: "bg.subtle" }}
                                             transition="background 0.15s"
                                         >
                                             <Table.Cell>
@@ -460,7 +460,7 @@ export default function QuotationsPage() {
                                                         w={8}
                                                         h={8}
                                                         borderRadius="lg"
-                                                        bg="purple.50"
+                                                        bg="purple.500/10"
                                                         align="center"
                                                         justify="center"
                                                     >
@@ -473,7 +473,7 @@ export default function QuotationsPage() {
                                                 <VStack align="start" gap={0}>
                                                     <Text fontWeight="medium" fontSize="sm">{quote.client}</Text>
                                                     {quote.clientPhone && (
-                                                        <Text fontSize="xs" color="gray.500">{quote.clientPhone}</Text>
+                                                        <Text fontSize="xs" color="fg.muted">{quote.clientPhone}</Text>
                                                     )}
                                                 </VStack>
                                             </Table.Cell>
@@ -490,19 +490,19 @@ export default function QuotationsPage() {
                                                 </Badge>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text fontSize="sm" color="gray.600">
+                                                <Text fontSize="sm" color="fg.muted">
                                                     {new Date(quote.issueDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                 </Text>
                                             </Table.Cell>
                                             <Table.Cell>
-                                                <Text fontSize="sm" color="gray.600">
+                                                <Text fontSize="sm" color="fg.muted">
                                                     {new Date(quote.validUntil).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                                                 </Text>
                                             </Table.Cell>
                                             <Table.Cell textAlign="right">
                                                 <HStack gap={1} justify="flex-end">
                                                     <Link href={`/dashboard/quotations/${quote.id}`}>
-                                                        <Button variant="ghost" size="xs" _hover={{ bg: "purple.50", color: "purple.600" }}>
+                                                        <Button variant="ghost" size="xs" _hover={{ bg: "purple.500/10", color: "purple.600" }}>
                                                             <LuEye />
                                                         </Button>
                                                     </Link>
@@ -511,7 +511,7 @@ export default function QuotationsPage() {
                                                             variant="ghost"
                                                             size="xs"
                                                             onClick={() => handleMarkAccepted(quote)}
-                                                            _hover={{ bg: "green.50", color: "green.600" }}
+                                                            _hover={{ bg: "green.500/10", color: "green.600" }}
                                                         >
                                                             <LuCheck />
                                                         </Button>
@@ -521,7 +521,7 @@ export default function QuotationsPage() {
                                                             variant="ghost"
                                                             size="xs"
                                                             onClick={() => openConvertDialog(quote)}
-                                                            _hover={{ bg: "blue.50", color: "blue.600" }}
+                                                            _hover={{ bg: "blue.500/10", color: "blue.600" }}
                                                         >
                                                             <LuFileText />
                                                         </Button>
@@ -531,7 +531,7 @@ export default function QuotationsPage() {
                                                             variant="ghost"
                                                             size="xs"
                                                             onClick={() => handleSend(quote)}
-                                                            _hover={{ bg: "blue.50", color: "blue.600" }}
+                                                            _hover={{ bg: "blue.500/10", color: "blue.600" }}
                                                         >
                                                             <LuSend />
                                                         </Button>
@@ -540,7 +540,7 @@ export default function QuotationsPage() {
                                                         variant="ghost"
                                                         size="xs"
                                                         onClick={() => handleDuplicate(quote)}
-                                                        _hover={{ bg: "gray.100" }}
+                                                        _hover={{ bg: "bg.muted" }}
                                                     >
                                                         <LuCopy />
                                                     </Button>
@@ -549,7 +549,7 @@ export default function QuotationsPage() {
                                                         size="xs"
                                                         colorPalette="red"
                                                         onClick={() => openDeleteDialog(quote)}
-                                                        _hover={{ bg: "red.50" }}
+                                                        _hover={{ bg: "red.500/10" }}
                                                     >
                                                         <LuTrash2 />
                                                     </Button>
@@ -565,22 +565,22 @@ export default function QuotationsPage() {
 
                 {/* Empty State - Only show when not loading and no quotations */}
                 {!isLoading && filteredQuotations.length === 0 && quotations.length === 0 && (
-                    <Card.Root bg="white" borderWidth="1px" borderColor="gray.100">
+                    <Card.Root bg="bg.surface" borderWidth="1px" borderColor="border.default">
                         <Card.Body p={10}>
                             <VStack gap={4}>
                                 <Flex
                                     w={16}
                                     h={16}
                                     borderRadius="full"
-                                    bg="gray.100"
+                                    bg="bg.muted"
                                     align="center"
                                     justify="center"
                                 >
-                                    <Icon fontSize="2xl" color="gray.400"><LuClipboardList /></Icon>
+                                    <Icon fontSize="2xl" color="fg.subtle"><LuClipboardList /></Icon>
                                 </Flex>
                                 <VStack gap={1}>
                                     <Text fontWeight="medium">No quotations found</Text>
-                                    <Text fontSize="sm" color="gray.500">
+                                    <Text fontSize="sm" color="fg.muted">
                                         {searchQuery || selectedStatus ? "Try adjusting your search or filters" : "Create your first quotation to get started"}
                                     </Text>
                                 </VStack>
@@ -604,12 +604,12 @@ export default function QuotationsPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Delete Quotation</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete <Text as="span" fontWeight="semibold">{quoteToDelete?.quotationNumber}</Text> for {quoteToDelete?.client}?
                                     This action cannot be undone.
                                 </Text>
@@ -645,22 +645,22 @@ export default function QuotationsPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                             <Dialog.Header p={6} pb={4}>
                                 <Dialog.Title fontWeight="semibold">Convert to Invoice</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body px={6} pb={6}>
                                 <VStack align="stretch" gap={4}>
-                                    <Text color="gray.600">
+                                    <Text color="fg.muted">
                                         Create an invoice from quotation <Text as="span" fontWeight="semibold">{quoteToConvert?.quotationNumber}</Text>?
                                     </Text>
-                                    <Box bg="purple.50" p={4} borderRadius="lg">
+                                    <Box bg="purple.500/10" p={4} borderRadius="lg">
                                         <HStack justify="space-between" mb={2}>
-                                            <Text fontSize="sm" color="gray.600">Client</Text>
+                                            <Text fontSize="sm" color="fg.muted">Client</Text>
                                             <Text fontSize="sm" fontWeight="medium">{quoteToConvert?.client}</Text>
                                         </HStack>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Amount</Text>
+                                            <Text fontSize="sm" color="fg.muted">Amount</Text>
                                             <Text fontSize="sm" fontWeight="semibold" color="purple.600">QAR {quoteToConvert?.total.toLocaleString()}</Text>
                                         </HStack>
                                     </Box>

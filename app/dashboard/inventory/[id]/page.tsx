@@ -286,7 +286,7 @@ export default function ProductDetailPage() {
                                     {product.status}
                                 </Badge>
                             </HStack>
-                            <Text color="gray.500" fontSize="sm">{product.sku}</Text>
+                            <Text color="fg.muted" fontSize="sm">{product.sku}</Text>
                         </Box>
                     </HStack>
                     <HStack gap={2}>
@@ -335,33 +335,33 @@ export default function ProductDetailPage() {
                     <Box gridColumn={{ base: "1", lg: "span 2" }}>
                         <VStack gap={6} align="stretch">
                             {/* Product Details */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Product Details</Heading>
                                 </Card.Header>
                                 <Card.Body p={5}>
                                     <VStack align="stretch" gap={4}>
                                         <Box>
-                                            <Text fontSize="xs" color="gray.500" mb={1}>Description</Text>
+                                            <Text fontSize="xs" color="fg.muted" mb={1}>Description</Text>
                                             <Text fontSize="sm">{product.description || "No description"}</Text>
                                         </Box>
                                         <SimpleGrid columns={{ base: 2, md: 4 }} gap={4}>
                                             <Box>
-                                                <Text fontSize="xs" color="gray.500" mb={1}>Category</Text>
+                                                <Text fontSize="xs" color="fg.muted" mb={1}>Category</Text>
                                                 <Badge variant="subtle" fontSize="xs" px={2} py={0.5} borderRadius="full">
                                                     {product.category || "Uncategorized"}
                                                 </Badge>
                                             </Box>
                                             <Box>
-                                                <Text fontSize="xs" color="gray.500" mb={1}>Supplier</Text>
+                                                <Text fontSize="xs" color="fg.muted" mb={1}>Supplier</Text>
                                                 <Text fontSize="sm" fontWeight="medium">{product.supplierName || "N/A"}</Text>
                                             </Box>
                                             <Box>
-                                                <Text fontSize="xs" color="gray.500" mb={1}>Location</Text>
+                                                <Text fontSize="xs" color="fg.muted" mb={1}>Location</Text>
                                                 <Text fontSize="sm" fontWeight="medium">{product.location || "N/A"}</Text>
                                             </Box>
                                             <Box>
-                                                <Text fontSize="xs" color="gray.500" mb={1}>Expiry Date</Text>
+                                                <Text fontSize="xs" color="fg.muted" mb={1}>Expiry Date</Text>
                                                 <Text fontSize="sm" fontWeight="medium" color={product.expiryDate ? (new Date(product.expiryDate) < new Date() ? "red.600" : new Date(product.expiryDate) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) ? "orange.600" : "gray.700") : "gray.500"}>
                                                     {product.expiryDate ? new Date(product.expiryDate).toLocaleDateString() : "N/A"}
                                                 </Text>
@@ -372,7 +372,7 @@ export default function ProductDetailPage() {
                             </Card.Root>
 
                             {/* Stock History */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <HStack justify="space-between">
                                         <Heading size="sm" fontWeight="semibold">Stock History</Heading>
@@ -383,7 +383,7 @@ export default function ProductDetailPage() {
                                 </Card.Header>
                                 <Card.Body p={5}>
                                     {isLoadingHistory ? (
-                                        <Text fontSize="sm" color="gray.500" textAlign="center" py={4}>
+                                        <Text fontSize="sm" color="fg.muted" textAlign="center" py={4}>
                                             Loading history...
                                         </Text>
                                     ) : stockHistory.length > 0 ? (
@@ -397,8 +397,8 @@ export default function ProductDetailPage() {
                                                         justify="space-between"
                                                         p={3}
                                                         borderRadius="lg"
-                                                        bg="gray.50"
-                                                        _hover={{ bg: "gray.100" }}
+                                                        bg="bg.subtle"
+                                                        _hover={{ bg: "bg.muted" }}
                                                         transition="background 0.15s"
                                                     >
                                                         <VStack align="start" gap={1} flex={1}>
@@ -415,7 +415,7 @@ export default function ProductDetailPage() {
                                                                 </Text>
                                                             </HStack>
                                                             {entry.notes && (
-                                                                <Text fontSize="xs" color="gray.500">
+                                                                <Text fontSize="xs" color="fg.muted">
                                                                     {entry.notes}
                                                                 </Text>
                                                             )}
@@ -428,21 +428,21 @@ export default function ProductDetailPage() {
                                                             )}
                                                         </VStack>
                                                         <VStack align="end" gap={1}>
-                                                            <Text fontSize="xs" color="gray.500">
+                                                            <Text fontSize="xs" color="fg.muted">
                                                                 {new Date(entry.createdAt).toLocaleDateString('en-US', {
                                                                     month: 'short',
                                                                     day: 'numeric',
                                                                     year: 'numeric',
                                                                 })}
                                                             </Text>
-                                                            <Text fontSize="xs" color="gray.500">
+                                                            <Text fontSize="xs" color="fg.muted">
                                                                 {new Date(entry.createdAt).toLocaleTimeString('en-US', {
                                                                     hour: '2-digit',
                                                                     minute: '2-digit',
                                                                 })}
                                                             </Text>
                                                             <HStack gap={2}>
-                                                                <Text fontSize="xs" color="gray.400">
+                                                                <Text fontSize="xs" color="fg.subtle">
                                                                     {entry.previousStock} →
                                                                 </Text>
                                                                 <Text fontSize="xs" fontWeight="medium" color={color + ".600"}>
@@ -455,7 +455,7 @@ export default function ProductDetailPage() {
                                             })}
                                         </VStack>
                                     ) : (
-                                        <Text fontSize="sm" color="gray.500" textAlign="center" py={4}>
+                                        <Text fontSize="sm" color="fg.muted" textAlign="center" py={4}>
                                             No stock history available
                                         </Text>
                                     )}
@@ -468,25 +468,25 @@ export default function ProductDetailPage() {
                     <Box>
                         <VStack gap={6} align="stretch">
                             {/* Stock Info */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Stock Information</Heading>
                                 </Card.Header>
                                 <Card.Body p={5}>
                                     <VStack align="stretch" gap={4}>
-                                        <Box textAlign="center" py={4} bg="orange.50" borderRadius="xl">
+                                        <Box textAlign="center" py={4} bg="orange.500/10" borderRadius="xl">
                                             <HStack justify="center" gap={2} mb={1}>
                                                 <LuPackage size={24} color="var(--chakra-colors-orange-500)" />
                                             </HStack>
                                             <Heading size="3xl" fontWeight="bold" color="orange.600">{product.stock}</Heading>
-                                            <Text fontSize="sm" color="gray.500">units in stock</Text>
+                                            <Text fontSize="sm" color="fg.muted">units in stock</Text>
                                         </Box>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Minimum Stock</Text>
+                                            <Text fontSize="sm" color="fg.muted">Minimum Stock</Text>
                                             <Text fontSize="sm" fontWeight="medium">{product.minStock || 0} units</Text>
                                         </HStack>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Stock Status</Text>
+                                            <Text fontSize="sm" color="fg.muted">Stock Status</Text>
                                             <Badge
                                                 colorPalette={getStatusColor(product.status)}
                                                 variant="subtle"
@@ -503,14 +503,14 @@ export default function ProductDetailPage() {
                             </Card.Root>
 
                             {/* Pricing */}
-                            <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+                            <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
                                 <Card.Header p={5} pb={0}>
                                     <Heading size="sm" fontWeight="semibold">Pricing</Heading>
                                 </Card.Header>
                                 <Card.Body p={5}>
                                     <VStack align="stretch" gap={3}>
                                         <HStack justify="space-between">
-                                            <Text fontSize="sm" color="gray.600">Selling Price</Text>
+                                            <Text fontSize="sm" color="fg.muted">Selling Price</Text>
                                             <Text fontSize="sm" fontWeight="semibold">QAR {product.sellingPrice.toFixed(2)}</Text>
                                         </HStack>
                                     </VStack>
@@ -526,13 +526,13 @@ export default function ProductDetailPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Add Stock</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
                                 <VStack gap={4} align="stretch">
-                                    <Text color="gray.600" fontSize="sm">
+                                    <Text color="fg.muted" fontSize="sm">
                                         Current stock: <strong>{product.stock} units</strong>
                                     </Text>
                                     <Field.Root>
@@ -582,13 +582,13 @@ export default function ProductDetailPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Remove Stock</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
                                 <VStack gap={4} align="stretch">
-                                    <Text color="gray.600" fontSize="sm">
+                                    <Text color="fg.muted" fontSize="sm">
                                         Current stock: <strong>{product.stock} units</strong>
                                     </Text>
                                     <Field.Root>
@@ -638,12 +638,12 @@ export default function ProductDetailPage() {
                 <Portal>
                     <Dialog.Backdrop bg="blackAlpha.600" backdropFilter="blur(4px)" />
                     <Dialog.Positioner>
-                        <Dialog.Content bg="white" borderRadius="xl" maxW="400px" mx={4}>
+                        <Dialog.Content bg="bg.surface" borderRadius="xl" maxW="400px" mx={4}>
                             <Dialog.Header p={5} pb={0}>
                                 <Dialog.Title fontWeight="semibold">Delete Product</Dialog.Title>
                             </Dialog.Header>
                             <Dialog.Body p={5}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Are you sure you want to delete "{product.name}"? This action cannot be undone.
                                 </Text>
                             </Dialog.Body>

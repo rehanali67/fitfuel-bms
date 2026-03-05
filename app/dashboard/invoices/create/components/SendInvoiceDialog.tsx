@@ -38,28 +38,28 @@ export default function SendInvoiceDialog({
             <Portal>
                 <Dialog.Backdrop bg="blackAlpha.600" />
                 <Dialog.Positioner>
-                    <Dialog.Content bg="white" borderRadius="xl" mx={4}>
+                    <Dialog.Content bg="bg.surface" borderRadius="xl" mx={4}>
                         <Dialog.Header p={6} pb={4}>
                             <Dialog.Title fontWeight="semibold">Send Invoice</Dialog.Title>
                         </Dialog.Header>
                         <Dialog.Body px={6} pb={6}>
                             <VStack align="stretch" gap={4}>
-                                <Text color="gray.600">
+                                <Text color="fg.muted">
                                     Ready to send this invoice?
                                 </Text>
-                                <Box bg="blue.50" p={4} borderRadius="lg">
+                                <Box bg="blue.500/10" p={4} borderRadius="lg">
                                     <HStack justify="space-between" mb={2}>
-                                        <Text fontSize="sm" color="gray.600">Client</Text>
+                                        <Text fontSize="sm" color="fg.muted">Client</Text>
                                         <Text fontSize="sm" fontWeight="medium">{clientName || "Not specified"}</Text>
                                     </HStack>
                                     {clientPhone && (
                                         <HStack justify="space-between" mb={2}>
-                                            <Text fontSize="sm" color="gray.600">Phone</Text>
+                                            <Text fontSize="sm" color="fg.muted">Phone</Text>
                                             <Text fontSize="sm" fontWeight="medium">{clientPhone}</Text>
                                         </HStack>
                                     )}
                                     <HStack justify="space-between">
-                                        <Text fontSize="sm" color="gray.600">Total</Text>
+                                        <Text fontSize="sm" color="fg.muted">Total</Text>
                                         <Text fontSize="sm" fontWeight="bold" color="blue.600">QAR {total.toLocaleString()}</Text>
                                     </HStack>
                                 </Box>

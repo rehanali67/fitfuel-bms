@@ -20,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { useAuth } from "@/context/AuthContext";
 import { Tooltip } from "@/components/ui/tooltip";
+import { ColorModeButton } from "@/components/ui/color-mode";
 import {
     LuLayoutDashboard,
     LuFileText,
@@ -54,12 +55,12 @@ function NavItem({ icon, label, href, isActive, onClick, isCollapsed }: NavItemP
             py={3}
             borderRadius="xl"
             cursor="pointer"
-            bg={isActive ? "blue.50" : "transparent"}
-            color={isActive ? "blue.600" : "gray.600"}
+            bg={isActive ? "brand.muted" : "transparent"}
+            color={isActive ? "brand.solid" : "fg.muted"}
             borderWidth={isActive ? "1px" : "0"}
-            borderColor={isActive ? "blue.100" : "transparent"}
+            borderColor={isActive ? "brand.subtle" : "transparent"}
             _hover={{
-                bg: isActive ? "blue.50" : "gray.50",
+                bg: isActive ? "brand.muted" : "bg.subtle",
             }}
             transition="all 0.15s ease"
             gap={3}
@@ -131,18 +132,18 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
     if (isLoading) {
         return (
-            <Flex h="100vh" align="center" justify="center" bg="gray.50">
+            <Flex h="100vh" align="center" justify="center" bg="bg.canvas">
                 <VStack gap={4}>
                     <Box
                         w={10}
                         h={10}
                         borderRadius="full"
                         border="2px solid"
-                        borderColor="blue.500"
+                        borderColor="brand.solid"
                         borderTopColor="transparent"
                         animation="spin 1s linear infinite"
                     />
-                    <Text color="gray.500" fontSize="sm">Loading...</Text>
+                    <Text color="fg.muted" fontSize="sm">Loading...</Text>
                 </VStack>
             </Flex>
         );
@@ -178,7 +179,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                     <Text
                         fontWeight="bold"
                         fontSize="lg"
-                        color="gray.800"
+                        color="fg.default"
                     >
                         FitFuel
                     </Text>
@@ -187,7 +188,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
 
             <VStack flex={1} px={isCollapsed ? 2 : 4} gap={1} align="stretch" pt={2}>
                 {!isCollapsed && (
-                    <Text fontSize="xs" fontWeight="medium" color="gray.400" px={4} pb={2} textTransform="uppercase" letterSpacing="wider">
+                    <Text fontSize="xs" fontWeight="medium" color="fg.subtle" px={4} pb={2} textTransform="uppercase" letterSpacing="wider">
                         Menu
                     </Text>
                 )}
@@ -228,7 +229,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 ) : (
                     <HStack
                         p={3}
-                        bg="gray.50"
+                        bg="bg.subtle"
                         borderRadius="xl"
                         justify="space-between"
                     >
@@ -241,7 +242,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                                 <Text fontWeight="semibold" fontSize="sm" lineHeight="tight">
                                     {user?.name}
                                 </Text>
-                                <Text fontSize="xs" color="gray.500" textTransform="capitalize">
+                                <Text fontSize="xs" color="fg.muted" textTransform="capitalize">
                                     {user?.role}
                                 </Text>
                             </VStack>
@@ -264,13 +265,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
     const sidebarWidth = sidebarCollapsed ? "80px" : "260px";
 
     return (
-        <Flex h="100vh" bg="gray.50">
+        <Flex h="100vh" bg="bg.canvas">
             {/* Desktop Sidebar */}
             <Box
                 w={sidebarWidth}
-                bg="white"
+                bg="bg.surface"
                 borderRight="1px solid"
-                borderColor="gray.100"
+                borderColor="border.default"
                 display={{ base: "none", lg: "flex" }}
                 flexDirection="column"
                 position="fixed"
@@ -292,7 +293,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <Portal>
                     <Drawer.Backdrop bg="blackAlpha.600" />
                     <Drawer.Positioner>
-                        <Drawer.Content bg="white" maxW="280px">
+                        <Drawer.Content bg="bg.surface" maxW="280px">
                             <Drawer.CloseTrigger asChild position="absolute" top={4} right={4}>
                                 <CloseButton size="sm" />
                             </Drawer.CloseTrigger>
@@ -317,9 +318,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                 <HStack
                     h="64px"
                     px={{ base: 4, md: 6 }}
-                    bg="white"
+                    bg="bg.surface"
                     borderBottom="1px solid"
-                    borderColor="gray.100"
+                    borderColor="border.default"
                     justify="space-between"
                     position="sticky"
                     top={0}
@@ -341,13 +342,13 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                         >
                             <Icon>{sidebarCollapsed ? <LuMenu /> : <LuMenu />}</Icon>
                         </IconButton>
-                        <Heading size="md" fontWeight="semibold" color="gray.800">
+                        <Heading size="md" fontWeight="semibold" color="fg.default">
                             {navItems.find((item) => isActiveRoute(item.href))?.label || "Dashboard"}
                         </Heading>
                     </HStack>
 
                     <HStack gap={2}>
-
+                        <ColorModeButton />
 
                         <Menu.Root positioning={{ placement: "bottom-end" }}>
                             <Menu.Trigger asChild>
@@ -368,11 +369,11 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
                             </Menu.Trigger>
                             <Portal>
                                 <Menu.Positioner>
-                                    <Menu.Content minW="180px" bg="white" borderRadius="xl" border="1px solid" borderColor="gray.100">
+                                    <Menu.Content minW="180px" bg="bg.surface" borderRadius="xl" border="1px solid" borderColor="border.default">
                                         <Menu.Item
                                             value="logout"
                                             color="red.500"
-                                            _hover={{ bg: "red.50" }}
+                                            _hover={{ bg: "red.500/10" }}
                                             onClick={handleLogout}
                                             borderRadius="lg"
                                         >

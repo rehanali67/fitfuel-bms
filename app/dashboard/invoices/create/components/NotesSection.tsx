@@ -12,7 +12,7 @@ export default function NotesSection({
     onNotesChange,
 }: NotesSectionProps) {
     return (
-        <Card.Root border="1px solid" borderColor="gray.100" bg="white">
+        <Card.Root border="1px solid" borderColor="border.default" bg="bg.surface">
             <Card.Header p={5} pb={0}>
                 <Heading size="sm" fontWeight="semibold">Notes</Heading>
             </Card.Header>
