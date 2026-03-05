@@ -348,7 +348,10 @@ export default function InvoiceDetailPage() {
                     .invoice-print-content {
                         position: relative !important;
                         width: 194mm !important;
-                        height: 277mm !important;
+                        /* allow content to size to its intrinsic height instead of forcing full page height
+                           this removes extra white space when the invoice is shorter than the A4 page */
+                        min-height: 277mm !important;
+                        height: auto !important;
                         background: white !important;
                         box-shadow: none !important;
                         overflow: hidden !important;

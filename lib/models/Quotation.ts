@@ -12,6 +12,8 @@ export interface QuotationDocument {
     subtotal: number;
     discount: number;
     total: number;
+    // status field is tracked similarly to invoices so history and filters work correctly
+    status: QuotationStatus;
     issueDate: Date;
     validUntil: Date;
     notes?: string;
@@ -80,6 +82,8 @@ export async function createQuotation(quotationData: Omit<QuotationDocument, '_i
 
     const quotation: QuotationDocument = {
         ...quotationData,
+        // ensure there is always a status; callers should supply one
+        status: quotationData.status || 'Draft',
         quotationNumber,
         createdAt: now,
         updatedAt: now,
